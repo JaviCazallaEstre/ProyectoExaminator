@@ -1,25 +1,51 @@
 <?php
-if(isset($_POST["enviar"])){
-    $errores=array();
-    if($_POST["enunciado"]==""){
-        $errores["enunciado"]="El enunciado debe de estar relleno";
+include_once("../entidades/preguntaObjeto.php");
+include_once("../entidades/respuestasObjeto.php");
+include_once("../gestion/sesion.php");
+Session::inicia();
+if (isset($_POST["enviar"])) {
+    $errores = array();
+    if ($_POST["enunciado"] == "") {
+        $errores["enunciado"] = "El enunciado debe de estar relleno";
     }
-    if($_POST["opcion1"]==""){
-        $errores["opcion1"]=="la primera opcion debe de estar rellena";
+    if ($_POST["opcion1"] == "") {
+        $errores["opcion1"] == "La primera opcion debe de estar rellena";
     }
-    if($_POST["opcion2"]==""){
-        
+    if ($_POST["opcion2"] == "") {
+        $errores["opcion2"] = "La segunda opción debe de estar rellena";
+    }
+    if ($_POST["opcion3"] == "") {
+        $errores["opcion3"] = "La tercera opción debe de estar rellena";
+    }
+    if ($_POST["opcion4"] == "") {
+        $errores["opcion4"] = "La cuarta opción debe de estar rellena";
+    }
+
+    if (count($errores) == 0) {
+        $opcion1 = new Respuesta(null, $_POST["opcion1"], null);
+        $opcion2 = new Respuesta(null, $_POST["opcion2"], null);
+        $opcion3 = new Respuesta(null, $_POST["opcion3"], null);
+        $opcion4 = new Respuesta(null, $_POST["opcion4"], null);
+        $opciones = array();
+        array_push($opciones, $opcion1, $opcion2, $opcion3, $opcion4);
+        if (isset($_FILES["archivo"])) {
+            $pregunta = new Pregunta(null, $_POST["enunciado"], $_FILES["archivo"], null, null);
+        } else {
+            $pregunta = new Pregunta(null, $_POST["enunciado"], null, null, null);
+        }
     }
 }
 ?>
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crea pregunta</title>
 </head>
+
 <body>
     <form id="formu" name="formu" method="POST" enctype="multipart/form-data">
         <table>
@@ -41,7 +67,21 @@ if(isset($_POST["enviar"])){
             </tr>
             <tr>
                 <td>
-                    <textarea id="enunciado" name="enunciado"></textarea>
+                    <textarea id="enunciado" name="enunciado" value="<?php
+                                                                        if (isset($errores["enunciado"])) {
+                                                                            echo "";
+                                                                        } else if (isset($_POST["enunciado"])) {
+                                                                            echo $_POST["enunciado"];
+                                                                        } else {
+                                                                            echo "";
+                                                                        }
+                                                                        ?>">
+                    </textarea>
+                    <?php
+                    if (isset($errores["enunciado"])) {
+                        echo "<p class='error'>" . $errores["enunciado"] . "</p>";
+                    }
+                    ?>
                 </td>
             </tr>
             <tr>
@@ -51,7 +91,7 @@ if(isset($_POST["enviar"])){
             </tr>
             <tr>
                 <td>
-                    <input type="file" name="archivo" id="archivo"/>
+                    <input type="file" name="archivo" id="archivo" />
                 </td>
             </tr>
             <tr>
@@ -61,10 +101,23 @@ if(isset($_POST["enviar"])){
             </tr>
             <tr>
                 <td>
-                    <input type="text" id="opcion1" name="opcion1"/>
+                    <input type="text" id="opcion1" name="opcion1" value="<?php
+                                                                            if (isset($errores["opcion1"])) {
+                                                                                echo "";
+                                                                            } else if (isset($_POST["opcion1"])) {
+                                                                                echo $_POST["opcion1"];
+                                                                            } else {
+                                                                                echo "";
+                                                                            }
+                                                                            ?>" />
+                    <?php
+                    if (isset($errores["opcion1"])) {
+                        echo "<p class='error'>" . $errores["opcion1"] . "</p>";
+                    }
+                    ?>
                 </td>
                 <td>
-                    <input type="radio" id="correcta" name="correcta"/>
+                    <input type="radio" id="correcta" name="correcta" />
                     <label for="radio1">Correcta</label>
                 </td>
             </tr>
@@ -75,7 +128,23 @@ if(isset($_POST["enviar"])){
             </tr>
             <tr>
                 <td>
-                    <input type="radio" id="correcta" name="correcta"/>
+                    <input type="text" id="opcion2" name="opcion2" value="<?php
+                                                                            if (isset($errores["opcion2"])) {
+                                                                                echo "";
+                                                                            } else if (isset($_POST["opcion2"])) {
+                                                                                echo $_POST["opcion2"];
+                                                                            } else {
+                                                                                echo "";
+                                                                            }
+                                                                            ?>" />
+                    <?php
+                    if (isset($errores["opcion2"])) {
+                        echo "<p class='error'>" . $errores["opcion2"] . "</p>";
+                    }
+                    ?>
+                </td>
+                <td>
+                    <input type="radio" id="correcta" name="correcta" />
                     <label for="radio2">Correcta</label>
                 </td>
             </tr>
@@ -86,7 +155,23 @@ if(isset($_POST["enviar"])){
             </tr>
             <tr>
                 <td>
-                    <input type="radio" id="correcta" name="correcta"/>
+                    <input type="text" id="opcion3" name="opcion3" value="<?php
+                                                                            if (isset($errores["opcion3"])) {
+                                                                                echo "";
+                                                                            } else if (isset($_POST["opcion3"])) {
+                                                                                echo $_POST["opcion3"];
+                                                                            } else {
+                                                                                echo "";
+                                                                            }
+                                                                            ?>" />
+                    <?php
+                    if (isset($errores["opcion3"])) {
+                        echo "<p class='error'>" . $errores["opcion3"] . "</p>";
+                    }
+                    ?>
+                </td>
+                <td>
+                    <input type="radio" id="correcta" name="correcta" />
                     <label for="radio3">Correcta</label>
                 </td>
             </tr>
@@ -97,16 +182,33 @@ if(isset($_POST["enviar"])){
             </tr>
             <tr>
                 <td>
-                    <input type="radio" name="correcta" id="correcta"/>
+                    <input type="text" id="opcion4" name="opcion4" value="<?php
+                                                                            if (isset($errores["opcion4"])) {
+                                                                                echo "";
+                                                                            } else if (isset($_POST["opcion4"])) {
+                                                                                echo $_POST["opcion4"];
+                                                                            } else {
+                                                                                echo "";
+                                                                            }
+                                                                            ?>" />
+                    <?php
+                    if (isset($errores["opcion4"])) {
+                        echo "<p class='error'>" . $errores["opcion4"] . "</p>";
+                    }
+                    ?>
+                </td>
+                <td>
+                    <input type="radio" name="correcta" id="correcta" />
                     <label for="radio4">Correcta</label>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <input type="submit" name="enviar" id="enviar" value="Crear"/>
+                    <input type="submit" name="enviar" id="enviar" value="Crear" />
                 </td>
             </tr>
         </table>
     </form>
 </body>
+
 </html>

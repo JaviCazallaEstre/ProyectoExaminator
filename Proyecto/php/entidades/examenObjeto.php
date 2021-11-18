@@ -1,16 +1,21 @@
 <?php
-class Respuesta
+class Examen
 {
     private $id;
-    private $enunciado;
-    private $idPregunta;
+    private $descripcion;
+    private $duracion;
+    private $numero;
+    private $activo;
 
-    public function __construct($id, $enunciado, $idPregunta)
+    public function __construct($id, $descripcion, $duracion, $numero, $activo)
     {
         $this->id = $id;
-        $this->enunciado = $enunciado;
-        $this->idPregunta = $idPregunta;
+        $this->descripcion = $descripcion;
+        $this->duracion = $duracion;
+        $this->numero = $numero;
+        $this->activo = $activo;
     }
+
     public function __set($propiedad, $valor)
     {
         if (property_exists($this, $propiedad)) {

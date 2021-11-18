@@ -77,10 +77,10 @@ BD::creaConexion();
                         setcookie("contrasena", $_POST["contrasena"], time() + 3600);
                         setcookie("recuerdame", $_POST["recuerdame"], time() + 3600);
                     }
-                }else{
+                } else {
                     echo "<p class='error'>Los datos introducidos son incorrectos</p>";
                 }
-            }else{
+            } else {
                 echo "<p class='error'>Los campos deben de estar rellenos</p>";
             }
         }

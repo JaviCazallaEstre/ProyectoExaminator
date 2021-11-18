@@ -1,15 +1,13 @@
 <?php
-class Respuesta
+class Tematica
 {
     private $id;
-    private $enunciado;
-    private $idPregunta;
+    private $descripcion;
 
-    public function __construct($id, $enunciado, $idPregunta)
+    public function __construct($id, $descripcion)
     {
         $this->id = $id;
-        $this->enunciado = $enunciado;
-        $this->idPregunta = $idPregunta;
+        $this->descripcion = $descripcion;
     }
     public function __set($propiedad, $valor)
     {
