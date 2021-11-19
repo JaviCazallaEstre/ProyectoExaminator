@@ -1,7 +1,7 @@
 <?php
-include_once("../entidades/preguntaObjeto.php");
-include_once("../entidades/respuestasObjeto.php");
-include_once("../gestion/sesion.php");
+include_once('../entidades/preguntaObjeto.php');
+include_once('../entidades/respuestasObjeto.php');
+include_once('../gestion/sesion.php');
 Session::inicia();
 if (isset($_POST["enviar"])) {
     $errores = array();
@@ -29,9 +29,9 @@ if (isset($_POST["enviar"])) {
         $opciones = array();
         array_push($opciones, $opcion1, $opcion2, $opcion3, $opcion4);
         if (isset($_FILES["archivo"])) {
-            $pregunta = new Pregunta(null, $_POST["enunciado"], $_FILES["archivo"], null, null);
+            $pregunta = new Pregunta(null, $_POST["enunciado"], $opciones, $_FILES["archivo"], null, null);
         } else {
-            $pregunta = new Pregunta(null, $_POST["enunciado"], null, null, null);
+            $pregunta = new Pregunta(null, $_POST["enunciado"], $opciones, null, null, null);
         }
     }
 }

@@ -1,15 +1,16 @@
 <?php
+include_once("preguntaObjeto.php");
 class Respuesta
 {
     private $id;
     private $enunciado;
-    private $idPregunta;
+    private $pregunta;
 
-    public function __construct($id, $enunciado, $idPregunta)
+    public function __construct($id, $enunciado, Pregunta $pregunta=null)
     {
         $this->id = $id;
         $this->enunciado = $enunciado;
-        $this->idPregunta = $idPregunta;
+        $this->pregunta = $pregunta;
     }
     public function __set($propiedad, $valor)
     {

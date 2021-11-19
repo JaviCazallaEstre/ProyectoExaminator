@@ -1,21 +1,22 @@
 <?php
+include_once("respuestasObjeto.php");
 class Pregunta
 {
     private $idPregunta;
     private $enunciado;
-    //private array $respuestas;
+    private $respuestas=[];
     private $multimedia;
     private $idTematica;
-    private $idRespuestaCorrecta;
+    private $respuestaCorrecta;
 
-    public function __construct($idPregunta, $enunciado, $multimedia, $idTematica, $idRespuestaCorrecta)
+    public function __construct($idPregunta, $enunciado,$respuestas ,$multimedia, $idTematica, Respuesta $respuestaCorrecta=null)
     {
         $this->idPregunta = $idPregunta;
         $this->enunciado = $enunciado;
-        //$this->respuestas = $respuestas;
+        $this->respuestas = $respuestas;
         $this->multimedia = $multimedia;
         $this->idTematica = $idTematica;
-        $this->idRespuestaCorrecta = $idRespuestaCorrecta;
+        $this->respuestaCorrecta = $respuestaCorrecta;
     }
     public function __set($propiedad, $valor)
     {
