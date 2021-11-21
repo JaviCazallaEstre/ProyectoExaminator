@@ -20,6 +20,9 @@ if (isset($_POST["enviar"])) {
     if ($_POST["opcion4"] == "") {
         $errores["opcion4"] = "La cuarta opción debe de estar rellena";
     }
+    if ($_POST["correcta"] == "") {
+        $errores["correcta"] = "Debes elegir una opcion correcta";
+    }
 
     if (count($errores) == 0) {
         $opcion1 = new Respuesta(null, $_POST["opcion1"], null);
@@ -34,6 +37,10 @@ if (isset($_POST["enviar"])) {
             $pregunta = new Pregunta(null, $_POST["enunciado"], $opciones, null, null, null);
         }
     }
+}
+function rellenaSelect(array $tematicas=null)
+{
+    # code...
 }
 ?>
 <!DOCTYPE html>
@@ -55,8 +62,11 @@ if (isset($_POST["enviar"])) {
                 </td>
             </tr>
             <tr>
-                <td>
+                <td id="tdTematica">
                     <select id="tematica" name="tematica">
+                        <?php
+                        rellenaSelect();
+                        ?>
                     </select>
                 </td>
             </tr>
@@ -66,7 +76,7 @@ if (isset($_POST["enviar"])) {
                 </td>
             </tr>
             <tr>
-                <td>
+                <td id="tdEnunciado">
                     <textarea id="enunciado" name="enunciado" value="<?php
                                                                         if (isset($errores["enunciado"])) {
                                                                             echo "";
@@ -100,7 +110,7 @@ if (isset($_POST["enviar"])) {
                 </td>
             </tr>
             <tr>
-                <td>
+                <td id="tdOpcion1">
                     <input type="text" id="opcion1" name="opcion1" value="<?php
                                                                             if (isset($errores["opcion1"])) {
                                                                                 echo "";
@@ -117,7 +127,7 @@ if (isset($_POST["enviar"])) {
                     ?>
                 </td>
                 <td>
-                    <input type="radio" id="correcta" name="correcta" />
+                    <input type="radio" id="correcta1" name="correcta" value="correcta1" />
                     <label for="radio1">Correcta</label>
                 </td>
             </tr>
@@ -127,7 +137,7 @@ if (isset($_POST["enviar"])) {
                 </td>
             </tr>
             <tr>
-                <td>
+                <td id="tdOpcion2">
                     <input type="text" id="opcion2" name="opcion2" value="<?php
                                                                             if (isset($errores["opcion2"])) {
                                                                                 echo "";
@@ -144,7 +154,7 @@ if (isset($_POST["enviar"])) {
                     ?>
                 </td>
                 <td>
-                    <input type="radio" id="correcta" name="correcta" />
+                    <input type="radio" id="correcta2" name="correcta" value="correcta2" />
                     <label for="radio2">Correcta</label>
                 </td>
             </tr>
@@ -154,7 +164,7 @@ if (isset($_POST["enviar"])) {
                 </td>
             </tr>
             <tr>
-                <td>
+                <td id="tdOpcion3">
                     <input type="text" id="opcion3" name="opcion3" value="<?php
                                                                             if (isset($errores["opcion3"])) {
                                                                                 echo "";
@@ -171,7 +181,7 @@ if (isset($_POST["enviar"])) {
                     ?>
                 </td>
                 <td>
-                    <input type="radio" id="correcta" name="correcta" />
+                    <input type="radio" id="correcta3" name="correcta" value="correcta3" />
                     <label for="radio3">Correcta</label>
                 </td>
             </tr>
@@ -181,7 +191,7 @@ if (isset($_POST["enviar"])) {
                 </td>
             </tr>
             <tr>
-                <td>
+                <td id="tdOpcion4">
                     <input type="text" id="opcion4" name="opcion4" value="<?php
                                                                             if (isset($errores["opcion4"])) {
                                                                                 echo "";
@@ -197,9 +207,14 @@ if (isset($_POST["enviar"])) {
                     }
                     ?>
                 </td>
-                <td>
-                    <input type="radio" name="correcta" id="correcta" />
+                <td id="tdRadio">
+                    <input type="radio" name="correcta" id="correcta4" value="correcta4" />
                     <label for="radio4">Correcta</label>
+                    <?php
+                    if (isset($errores["correcta"])) {
+                        echo "<p class='error'>" . $errores["correcta"] . "</p>";
+                    }
+                    ?>
                 </td>
             </tr>
             <tr>

@@ -61,6 +61,7 @@ if (isset($_POST["crear"])) {
     <title>Crea usuario</title>
     <script src="../../js/creaUsuario.js"></script>
     <script src="../../js/libreria/prototiposString.js"></script>
+    <script src="../../js/libreria/metodos.js"></script>
 </head>
 
 <body>
