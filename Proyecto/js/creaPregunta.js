@@ -49,13 +49,7 @@ window.addEventListener("load", function () {
           "&correcta" +
           opcionCorrecta
       );
-      const ajax = new XMLHttpRequest();
-      ajax.open("POST", "../php/formularios/creaPregunta.php");
-      ajax.setRequestHeader(
-        "Content-type",
-        "application/x-www-form-urlencoded"
-      );
-      ajax.send(texto);
+      enviarFormularioAjax(texto, "../php/formularios/creaPregunta.php");
     }
   };
   function muestraErrores(errores) {

@@ -38,7 +38,7 @@ if (isset($_POST["enviar"])) {
         }
     }
 }
-function rellenaSelect(array $tematicas=null)
+function rellenaSelect(array $tematicas = null)
 {
     # code...
 }
@@ -51,6 +51,8 @@ function rellenaSelect(array $tematicas=null)
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crea pregunta</title>
+    <script src="../../js/creaPregunta.js"></script>
+    <script src="../../js/libreria/metodos.js"></script>
 </head>
 
 <body>
