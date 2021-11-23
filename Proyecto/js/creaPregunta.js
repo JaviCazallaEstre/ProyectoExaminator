@@ -49,7 +49,7 @@ window.addEventListener("load", function () {
           "&correcta" +
           opcionCorrecta
       );
-      enviarFormularioAjax(texto, "../php/formularios/creaPregunta.php");
+      enviarFormularioAjax(texto, "creaPregunta.php");
     }
   };
   function muestraErrores(errores) {

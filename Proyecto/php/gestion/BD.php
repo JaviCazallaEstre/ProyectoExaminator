@@ -1,4 +1,6 @@
 <?php
+include_once("../entidades/tematicaObjeto.php");
+include_once("../entidades/rolObjeto.php");
 class BD{
     private static $conexion;
     public static function creaConexion(){
@@ -15,5 +17,11 @@ class BD{
                 return false;
             }
         }
+    }
+    public static function insertaTematica(Tematica $tematica){
+        return null;
+    }
+    public static function insertaRol(Rol $rol){
+        return null;
     }
 }

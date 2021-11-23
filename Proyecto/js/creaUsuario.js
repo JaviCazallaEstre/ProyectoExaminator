@@ -37,13 +37,7 @@ window.addEventListener("load", function () {
           "&foto=" +
           foto.src
       );
-      const ajax = new XMLHttpRequest();
-      ajax.open("POST", "../php/formularios/creaUsuario.php");
-      ajax.setRequestHeader(
-        "Content-type",
-        "application/x-www-form-urlencoded"
-      );
-      ajax.send(texto);
+      enviarFormularioAjax(texto, "creaUsuario.php");
     }
   };
 
@@ -77,8 +71,6 @@ window.addEventListener("load", function () {
       escribeErrores("foto", errores, tdfoto);
     }
   }
-
-  
 
   function validaUsuario(
     email,

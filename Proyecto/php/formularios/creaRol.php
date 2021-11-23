@@ -1,5 +1,5 @@
 <?php
-include_once("../entidades/tematicaObjeto.php");
+include_once("../entidades/rolObjeto.php");
 include_once("../gestion/BD.php");
 include_once("../gestion/sesion.php");
 if (isset($_POST["crear"])) {
@@ -8,25 +8,23 @@ if (isset($_POST["crear"])) {
         $errores["nombre"] = "El campo de nombre debe de estar relleno";
     }
     if (count($errores) == 0) {
-        $tematica = new Tematica(null, $_POST["nombre"]);
-        bd::insertaTematica($tematica);
+        $rol = new Rol(null, $_POST["nombre"]);
+        bd::insertaRol($rol);
     }
 }
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crea tematica</title>
-    <script src="../../js/creaTematica.js"></script>
+    <title>Crear rol</title>
+    <script src="../../js/creaRol.js"></script>
     <script src="../../js/libreria/metodos.js"></script>
 </head>
-
 <body>
-    <form id="formu" method="POST" name="formu">
+<form id="formu" method="POST" name="formu">
         <table>
             <tr>
                 <td>
@@ -49,5 +47,4 @@ if (isset($_POST["crear"])) {
         </table>
     </form>
 </body>
-
 </html>
