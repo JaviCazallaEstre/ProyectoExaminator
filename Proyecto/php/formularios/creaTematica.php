@@ -1,6 +1,6 @@
 <?php
 include_once("../entidades/tematicaObjeto.php");
-include_once("../gestion/BD.php");
+include_once("../gestion/Base%20de%20datos/BdTematica.php");
 include_once("../gestion/sesion.php");
 if (isset($_POST["crear"])) {
     $errores = array();
@@ -9,7 +9,7 @@ if (isset($_POST["crear"])) {
     }
     if (count($errores) == 0) {
         $tematica = new Tematica(null, $_POST["nombre"]);
-        bd::insertaTematica($tematica);
+        BdTematica::insertaTematica($tematica);
     }
 }
 ?>

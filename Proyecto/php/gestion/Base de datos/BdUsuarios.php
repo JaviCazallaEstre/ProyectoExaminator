@@ -1,10 +1,20 @@
 <?php
-include_once("../entidades/tematicaObjeto.php");
-include_once("../entidades/rolObjeto.php");
-class BD{
+include_once("../../entidades/usuarioObjeto.php");
+class BdUsuario
+{
     private static $conexion;
-    public static function creaConexion(){
+    public static function creaConexion()
+    {
         self::$conexion = new PDO('mysql:host=localhost;dbname=examinador', 'root', '');
+    }
+    public static function insertaUsuario(Usuario $usuario)
+    {
+        $id=$usuario->id;
+        $email=$usuario->email;
+        $nombre=$usuario->nombre;
+        $apellidos=$usuario->apellidos;
+        $contrasena=$
+        $sentencia = "INSERT INTO usuarios VALUES(:ID, :EMAIL, :NOMBRE, :APELLIDOS, :CONTRASENA, :FECHA_NAC, :FOTO, :ACTIVO, :ROL_ID)";
     }
     public static function existeUsuario($email, $contrasena)
     {
@@ -17,11 +27,5 @@ class BD{
                 return false;
             }
         }
-    }
-    public static function insertaTematica(Tematica $tematica){
-        return null;
-    }
-    public static function insertaRol(Rol $rol){
-        return null;
     }
 }
