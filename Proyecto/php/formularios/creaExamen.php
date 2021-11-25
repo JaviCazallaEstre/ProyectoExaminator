@@ -1,5 +1,10 @@
+<?php
+include_once("../gestion/creaCabeceraProfesor.php");
+include_once("../gestion/creaCabeceraAlumno.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,6 +12,12 @@
     <title>Crea examen</title>
     <script src="../../js/creaExamen.js"></script>
 </head>
+<header>
+    <?php
+    creaCabecera();
+    ?>
+</header>
+
 <body>
     <form>
         <table>
@@ -15,7 +26,7 @@
                     <label for="descripcion">Descripcion:</label>
                 </td>
                 <td>
-                    <input type="text" id="descripcion" name="descripcion"/>
+                    <input type="text" id="descripcion" name="descripcion" />
                 </td>
             </tr>
             <tr>
@@ -23,7 +34,7 @@
                     <label for="duracion">Duracion:</label>
                 </td>
                 <td>
-                    <input type="number" id="duracion" name="duracion"/>
+                    <input type="number" id="duracion" name="duracion" />
                 </td>
             </tr>
             <tr>
@@ -31,7 +42,7 @@
                     <label for="activo">Activo:</label>
                 </td>
                 <td>
-                    <input type="checkbox" id="activo" name="activo"/>
+                    <input type="checkbox" id="activo" name="activo" />
                 </td>
             </tr>
             <tr>
@@ -52,10 +63,16 @@
             </tr>
             <tr>
                 <td>
-                    <input type="submit" name="crear" id="crear" value="Crear"/>
+                    <input type="submit" name="crear" id="crear" value="Crear" />
                 </td>
             </tr>
         </table>
     </form>
+    <footer>
+        <?php
+        creaFooter("", "");
+        ?>
+    </footer>
 </body>
+
 </html>
