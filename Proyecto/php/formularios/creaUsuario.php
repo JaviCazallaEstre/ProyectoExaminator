@@ -1,6 +1,7 @@
 <?php
-include_once("../gestion/BD.php");
 include_once("../entidades/usuarioObjeto.php");
+include_once("../entidades/rolObjeto.php");
+include_once("../gestion/creaCabecera.php");
 function validateDateEs($date)
 {
     $pattern = "/^(0?[1-9]|[12][0-9]|3[01])[\/|-](0?[1-9]|[1][012])[\/|-]((19|20)?[0-9]{2})$/";
@@ -44,9 +45,9 @@ if (isset($_POST["crear"])) {
 
     if (count($errores) == 0) {
         if (isset($_FILES["foto"])) {
-            $usuario = new Usuario($_POST["email"], $_POST["nombre"], $_POST["apellidos"], $_POST["contrasena"], $_POST["fecha"], $_FILES["foto"], null, null);
+            $usuario = new Usuario($_POST["email"], $_POST["nombre"], $_POST["apellidos"], $_POST["contrasena"], $_POST["fecha"], $_FILES["foto"], new Rol(2,"estudiante"));
         } else {
-            $usuario = new Usuario($_POST["email"], $_POST["nombre"], $_POST["apellidos"], $_POST["contrasena"], $_POST["fecha"], null, null, null);
+            $usuario = new Usuario($_POST["email"], $_POST["nombre"], $_POST["apellidos"], $_POST["contrasena"], $_POST["fecha"], null, new Rol(2,"estudiante"));
         }
     }
 }
@@ -65,6 +66,11 @@ if (isset($_POST["crear"])) {
 </head>
 
 <body>
+    <header>
+        <?php
+        creaCabecera();
+        ?>
+    </header>
     <h1>Alta de usuario</h1>
     <form id="formu" name="formu" method="POST" enctype="multipart/form-data">
         <table>

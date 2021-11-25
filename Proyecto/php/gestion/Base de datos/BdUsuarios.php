@@ -68,4 +68,12 @@ class BdUsuario
         }
         return $usuarios;
     }
+    public static function sacaUsuario($id){
+        $sentencia = "SELECT * FROM usuarios WHERE id='$id'";
+        $registros=self::$conexion->query($sentencia);
+        while($resultado=$registros->fetch(PDO::FETCH_OBJ)){
+            $usuario=$resultado;
+        }
+        return $usuario;
+    }
 }
