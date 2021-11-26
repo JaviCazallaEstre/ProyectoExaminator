@@ -43,12 +43,12 @@ class BdUsuario
         $registros = self::$conexion->prepare($sentencia);
         $registros->execute($id, $nombre, $apellidos, $contrasena, $fechaNac, $foto, $rol);
     }
-    public static function existeUsuario($email, $contrasena)
+    public static function existeUsuario($email)
     {
-        $sentencia = "SELECT email, contrasena FROM usuarios WHERE email LIKE '$email'";
+        $sentencia = "SELECT email FROM usuarios WHERE email LIKE '$email'";
         $registros = self::$conexion->query($sentencia);
         while ($resultado = $registros->fetch()) {
-            if ($resultado['email'] == $email && $resultado['contrasena'] == $contrasena) {
+            if ($resultado['email'] == $email) {
                 return true;
             } else {
                 return false;

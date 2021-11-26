@@ -1,7 +1,7 @@
 <?php
 include_once("../entidades/usuarioObjeto.php");
 include_once("../entidades/examenObjeto.php");
-class examenHecho
+class ExamenHecho
 {
     private $id;
     private $fecha;
