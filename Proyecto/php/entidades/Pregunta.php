@@ -1,5 +1,5 @@
 <?php
-include_once("respuestasObjeto.php");
+require_once("../../cargadores/cargarclases.php");
 class Pregunta
 {
     private $idPregunta;

@@ -1,7 +1,6 @@
 <?php
-include_once('../entidades/preguntaObjeto.php');
-include_once('../entidades/respuestasObjeto.php');
-include_once('../gestion/sesion.php');
+require_once("../../cargadores/cargarBD.php");
+require_once("../../cargadores/cargarclases.php");
 Session::inicia();
 if (isset($_POST["enviar"])) {
     $errores = array();
@@ -23,7 +22,13 @@ if (isset($_POST["enviar"])) {
     if ($_POST["correcta"] == "") {
         $errores["correcta"] = "Debes elegir una opcion correcta";
     }
-
+    if (isset($_FILES["archivo"])) {
+        $permitidos = array("image/png", "image/jpeg", "image/jpg", "image/gif", "video/mp4", "video/mpg", "video/mpeg", "video/avi");
+        if (in_array($_FILES["archivo"]["type"], $permitidos)) {
+            $ruta = "../../Recursos/Preguntas/" . $_FILES["archivo"]["name"];
+            move_uploaded_file($_FILES["archivo"]["tmp_name"], $ruta);
+        }
+    }
     if (count($errores) == 0) {
         $opcion1 = new Respuesta(null, $_POST["opcion1"], null);
         $opcion2 = new Respuesta(null, $_POST["opcion2"], null);
@@ -32,15 +37,18 @@ if (isset($_POST["enviar"])) {
         $opciones = array();
         array_push($opciones, $opcion1, $opcion2, $opcion3, $opcion4);
         if (isset($_FILES["archivo"])) {
-            $pregunta = new Pregunta(null, $_POST["enunciado"], $opciones, $_FILES["archivo"], null, null);
+            $pregunta = new Pregunta(null, $_POST["enunciado"], $opciones, $_FILES["archivo"]["name"], null, null);
         } else {
             $pregunta = new Pregunta(null, $_POST["enunciado"], $opciones, null, null, null);
         }
     }
 }
-function rellenaSelect(array $tematicas = null)
+function rellenaSelect()
 {
-    # code...
+    $tematicas=BdTematica::sacaTematicas();
+    for ($i=0; $i < count($tematicas); $i++) { 
+        echo '<option value="'.$tematicas[$i]["id"].'">'.$tematicas[$i]["descripcion"].'</option>';
+    }
 }
 ?>
 <!DOCTYPE html>

@@ -1,7 +1,8 @@
 <?php
-include_once("rolObjeto.php");
+require_once("../../cargadores/cargarclases.php");
 class Usuario
 {
+    private $id;
     private $email;
     private $nombre;
     private $apellidos;
@@ -10,8 +11,9 @@ class Usuario
     private $foto;
     private $rol;
 
-    public function __construct($email, $nombre, $apellidos, $contrasena, $fecha_nac, $foto, Rol $rol)
+    public function __construct($id, $email, $nombre, $apellidos, $contrasena, $fecha_nac, $foto, Rol $rol)
     {
+        $this->id = $id;
         $this->email = $email;
         $this->nombre = $nombre;
         $this->apellidos = $apellidos;

@@ -1,14 +1,11 @@
 <?php
-include_once("../../entidades/usuarioObjeto.php");
+require_once("../../cargadores/cargarBD.php");
+require_once("../../cargadores/cargarclases.php");
 class BdUsuario
 {
-    private static $conexion;
-    public static function creaConexion()
-    {
-        self::$conexion = new PDO('mysql:host=localhost;dbname=examinador', 'root', '');
-    }
     public static function insertaUsuario(Usuario $usuario)
     {
+        $conexion = Conn::creaConexion();
         $id = $usuario->id;
         $email = $usuario->email;
         $nombre = $usuario->nombre;
@@ -18,7 +15,7 @@ class BdUsuario
         $foto = $usuario->foto;
         $rol = $usuario->rol->id;
         $sentencia = "INSERT INTO usuarios VALUES(:ID, :EMAIL, :NOMBRE, :APELLIDOS, :CONTRASENA, :FECHA_NAC, :FOTO, :ROL_ID)";
-        $registros = self::$conexion->prepare($sentencia);
+        $registros = $conexion->prepare($sentencia);
         $registros->bindParam(':ID', $id);
         $registros->bindParam(':EMAIL', $email);
         $registros->bindParam(':NOMBRE', $nombre);
@@ -31,6 +28,7 @@ class BdUsuario
     }
     public static function modificaUsuario(Usuario $usuario)
     {
+        $conexion = Conn::creaConexion();
         $id = $usuario->id;
         $email = $usuario->email;
         $nombre = $usuario->nombre;
@@ -40,13 +38,14 @@ class BdUsuario
         $foto = $usuario->foto;
         $rol = $usuario->rol->id;
         $sentencia = "UPDATE usuarios SET id = ?, nombre = ?, apellidos = ?, contrasena = ?, fecha_nac = ?, foto = ?, rol_id = ? WHERE id LIKE '$id'";
-        $registros = self::$conexion->prepare($sentencia);
+        $registros = $conexion->prepare($sentencia);
         $registros->execute($id, $nombre, $apellidos, $contrasena, $fechaNac, $foto, $rol);
     }
     public static function existeUsuario($email)
     {
+        $conexion = Conn::creaConexion();
         $sentencia = "SELECT email FROM usuarios WHERE email LIKE '$email'";
-        $registros = self::$conexion->query($sentencia);
+        $registros = $conexion->query($sentencia);
         while ($resultado = $registros->fetch()) {
             if ($resultado['email'] == $email) {
                 return true;
@@ -57,22 +56,27 @@ class BdUsuario
     }
     public static function borraUsuario($id)
     {
+        $conexion = Conn::creaConexion();
         $sentencia = "DELETE FROM usuarios WHERE ID like '$id'";
-        $registros = self::$conexion->query($sentencia);
+        $registros = $conexion->query($sentencia);
     }
-    public static function sacaUsuarios(){
+    public static function sacaUsuarios()
+    {
+        $conexion = Conn::creaConexion();
         $sentencia = "SELECT * FROM usuarios";
-        $registros=self::$conexion->query($sentencia);
-        while($resultado=$registros->fetch(PDO::FETCH_OBJ)){
-            $usuarios[]=$resultado;
+        $registros = $conexion->query($sentencia);
+        while ($resultado = $registros->fetch(PDO::FETCH_OBJ)) {
+            $usuarios[] = $resultado;
         }
         return $usuarios;
     }
-    public static function sacaUsuario($id){
+    public static function sacaUsuario($id)
+    {
+        $conexion = Conn::creaConexion();
         $sentencia = "SELECT * FROM usuarios WHERE id='$id'";
-        $registros=self::$conexion->query($sentencia);
-        while($resultado=$registros->fetch(PDO::FETCH_OBJ)){
-            $usuario=$resultado;
+        $registros = $conexion->query($sentencia);
+        while ($resultado = $registros->fetch(PDO::FETCH_OBJ)) {
+            $usuario = $resultado;
         }
         return $usuario;
     }

@@ -1,6 +1,8 @@
 <?php
 include_once("../gestion/creaCabeceraProfesor.php");
 include_once("../gestion/creaCabeceraAlumno.php");
+require_once("../../cargadores/cargarBD.php");
+require_once("../../cargadores/cargarclases.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,7 +21,7 @@ include_once("../gestion/creaCabeceraAlumno.php");
 </header>
 
 <body>
-    <form>
+    <form name="formu" id="formu" method="POST">
         <table>
             <tr>
                 <td>

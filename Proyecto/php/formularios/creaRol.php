@@ -1,7 +1,6 @@
 <?php
-include_once("../entidades/rolObjeto.php");
-include_once("../gestion/BD.php");
-include_once("../gestion/sesion.php");
+require_once("../../cargadores/cargarBD.php");
+require_once("../../cargadores/cargarclases.php");
 if (isset($_POST["crear"])) {
     $errores = array();
     if ($_POST["nombre"] == "") {
@@ -9,7 +8,7 @@ if (isset($_POST["crear"])) {
     }
     if (count($errores) == 0) {
         $rol = new Rol(null, $_POST["nombre"]);
-        bd::insertaRol($rol);
+        BdRol::insertaRol($rol);
     }
 }
 ?>

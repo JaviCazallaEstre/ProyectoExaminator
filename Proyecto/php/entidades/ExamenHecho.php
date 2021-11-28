@@ -1,6 +1,5 @@
 <?php
-include_once("../entidades/usuarioObjeto.php");
-include_once("../entidades/examenObjeto.php");
+require_once("../../cargadores/cargarclases.php");
 class ExamenHecho
 {
     private $id;

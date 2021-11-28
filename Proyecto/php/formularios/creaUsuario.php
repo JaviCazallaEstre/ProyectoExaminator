@@ -1,7 +1,6 @@
 <?php
-include_once("../entidades/usuarioObjeto.php");
-include_once("../entidades/rolObjeto.php");
-include_once("../gestion/creaCabecera.php");
+require_once("../../cargadores/cargarBD.php");
+require_once("../../cargadores/cargarclases.php");
 function validateDateEs($date)
 {
     $pattern = "/^(0?[1-9]|[12][0-9]|3[01])[\/|-](0?[1-9]|[1][012])[\/|-]((19|20)?[0-9]{2})$/";
@@ -42,12 +41,23 @@ if (isset($_POST["crear"])) {
     } else if (!(validateDateEs($_POST["fecha"]))) {
         $errores["fecha"] = "El campo fecha no es v&aacute;lido";
     }
-
+    if (isset($_FILES["foto"])) {
+        $permitidos = array("image/png", "image/jpeg", "image/jpg", "image/gif");
+        $limiteKb = 200;
+        if (in_array($_FILES["foto"]["type"], $permitidos) && $_FILES["foto"]["size"] <= $limiteKb * 1024) {
+            $ruta = "../../Imagenes/Usuarios" . $_FILES["foto"]["name"];
+            move_uploaded_file($_FILES["foto"]["tmp_name"], $ruta);
+        } else if (in_array($_FILES["foto"]["type"], $permitidos)) {
+            $errores["foto"] = "La foto introducida no tiene un formato válido";
+        } else {
+            $errores["foto"] = "La foto introducida supera el limite de peso permitido";
+        }
+    }
     if (count($errores) == 0) {
         if (isset($_FILES["foto"])) {
-            $usuario = new Usuario($_POST["email"], $_POST["nombre"], $_POST["apellidos"], $_POST["contrasena"], $_POST["fecha"], $_FILES["foto"], new Rol(2,"estudiante"));
+            $usuario = new Usuario($_POST["id"], $_POST["email"], $_POST["nombre"], $_POST["apellidos"], $_POST["contrasena"], $_POST["fecha"], $_FILES["foto"]["name"], new Rol(2, "estudiante"));
         } else {
-            $usuario = new Usuario($_POST["email"], $_POST["nombre"], $_POST["apellidos"], $_POST["contrasena"], $_POST["fecha"], null, new Rol(2,"estudiante"));
+            $usuario = new Usuario($_POST["id"], $_POST["email"], $_POST["nombre"], $_POST["apellidos"], $_POST["contrasena"], $_POST["fecha"], null, new Rol(2, "estudiante"));
         }
     }
 }
@@ -206,6 +216,11 @@ if (isset($_POST["crear"])) {
                 </td>
                 <td id="tdFoto">
                     <input type="file" id="foto" name="foto" />
+                    <?php
+                    if (isset($errores["foto"])) {
+                        echo "<p class='error'>" . $errores["foto"] . "</p>";
+                    }
+                    ?>
                 </td>
             </tr>
             <tr>

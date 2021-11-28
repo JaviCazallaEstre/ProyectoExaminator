@@ -1,7 +1,6 @@
 <?php
-include_once("../entidades/tematicaObjeto.php");
-include_once("../gestion/Base%20de%20datos/BdTematica.php");
-include_once("../gestion/sesion.php");
+require_once("../../cargadores/cargarBD.php");
+require_once("../../cargadores/cargarclases.php");
 if (isset($_POST["crear"])) {
     $errores = array();
     if ($_POST["nombre"] == "") {
