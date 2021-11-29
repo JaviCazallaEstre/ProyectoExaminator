@@ -1,8 +1,7 @@
 <?php
-include_once("../gestion/creaCabeceraProfesor.php");
-include_once("../gestion/creaCabeceraAlumno.php");
-require_once("../../cargadores/cargarBD.php");
-require_once("../../cargadores/cargarclases.php");
+require_once("../cargadores/cargarGestion.php");
+require_once("../cargadores/cargarBD.php");
+require_once("../cargadores/cargarclases.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,7 +15,7 @@ require_once("../../cargadores/cargarclases.php");
 </head>
 <header>
     <?php
-    creaCabecera();
+    CreaCabecera::creaCabeceraProfesor();
     ?>
 </header>
 
@@ -72,7 +71,7 @@ require_once("../../cargadores/cargarclases.php");
     </form>
     <footer>
         <?php
-        creaFooter("", "");
+        CreaFooter::creaFooterPagina("","");
         ?>
     </footer>
 </body>

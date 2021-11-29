@@ -1,8 +1,10 @@
 <?php
-function creaFooter($guia, $mapa)
+class CreaFooter
 {
-    echo
-    "<div class='columna1'>
+    public static function creaFooterPagina($guia, $mapa)
+    {
+        echo
+        "<div class='columna1'>
     <ul>
         <li>
             <a href='" . $guia . "'>Guia de estilo</a>
@@ -12,8 +14,8 @@ function creaFooter($guia, $mapa)
         </li>
     </ul>
 </div>";
-    echo
-    "<div class='columna2'>
+        echo
+        "<div class='columna2'>
     <p>Enlaces relacionados</p>
     <ul>
         <li>
@@ -27,8 +29,8 @@ function creaFooter($guia, $mapa)
         </li>
     </ul>
 </div>";
-    echo
-    "<div class='columna3'>
+        echo
+        "<div class='columna3'>
     <p>Contacto</p>
     <ul>
         <li>
@@ -42,4 +44,5 @@ function creaFooter($guia, $mapa)
         </li>
     </ul>
 </div>";
+    }
 }

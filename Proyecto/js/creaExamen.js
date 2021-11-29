@@ -7,9 +7,11 @@ window.addEventListener("load", function () {
   var seleccionables = document.getElementById("seleccionables");
   var seleccionadas = document.getElementById("seleccionadas");
 
-  const ajax = new XMLHttpRequest();
+  pidePreguntas();
+  function pidePreguntas() {
+    const ajax = new XMLHttpRequest();
   ajax.onreadystatechange = function () {
-    if (ajax.readyState == 4 && ajax.readyState == 200) {
+    if (ajax.readyState == 4 && ajax.status == 200) {
       var respuesta = JSON.parse(ajax.responseText);
       if (respuesta.preguntas.length > 0) {
         for (let i = 0; i < respuesta.preguntas.length; i++) {
@@ -18,11 +20,14 @@ window.addEventListener("load", function () {
         }
       }
     }
-  };
-  ajax.open("GET", "");
+  }
+  ajax.open("GET", "../../php/entidades/pidePreguntasPrueba.php");
   ajax.send();
+  }
+  
 
   function crearContenido(pregunta) {
+    debugger;
     const div1 = document.createElement("div");
     div1.className = pregunta.tematica;
     const div2 = document.createElement("div");
@@ -39,6 +44,8 @@ window.addEventListener("load", function () {
       div4.appendChild(imagen);
       div1.appendChild(div4);
     }
+    div1.appendChild(div2);
+    div1.appendChild(div3);
     return div1;
   }
 });

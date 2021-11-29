@@ -1,6 +1,25 @@
 <?php
-include_once("php/gestion/BD.php");
-BD::creaConexion();
+require_once("../../cargadores/cargarBD.php");
+require_once("../../cargadores/cargarclases.php");
+require_once("../../cargadores/cargarGestion.php");
+if (isset($_POST)) {
+    if ($_POST["email"] != "" && $_POST["contrasena"] != "") {
+        $usuario = Login::existeUsuario($_POST["email"], $_POST["contrasena"]);
+        if ($usuario != false) {
+            Session::inicia();
+            Session::escribir("usuario", $usuario);
+            if ($_POST["recuerdame"] == 'on') {
+                setcookie("usuario", $_POST["email"], time() + 3600);
+                setcookie("contrasena", $_POST["contrasena"], time() + 3600);
+                setcookie("recuerdame", $_POST["recuerdame"], time() + 3600);
+            }
+        } else {
+            echo "<p class='error'>Los datos introducidos son incorrectos</p>";
+        }
+    } else {
+        echo "<p class='error'>Los campos deben de estar rellenos</p>";
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -65,28 +84,7 @@ BD::creaConexion();
                 </tr>
             </table>
         </form>
-        <?php
-        if (isset($_POST)) {
-            if ($_POST["email"] != "" && $_POST["contrasena"] != "") {
-                if (bd::existeUsuario($_POST["email"], $_POST["contrasena"])) {
-                    Session::inicia();
-                    Session::escribir("usuario", $_POST["email"]);
-                    Session::escribir("contrasena", $_POST["contrasena"]);
-                    if ($_POST["recuerdame"] == 'on') {
-                        setcookie("usuario", $_POST["email"], time() + 3600);
-                        setcookie("contrasena", $_POST["contrasena"], time() + 3600);
-                        setcookie("recuerdame", $_POST["recuerdame"], time() + 3600);
-                    }
-                } else {
-                    echo "<p class='error'>Los datos introducidos son incorrectos</p>";
-                }
-            } else {
-                echo "<p class='error'>Los campos deben de estar rellenos</p>";
-            }
-        }
-        ?>
         <a href="">¿Has olvidado tu contraseña</a>
-        <a href="">Nueva cuenta de usuario</a>
     </div>
 </body>
 
