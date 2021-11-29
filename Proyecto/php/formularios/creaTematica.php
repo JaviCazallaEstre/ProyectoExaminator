@@ -1,6 +1,7 @@
 <?php
-require_once("../../cargadores/cargarBD.php");
-require_once("../../cargadores/cargarclases.php");
+require_once("../cargadores/cargarBD.php");
+require_once("../cargadores/cargarclases.php");
+require_once("../cargadores/cargarGestion.php");
 if (isset($_POST["crear"])) {
     $errores = array();
     if ($_POST["nombre"] == "") {

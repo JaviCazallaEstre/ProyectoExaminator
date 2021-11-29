@@ -1,6 +1,7 @@
 <?php
-require_once("../../cargadores/cargarBD.php");
-require_once("../../cargadores/cargarclases.php");
+require_once("../cargadores/cargarBD.php");
+require_once("../cargadores/cargarclases.php");
+require_once("../cargadores/cargarGestion.php");
 Session::inicia();
 if (isset($_POST["enviar"])) {
     $errores = array();
@@ -64,6 +65,11 @@ function rellenaSelect()
 </head>
 
 <body>
+    <header>
+        <?php
+        CreaCabecera::creaCabeceraProfesor();
+        ?>
+    </header>
     <form id="formu" name="formu" method="POST" enctype="multipart/form-data">
         <table>
             <tr>
@@ -234,6 +240,11 @@ function rellenaSelect()
             </tr>
         </table>
     </form>
+    <footer>
+        <?php
+        CreaFooter::creaFooterPagina("","");
+        ?>
+    </footer>
 </body>
 
 </html>

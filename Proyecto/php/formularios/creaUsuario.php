@@ -1,6 +1,7 @@
 <?php
-require_once("../../cargadores/cargarBD.php");
-require_once("../../cargadores/cargarclases.php");
+require_once("../cargadores/cargarBD.php");
+require_once("../cargadores/cargarclases.php");
+require_once("../cargadores/cargarGestion.php");
 function validateDateEs($date)
 {
     $pattern = "/^(0?[1-9]|[12][0-9]|3[01])[\/|-](0?[1-9]|[1][012])[\/|-]((19|20)?[0-9]{2})$/";
@@ -10,6 +11,16 @@ function validateDateEs($date)
             return true;
     }
     return false;
+}
+function getAge($fecha)
+{
+    //Creamos objeto fecha desde los valores recibidos
+    $nacio = DateTime::createFromFormat('Y-m-d', $fecha);
+    //Calculamos usando diff y la fecha actual
+    $calculo = $nacio->diff(new DateTime());
+    //Obtenemos la edad
+    $edad =  $calculo->y;
+   return $edad;
 }
 if (isset($_POST["crear"])) {
     $errores = array();
@@ -40,6 +51,8 @@ if (isset($_POST["crear"])) {
         $errores["fecha"] = "El campo fecha debe de estar relleno";
     } else if (!(validateDateEs($_POST["fecha"]))) {
         $errores["fecha"] = "El campo fecha no es v&aacute;lido";
+    } else if (getAge($_POST["fecha"]) <18) {
+        $errores["fecha"] = "Debe de ser mayor de 18 años";
     }
     if (isset($_FILES["foto"])) {
         $permitidos = array("image/png", "image/jpeg", "image/jpg", "image/gif");
@@ -76,11 +89,6 @@ if (isset($_POST["crear"])) {
 </head>
 
 <body>
-    <header>
-        <?php
-        creaCabecera();
-        ?>
-    </header>
     <h1>Alta de usuario</h1>
     <form id="formu" name="formu" method="POST" enctype="multipart/form-data">
         <table>

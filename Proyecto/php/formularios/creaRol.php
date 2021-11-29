@@ -1,6 +1,7 @@
 <?php
-require_once("../../cargadores/cargarBD.php");
-require_once("../../cargadores/cargarclases.php");
+require_once("../cargadores/cargarBD.php");
+require_once("../cargadores/cargarclases.php");
+require_once("../cargadores/cargarGestion.php");
 if (isset($_POST["crear"])) {
     $errores = array();
     if ($_POST["nombre"] == "") {
@@ -14,6 +15,7 @@ if (isset($_POST["crear"])) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -22,8 +24,14 @@ if (isset($_POST["crear"])) {
     <script src="../../js/creaRol.js"></script>
     <script src="../../js/libreria/metodos.js"></script>
 </head>
+
 <body>
-<form id="formu" method="POST" name="formu">
+<header>
+    <?php
+        CreaCabecera::creaCabeceraProfesor();
+    ?>
+</header>
+    <form id="formu" method="POST" name="formu">
         <table>
             <tr>
                 <td>
@@ -45,5 +53,11 @@ if (isset($_POST["crear"])) {
             </tr>
         </table>
     </form>
+    <footer>
+        <?php
+        CreaFooter::creaFooterPagina("","");
+        ?>
+    </footer>
 </body>
+
 </html>

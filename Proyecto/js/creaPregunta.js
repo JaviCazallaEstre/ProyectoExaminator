@@ -31,25 +31,24 @@ window.addEventListener("load", function () {
           opcionCorrecta = correcta[i].value;
         }
       }
-      var texto = encodeURI(
-        "enviar=&tematica=" +
-          tematica.value +
-          "&enunciado=" +
-          enunciado.value +
-          "&archivo=" +
-          archivo.src +
-          "&opcion1=" +
-          opcion1.value +
-          "&opcion2=" +
-          opcion2.value +
-          "&opcion3=" +
-          opcion3.value +
-          "&opcion4=" +
-          opcion4.value +
-          "&correcta" +
-          opcionCorrecta
-      );
-      enviarFormularioAjax(texto, "creaPregunta.php");
+      let formu = new FormData();
+      formu.append("boton", "");
+      formu.append("tematica", tematica.value);
+      formu.append("enunciado", enunciado.value);
+      formu.append("opcion1", opcion1.value);
+      formu.append("opcion2", opcion2.value);
+      formu.append("opcion3", opcion3.value);
+      formu.append("opcion4", opcion4.value);
+      formu.append("correcta", opcionCorrecta);
+      if (
+        /^image\//.test(archivo.files[0].type) ||
+        /^video\//.test(archivo.files[0].type)
+      ) {
+        formu.append("archivo", archivo.files[0]);
+      }
+      const ajax = new XMLHttpRequest();
+      ajax.open("POST", "creaPregunta.php");
+      ajax.send(formu);
     }
   };
   function muestraErrores(errores) {
