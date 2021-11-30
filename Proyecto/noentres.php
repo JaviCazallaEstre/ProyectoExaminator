@@ -1,8 +1,8 @@
 <?php
-require_once("../../cargadores/cargarBD.php");
-require_once("../../cargadores/cargarclases.php");
-require_once("../../cargadores/cargarGestion.php");
-if (isset($_POST)) {
+require_once("php/cargadores/cargarBD.php");
+require_once("php/cargadores/cargarclases.php");
+require_once("php/cargadores/cargarGestion.php");
+if (isset($_POST["enviar"])) {
     if ($_POST["email"] != "" && $_POST["contrasena"] != "") {
         $usuario = Login::existeUsuario($_POST["email"], $_POST["contrasena"]);
         if ($usuario != false) {
@@ -42,13 +42,13 @@ if (isset($_POST)) {
                 </tr>
                 <tr>
                     <td>
-                        <input type="text" id="email" name="email" value=<?php
+                        <input type="text" id="email" name="email" value='<?php
                                                                             if (isset($_COOKIE)) {
                                                                                 if (isset($_COOKIE["usuario"]) && isset($_COOKIE["contrasena"])) {
                                                                                     echo $_COOKIE["usuario"];
                                                                                 }
                                                                             }
-                                                                            ?> />
+                                                                            ?> '/>
                     </td>
                 </tr>
                 <tr>
@@ -58,13 +58,13 @@ if (isset($_POST)) {
                 </tr>
                 <tr>
                     <td>
-                        <input type="password" id="contrasena" name="contrasena" value=<?php
+                        <input type="password" id="contrasena" name="contrasena" value='<?php
                                                                                         if (isset($_COOKIE)) {
                                                                                             if (isset($_COOKIE["usuario"]) && isset($_COOKIE["contrasena"])) {
                                                                                                 echo $_COOKIE["contrasena"];
                                                                                             }
                                                                                         }
-                                                                                        ?> />
+                                                                                        ?>' />
                     </td>
                     <td>
                         <label for="recuerdame">Recuerdame</label>

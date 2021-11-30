@@ -23,16 +23,18 @@ window.addEventListener("load", function () {
     if (Object.keys(errores).length > 0) {
       muestraErrores(errores);
     } else {
-      formu= new FormData();
-      formu.append("crear","");
+      formu = new FormData();
+      formu.append("crear", "");
       formu.append("email", email.value);
       formu.append("nombre", nombre.value);
       formu.append("apellidos", apellidos.value);
-      formu.append("contrasena",contrasena.value);
+      formu.append("contrasena", contrasena.value);
       formu.append("fecha", fecha.value);
-      formu.append("foto",foto.files[0]);
+      if (/^image\//.test(foto.files[0].type)) {
+        formu.append("foto", foto.files[0]);
+      }
       const ajax = new XMLHttpRequest();
-      ajax.open("POST","creaUsuario.php");
+      ajax.open("POST", "creaUsuario.php");
       ajax.send(formu);
     }
   };
@@ -106,8 +108,8 @@ window.addEventListener("load", function () {
       errores["fecha"] = "El campo fecha debe de estar relleno";
     } else if (!fecha.esFecha()) {
       errores["fecha"] = "Debe introducir una fecha valida";
-    }else if(calcularEdad(fecha)<18){
-      errores["fecha"]="La edad debe de ser mayor de 18 años";
+    } else if (calcularEdad(fecha) < 18) {
+      errores["fecha"] = "La edad debe de ser mayor de 18 años";
     }
     if (foto.files[0] != "") {
       if (!/^image\//.test(foto.files[0].type)) {

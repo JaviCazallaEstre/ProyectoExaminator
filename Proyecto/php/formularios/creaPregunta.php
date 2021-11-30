@@ -25,9 +25,14 @@ if (isset($_POST["enviar"])) {
     }
     if (isset($_FILES["archivo"])) {
         $permitidos = array("image/png", "image/jpeg", "image/jpg", "image/gif", "video/mp4", "video/mpg", "video/mpeg", "video/avi");
-        if (in_array($_FILES["archivo"]["type"], $permitidos)) {
+        $limitekb = 4096;
+        if (in_array($_FILES["archivo"]["type"], $permitidos) && $_FILES["archivo"]["size"] <= $limitekb * 1024) {
             $ruta = "../../Recursos/Preguntas/" . $_FILES["archivo"]["name"];
             move_uploaded_file($_FILES["archivo"]["tmp_name"], $ruta);
+        } else if(!in_array($_FILES["archivo"]["type"], $permitidos)){
+            $errores["archivo"]="El recurso debe de ser una foto o un vídeo";
+        }else{
+            $errores["archivo"]="El peso del archivo supera el limite de 4MB";
         }
     }
     if (count($errores) == 0) {
@@ -46,9 +51,9 @@ if (isset($_POST["enviar"])) {
 }
 function rellenaSelect()
 {
-    $tematicas=BdTematica::sacaTematicas();
-    for ($i=0; $i < count($tematicas); $i++) { 
-        echo '<option value="'.$tematicas[$i]["id"].'">'.$tematicas[$i]["descripcion"].'</option>';
+    $tematicas = BdTematica::sacaTematicas();
+    for ($i = 0; $i < count($tematicas); $i++) {
+        echo '<option value="' . $tematicas[$i]["id"] . '">' . $tematicas[$i]["descripcion"] . '</option>';
     }
 }
 ?>
@@ -118,6 +123,11 @@ function rellenaSelect()
             <tr>
                 <td>
                     <input type="file" name="archivo" id="archivo" />
+                    <?php
+                    if (isset($errores["archivo"])) {
+                        echo "<p class='error'>" . $errores["archivo"] . "</p>";
+                    }
+                    ?>
                 </td>
             </tr>
             <tr>
@@ -242,7 +252,7 @@ function rellenaSelect()
     </form>
     <footer>
         <?php
-        CreaFooter::creaFooterPagina("","");
+        CreaFooter::creaFooterPagina("", "");
         ?>
     </footer>
 </body>

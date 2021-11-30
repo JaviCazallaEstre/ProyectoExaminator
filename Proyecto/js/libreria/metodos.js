@@ -4,12 +4,6 @@ function escribeErrores(atributo, errores, elemento) {
   parrafo.setAttribute("class", "error");
   elemento.appendChild(parrafo);
 }
-function enviarFormularioAjax(texto, ruta) {
-  const ajax = new XMLHttpRequest();
-  ajax.open("POST", ruta);
-  ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-  ajax.send(texto);
-}
 function calcularEdad(fecha_nacimiento) {
   var hoy = new Date();
   var cumpleanos = new Date(fecha_nacimiento);

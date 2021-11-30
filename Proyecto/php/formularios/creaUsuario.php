@@ -58,9 +58,9 @@ if (isset($_POST["crear"])) {
         $permitidos = array("image/png", "image/jpeg", "image/jpg", "image/gif");
         $limiteKb = 200;
         if (in_array($_FILES["foto"]["type"], $permitidos) && $_FILES["foto"]["size"] <= $limiteKb * 1024) {
-            $ruta = "../../Imagenes/Usuarios" . $_FILES["foto"]["name"];
+            $ruta = "../../Recursos/Usuarios" . $_FILES["foto"]["name"];
             move_uploaded_file($_FILES["foto"]["tmp_name"], $ruta);
-        } else if (in_array($_FILES["foto"]["type"], $permitidos)) {
+        } else if (!in_array($_FILES["foto"]["type"], $permitidos)) {
             $errores["foto"] = "La foto introducida no tiene un formato válido";
         } else {
             $errores["foto"] = "La foto introducida supera el limite de peso permitido";
