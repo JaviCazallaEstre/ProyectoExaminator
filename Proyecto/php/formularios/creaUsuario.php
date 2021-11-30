@@ -20,7 +20,7 @@ function getAge($fecha)
     $calculo = $nacio->diff(new DateTime());
     //Obtenemos la edad
     $edad =  $calculo->y;
-   return $edad;
+    return $edad;
 }
 if (isset($_POST["crear"])) {
     $errores = array();
@@ -51,7 +51,7 @@ if (isset($_POST["crear"])) {
         $errores["fecha"] = "El campo fecha debe de estar relleno";
     } else if (!(validateDateEs($_POST["fecha"]))) {
         $errores["fecha"] = "El campo fecha no es v&aacute;lido";
-    } else if (getAge($_POST["fecha"]) <18) {
+    } else if (getAge($_POST["fecha"]) < 18) {
         $errores["fecha"] = "Debe de ser mayor de 18 años";
     }
     if (isset($_FILES["foto"])) {
@@ -63,7 +63,7 @@ if (isset($_POST["crear"])) {
         } else if (!in_array($_FILES["foto"]["type"], $permitidos)) {
             $errores["foto"] = "La foto introducida no tiene un formato válido";
         } else {
-            $errores["foto"] = "La foto introducida supera el limite de peso permitido";
+            $errores["foto"] = "La foto introducida supera el límite de peso permitido (200KB)";
         }
     }
     if (count($errores) == 0) {

@@ -18,7 +18,7 @@ window.addEventListener("load", function () {
       contrasena.value,
       contrasenaIgual.value,
       fecha.value,
-      foto.files[0]
+      foto
     );
     if (Object.keys(errores).length > 0) {
       muestraErrores(errores);
@@ -112,8 +112,11 @@ window.addEventListener("load", function () {
       errores["fecha"] = "La edad debe de ser mayor de 18 años";
     }
     if (foto.files[0] != "") {
+      limiteKB = 200;
       if (!/^image\//.test(foto.files[0].type)) {
         errores["foto"] = "El archivo debe de ser una foto";
+      } else if (foto.files[0].size > limiteKB * 1024) {
+        errores["foto"] = "El tamaño de la foto no puede superar los 200KB";
       }
     }
     return errores;

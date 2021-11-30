@@ -121,7 +121,7 @@ function rellenaSelect()
                 </td>
             </tr>
             <tr>
-                <td>
+                <td id="tdArchivo">
                     <input type="file" name="archivo" id="archivo" />
                     <?php
                     if (isset($errores["archivo"])) {

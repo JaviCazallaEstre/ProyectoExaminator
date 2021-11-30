@@ -59,6 +59,7 @@ window.addEventListener("load", function () {
     const tdOpcion3 = document.getElementById("tdOpcion3");
     const tdOpcion4 = document.getElementById("tdOpcion4");
     const tdRadio = document.getElementById("tdRadio");
+    const tdArchivo = document.getElementById("tdArchivo");
     if (errores.hasOwnProperty("tematica")) {
       escribeErrores("tematica", errores, tdTematica);
     }
@@ -79,6 +80,9 @@ window.addEventListener("load", function () {
     }
     if (errores.hasOwnProperty("correcta")) {
       escribeErrores("correcta", errores, tdRadio);
+    }
+    if (errores.hasOwnProperty("archivo")) {
+      escribeErrores("archivo", errores, tdArchivo);
     }
   }
   function validaPregunta(
@@ -117,6 +121,17 @@ window.addEventListener("load", function () {
     }
     if (opcionCorrecta == "") {
       errores["correcta"] = "Debes de elegir una opción como la correcta";
+    }
+    if (archivo.files[0] != "") {
+      limiteKb = 4096;
+      if (
+        !/^image\//.test(archivo.files[0].type) &&
+        !/^video\//.test(archivo.files[0].type)
+      ) {
+        errores["archivo"] = "El archivo debe de ser un vídeo o una imagen";
+      } else if (archivo.files[0].size > limiteKb * 1024) {
+        errores["archivo"] = "El archivo no puede pesar más de 4MB";
+      }
     }
     return errores;
   }
