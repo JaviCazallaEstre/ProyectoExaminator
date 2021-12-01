@@ -1,17 +1,31 @@
 <?php
 require_once("../../cargadores/cargarBD.php");
 require_once("../../cargadores/cargarclases.php");
-class bdAltaUsuario{
-    public static function insertaAlta($id,$correo){
-        $conexion=Conn::creaConexion();
-        $sentencia="INSERT INTO registropendiente VALUES(:ID, :CORREO)";
-        $registros=$conexion->prepare($sentencia);
-        $registros->bindParam(":ID",$id);
-        $registros->bindParam(":CORREO",$correo);
+class bdAltaUsuario
+{
+    public static function insertaAlta($id, $correo)
+    {
+        $conexion = Conn::creaConexion();
+        $sentencia = "INSERT INTO registropendiente VALUES(:ID, :CORREO)";
+        $registros = $conexion->prepare($sentencia);
+        $registros->bindParam(":ID", $id);
+        $registros->bindParam(":CORREO", $correo);
         $registros->execute();
     }
-    public static function borraAlta($id){
-        $conexion=Conn::creaConexion();
-        
+    public static function borraAlta($id)
+    {
+        $conexion = Conn::creaConexion();
+        $sentencia = "DELETE FROM registropendiente WHERE ID LIKE '$id'";
+        $conexion->query($sentencia);
+    }
+    public static function cogeAlta($id)
+    {
+        $conexion = Conn::creaConexion();
+        $sentencia = "SELECT * FROM registropendiente WHERE ID LIKE'$id'";
+        $registros = $conexion->query($sentencia);
+        while ($resultado = $registros->fetch()) {
+            $alta = $resultado;
+        }
+        return $alta;
     }
 }

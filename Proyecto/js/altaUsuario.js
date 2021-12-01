@@ -6,7 +6,7 @@ window,
 
     enviar.onclick(function (ev) {
       ev.preventDefault();
-      errores = validaAlta(email.value, fecha.value);
+      errores = validaAlta(email.value);
       if(Object.keys(errores).length>0){
           muestraErrores(errores);
       }else{
@@ -19,7 +19,7 @@ window,
       }
     });
 
-    function validaAlta(email, fecha) {
+    function validaAlta(email) {
       errores = [];
       if (email == "") {
         errores["email"] = "El campo email debe de estar relleno";
