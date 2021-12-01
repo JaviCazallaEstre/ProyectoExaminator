@@ -58,7 +58,7 @@ class BdUsuario
     {
         $conexion = Conn::creaConexion();
         $sentencia = "DELETE FROM usuarios WHERE ID like '$id'";
-        $registros = $conexion->query($sentencia);
+        $conexion->query($sentencia);
     }
     public static function sacaUsuarios()
     {

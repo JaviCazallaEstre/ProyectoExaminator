@@ -27,7 +27,6 @@ window.addEventListener("load", function () {
   
 
   function crearContenido(pregunta) {
-    debugger;
     const div1 = document.createElement("div");
     div1.className = pregunta.tematica;
     const div2 = document.createElement("div");

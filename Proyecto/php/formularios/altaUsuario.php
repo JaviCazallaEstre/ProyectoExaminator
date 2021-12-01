@@ -9,11 +9,6 @@ if (isset($_POST["enviar"])) {
     } else if (!($_POST["email"] == filter_var($_POST["email"], FILTER_VALIDATE_EMAIL))) {
         $errores["email"] = "El email introducido no es v&aacute;lido";
     }
-    if ($_POST["fecha"] == "") {
-        $errores["fecha"] = "El campo fecha debe de estar relleno";
-    } else if (!(validateDateEs($_POST["fecha"]))) {
-        $errores["fecha"] = "El campo fecha no es v&aacute;lido";
-    }
 }
 ?>
 <!DOCTYPE html>
@@ -41,7 +36,7 @@ if (isset($_POST["enviar"])) {
                 <td>
                     <label for="correo">Correo electr&oacute;nico:</label>
                 </td>
-                <td>
+                <td id="tdEmail">
                     <input type="text" name="correo" id="correo" value="<?php
                                                                         if (isset($errores["email"])) {
                                                                             echo "";
@@ -57,27 +52,6 @@ if (isset($_POST["enviar"])) {
                     }
                     ?>
 
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="fecha">Fecha de expiraci&oacute;n:</label>
-                </td>
-                <td>
-                    <input type="date" name="fecha" id="fecha" value="<?php
-                                                                        if (isset($errores["fecha"])) {
-                                                                            echo "";
-                                                                        } else if (isset($_POST["fecha"])) {
-                                                                            echo $_POST["fecha"];
-                                                                        } else {
-                                                                            echo "";
-                                                                        }
-                                                                        ?>" />
-                    <?php
-                    if (isset($errores["fecha"])) {
-                        echo "<p class='error'>" . $errores["fecha"] . "</p>";
-                    }
-                    ?>
                 </td>
             </tr>
             <tr>
