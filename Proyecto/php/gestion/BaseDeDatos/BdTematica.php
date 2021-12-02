@@ -12,6 +12,9 @@ class BdTematica
         while ($resultado = $registros->fetch(PDO::FETCH_OBJ)) {
             $tematicas[] = $resultado;
         }
+        $registros->closeCursor();
+        $registros = null;
+        $conexion = null;
         return $tematicas;
     }
 
@@ -24,6 +27,9 @@ class BdTematica
         $registros->bindParam(':ID', null);
         $registros->bindParam('DESCRIPCION', $descripcion);
         $registros->execute();
+        $registros->closeCursor();
+        $registros = null;
+        $conexion = null;
     }
 
     public static function sacaTematica($descripcion)
@@ -34,6 +40,9 @@ class BdTematica
         while ($resultado = $registros->fetch(PDO::FETCH_OBJ)) {
             $tematica = $resultado;
         }
+        $registros->closeCursor();
+        $registros = null;
+        $conexion = null;
         return $tematica;
     }
 }

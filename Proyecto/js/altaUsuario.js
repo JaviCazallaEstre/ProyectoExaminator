@@ -7,15 +7,15 @@ window,
     enviar.onclick(function (ev) {
       ev.preventDefault();
       errores = validaAlta(email.value);
-      if(Object.keys(errores).length>0){
-          muestraErrores(errores);
-      }else{
-          formulario= new FormData();
-          formulario.append("enviar","");
-          formulario.append("email",email.value);
-          const ajax = new XMLHttpRequest();
-          ajax.open("POST","altaUsuario.php");
-          ajax.send(formulario);
+      if (Object.keys(errores).length > 0) {
+        muestraErrores(errores);
+      } else {
+        formulario = new FormData();
+        formulario.append("enviar", "");
+        formulario.append("email", email.value);
+        const ajax = new XMLHttpRequest();
+        ajax.open("POST", "altaUsuario.php");
+        ajax.send(formulario);
       }
     });
 

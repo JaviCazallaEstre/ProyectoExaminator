@@ -12,6 +12,9 @@ class BdRol
         while ($resultado = $registros->fetch(PDO::FETCH_OBJ)) {
             $roles[] = $resultado;
         }
+        $registros->closeCursor();
+        $registros = null;
+        $conexion = null;
         return $roles;
     }
 
@@ -24,6 +27,9 @@ class BdRol
         $registros->bindParam(':ID', null);
         $registros->bindParam(':DESCRIPCION', $descripcion);
         $registros->execute();
+        $registros->closeCursor();
+        $registros = null;
+        $conexion = null;
     }
 
     public static function sacaRol($descripcion)
@@ -34,6 +40,9 @@ class BdRol
         while ($resultado = $registros->fetch(PDO::FETCH_OBJ)) {
             $rol = $resultado;
         }
+        $registros->closeCursor();
+        $registros = null;
+        $conexion = null;
         return $rol;
     }
     public static function sacaRolId($id)
@@ -44,6 +53,9 @@ class BdRol
         while ($resultado = $registros->fetch(PDO::FETCH_OBJ)) {
             $rol = $resultado;
         }
+        $registros->closeCursor();
+        $registros = null;
+        $conexion = null;
         return $rol;
     }
 }

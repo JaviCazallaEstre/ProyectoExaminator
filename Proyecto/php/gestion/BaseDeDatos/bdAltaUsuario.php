@@ -11,12 +11,16 @@ class bdAltaUsuario
         $registros->bindParam(":ID", $id);
         $registros->bindParam(":CORREO", $correo);
         $registros->execute();
+        $registros->closeCursor();
+        $registros = null;
+        $conexion = null;
     }
     public static function borraAlta($id)
     {
         $conexion = Conn::creaConexion();
         $sentencia = "DELETE FROM registropendiente WHERE ID LIKE '$id'";
         $conexion->query($sentencia);
+        $conexion = null;
     }
     public static function cogeAlta($id)
     {
@@ -26,6 +30,9 @@ class bdAltaUsuario
         while ($resultado = $registros->fetch()) {
             $alta = $resultado;
         }
+        $registros->closeCursor();
+        $registros = null;
+        $conexion = null;
         return $alta;
     }
 }

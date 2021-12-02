@@ -25,12 +25,12 @@ require_once("../cargadores/cargarGestion.php");
                 </td>
             </tr>
             <tr>
-                <td>
+                <td id="tdTextArea">
                     <textarea id="textarea" name="textarea"></textarea>
                 </td>
             </tr>
             <tr>
-                <td>
+                <td id="tdArchivo">
                     <input type="file" name="archivo" id="archivo"/>
                 </td>
             </tr>

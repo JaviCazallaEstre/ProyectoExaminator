@@ -23,8 +23,11 @@ class BdUsuario
         $registros->bindParam(':CONTRASENA', $contrasena);
         $registros->bindParam(':FECHA_NAC', $fechaNac);
         $registros->bindParam(':FOTO', $foto);
-        $registros->bindParam('ROL_ID', $rol);
+        $registros->bindParam(':ROL_ID', $rol);
         $registros->execute();
+        $registros->closeCursor();
+        $registros = null;
+        $conexion = null;
     }
     public static function modificaUsuario(Usuario $usuario)
     {
@@ -37,9 +40,12 @@ class BdUsuario
         $fechaNac = $usuario->fecha_nac;
         $foto = $usuario->foto;
         $rol = $usuario->rol->id;
-        $sentencia = "UPDATE usuarios SET id = ?, nombre = ?, apellidos = ?, contrasena = ?, fecha_nac = ?, foto = ?, rol_id = ? WHERE id LIKE '$id'";
+        $sentencia = "UPDATE usuarios SET id = ?, email=?, nombre = ?, apellidos = ?, contrasena = ?, fecha_nac = ?, foto = ?, rol_id = ? WHERE id LIKE '$id'";
         $registros = $conexion->prepare($sentencia);
-        $registros->execute($id, $nombre, $apellidos, $contrasena, $fechaNac, $foto, $rol);
+        $registros->execute($id, $email, $nombre, $apellidos, $contrasena, $fechaNac, $foto, $rol);
+        $registros->closeCursor();
+        $registros = null;
+        $conexion = null;
     }
     public static function existeUsuario($email)
     {
@@ -48,8 +54,14 @@ class BdUsuario
         $registros = $conexion->query($sentencia);
         while ($resultado = $registros->fetch()) {
             if ($resultado['email'] == $email) {
+                $registros->closeCursor();
+                $registros = null;
+                $conexion = null;
                 return true;
             } else {
+                $registros->closeCursor();
+                $registros = null;
+                $conexion = null;
                 return false;
             }
         }
@@ -59,6 +71,7 @@ class BdUsuario
         $conexion = Conn::creaConexion();
         $sentencia = "DELETE FROM usuarios WHERE ID like '$id'";
         $conexion->query($sentencia);
+        $conexion = null;
     }
     public static function sacaUsuarios()
     {
@@ -68,6 +81,9 @@ class BdUsuario
         while ($resultado = $registros->fetch(PDO::FETCH_OBJ)) {
             $usuarios[] = $resultado;
         }
+        $registros->closeCursor();
+        $registros = null;
+        $conexion = null;
         return $usuarios;
     }
     public static function sacaUsuario($id)
@@ -78,6 +94,9 @@ class BdUsuario
         while ($resultado = $registros->fetch(PDO::FETCH_OBJ)) {
             $usuario = $resultado;
         }
+        $registros->closeCursor();
+        $registros = null;
+        $conexion = null;
         return $usuario;
     }
 }
