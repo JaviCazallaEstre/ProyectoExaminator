@@ -29,9 +29,12 @@ window.addEventListener("load", function () {
       formu.append("nombre", nombre.value);
       formu.append("apellidos", apellidos.value);
       formu.append("contrasena", contrasena.value);
+      formu.append("contrasenaIgual", contrasenaIgual.value);
       formu.append("fecha", fecha.value);
-      if (/^image\//.test(foto.files[0].type)) {
-        formu.append("foto", foto.files[0]);
+      if (foto.hasOwnProperty("files")) {
+        if (/^image\//.test(foto.files[0].type)) {
+          formu.append("foto", foto.files[0]);
+        }
       }
       const ajax = new XMLHttpRequest();
       ajax.open("POST", "creaUsuario.php");
@@ -73,6 +76,7 @@ window.addEventListener("load", function () {
   function validaUsuario(
     email,
     nombre,
+    apellidos,
     contrasena,
     contrasenaIgual,
     fecha,
@@ -104,14 +108,14 @@ window.addEventListener("load", function () {
     } else if (contrasena != contrasenaIgual) {
       errores[contrasenaIgual] = "Las contraseñas no coinciden";
     }
-    if (fecha == "") {
-      errores["fecha"] = "El campo fecha debe de estar relleno";
-    } else if (!fecha.esFecha()) {
-      errores["fecha"] = "Debe introducir una fecha valida";
-    } else if (calcularEdad(fecha) < 18) {
+    //if (fecha == "") {
+    //  errores["fecha"] = "El campo fecha debe de estar relleno";
+    //} else if (!fecha.esFecha()) {
+    //  errores["fecha"] = "Debe introducir una fecha valida";
+    if (calcularEdad(fecha) < 18) {
       errores["fecha"] = "La edad debe de ser mayor de 18 años";
     }
-    if (foto.files[0] != "") {
+    if (foto.hasOwnProperty("files")) {
       limiteKB = 200;
       if (!/^image\//.test(foto.files[0].type)) {
         errores["foto"] = "El archivo debe de ser una foto";

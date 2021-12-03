@@ -4,10 +4,10 @@ require_once("../cargadores/cargarclases.php");
 require_once("../cargadores/cargarGestion.php");
 function validateDateEs($date)
 {
-    $pattern = "/^(0?[1-9]|[12][0-9]|3[01])[\/|-](0?[1-9]|[1][012])[\/|-]((19|20)?[0-9]{2})$/";
+    $pattern = "/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/";
     if (preg_match($pattern, $date)) {
         $values = preg_split("[\/|-]", $date);
-        if (checkdate($values[1], $values[0], $values[2]))
+        if (checkdate($values[1], $values[2], $values[0]))
             return true;
     }
     return false;
@@ -42,6 +42,7 @@ if (isset($_POST["crear"])) {
     if ($_POST["contrasena"] == "") {
         $errores["contrasena"] = "La contrase&ntilde;a debe de estar rellena";
     }
+    var_dump($_POST);
     if ($_POST["contrasenaIgual"] == "") {
         $errores["contrasenaIgual"] = "El confirmar contrase&ntilde;a debe de estar relleno";
     } else if ($_POST["contrasena"] != $_POST["contrasenaIgual"]) {
@@ -72,6 +73,7 @@ if (isset($_POST["crear"])) {
         } else {
             $usuario = new Usuario($_POST["id"], $_POST["email"], $_POST["nombre"], $_POST["apellidos"], $_POST["contrasena"], $_POST["fecha"], null, new Rol(2, "estudiante"));
         }
+        BdUsuario::insertaUsuario($usuario);
     }
 }
 ?>
@@ -143,7 +145,7 @@ if (isset($_POST["crear"])) {
                                                                                 if (isset($errores["apellidos"])) {
                                                                                     echo "";
                                                                                 } else if (isset($_POST["apellidos"])) {
-                                                                                    echo $_POST["apeliidos"];
+                                                                                    echo $_POST["apellidos"];
                                                                                 } else {
                                                                                     echo "";
                                                                                 }
@@ -202,7 +204,7 @@ if (isset($_POST["crear"])) {
                     <label for="fecha">Fecha de nacimiento:</label>
                 </td>
                 <td id="tdFecha">
-                    <input type="date" id="fecha" name="fecha" value="<?php
+                    <input type="date" id="fecha" name="fecha" placeholder="dd/mm/yyyy"value="<?php
                                                                         if (isset($errores["fecha"])) {
                                                                             echo "";
                                                                         } else if (isset($_POST["fecha"])) {
