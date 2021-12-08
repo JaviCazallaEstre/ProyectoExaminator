@@ -9,11 +9,11 @@ window.addEventListener("load", function () {
     if (Object.keys(errores).length > 0) {
       muestraErrores(errores);
     } else {
-      formulario=new FormData();
-      formulario.append("crear","");
+      formulario = new FormData();
+      formulario.append("crear", "");
       formulario.append("nombre", nombre.value);
-      const ajax= new XMLHttpRequest();
-      ajax.open("POST","crearTematica.php");
+      const ajax = new XMLHttpRequest();
+      ajax.open("POST", "creaTematica.php");
       ajax.send(formulario);
     }
   };

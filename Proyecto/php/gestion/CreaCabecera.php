@@ -3,7 +3,9 @@ class CreaCabecera
 {
     public static function creaCabeceraAlumno()
     {
-        echo "<div class='logo'><img src=''/></div>";
+        echo "<div class='logo'><img src='../../Recursos/Autoescuela-A7-00.png'/>
+        <h1>Autoescuela Javi</h1>
+        </div>";
         echo "<div class='fotoUsuario'><img src=''/></div>";
         echo
         "<div>
@@ -22,10 +24,12 @@ class CreaCabecera
     }
     public static function creaCabeceraProfesor()
     {
-        echo "<div class='logo'><img src=''/></div>";
+        echo "<div class='logo'><img src='../../Recursos/Autoescuela-A7-00.png'/>
+        <h1>Autoescuela Javi</h1>
+        </div>";
         echo "<div class='fotoUsuario'><img src=''/></div>";
         echo
-        "<div class='menu'>
+        "<div id='menu'>
             <ul>
                 <li>
                     <a href='#'>Usuarios</a>

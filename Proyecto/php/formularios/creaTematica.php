@@ -9,12 +9,13 @@ if (isset($_POST["crear"])) {
     }
     if (count($errores) == 0) {
         $tematica = new Tematica(null, $_POST["nombre"]);
+        var_dump($tematica);
         BdTematica::insertaTematica($tematica);
     }
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -23,31 +24,44 @@ if (isset($_POST["crear"])) {
     <title>Crea tematica</title>
     <script src="../../js/creaTematica.js"></script>
     <script src="../../js/libreria/metodos.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../css/creaTematica.css" />
 </head>
 
 <body>
-    <form id="formu" method="POST" name="formu">
-        <table>
-            <tr>
-                <td>
-                    <label for="nombre">Nombre: *</label>
-                </td>
-                <td id="tdNombre">
-                    <input type="text" id="nombre" name="nombre" />
-                    <?php
-                    if (isset($errores["nombre"])) {
-                        echo "<p class='error'>" . $errores["nombre"] . "</p>";
-                    }
-                    ?>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <input type="submit" id="crear" name="crear" value="Crear" />
-                </td>
-            </tr>
-        </table>
-    </form>
+    <header>
+        <?php
+        CreaCabecera::creaCabeceraProfesor();
+        ?>
+    </header>
+    <div class="contenido">
+        <form id="formu" method="POST" name="formu">
+            <table>
+                <tr>
+                    <td>
+                        <label for="nombre">Nombre: *</label>
+                    </td>
+                    <td id="tdNombre">
+                        <input type="text" id="nombre" name="nombre" />
+                        <?php
+                        if (isset($errores["nombre"])) {
+                            echo "<p class='error'>" . $errores["nombre"] . "</p>";
+                        }
+                        ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="submit" id="crear" name="crear" value="Crear" />
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <footer>
+        <?php
+        CreaFooter::creaFooterPagina("", "");
+        ?>
+    </footer>
 </body>
 
 </html>

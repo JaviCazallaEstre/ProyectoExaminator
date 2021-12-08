@@ -22,6 +22,7 @@ if (isset($_POST["enviar"])) {
     <script src="../../js/altaUsuario.js"></script>
     <script src="../../js/libreria/prototiposString.js"></script>
     <script src="../../js/libreria/metodos.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../css/altaUsuario.css" />
 </head>
 
 <body>
@@ -30,37 +31,39 @@ if (isset($_POST["enviar"])) {
         CreaCabecera::creaCabeceraProfesor();
         ?>
     </header>
-    <form>
-        <table>
-            <tr>
-                <td>
-                    <label for="correo">Correo electr&oacute;nico:</label>
-                </td>
-                <td id="tdEmail">
-                    <input type="text" name="correo" id="correo" value="<?php
-                                                                        if (isset($errores["email"])) {
-                                                                            echo "";
-                                                                        } else if (isset($_POST["email"])) {
-                                                                            echo $_POST["email"];
-                                                                        } else {
-                                                                            echo "";
-                                                                        }
-                                                                        ?>" />
-                    <?php
-                    if (isset($errores["email"])) {
-                        echo "<p class='error'>" . $errores["email"] . "</p>";
-                    }
-                    ?>
+    <div class="contenido">
+        <form>
+            <table>
+                <tr>
+                    <td>
+                        <label for="correo">Correo electr&oacute;nico:</label>
+                    </td>
+                    <td id="tdEmail">
+                        <input type="text" name="correo" id="correo" value="<?php
+                                                                            if (isset($errores["email"])) {
+                                                                                echo "";
+                                                                            } else if (isset($_POST["email"])) {
+                                                                                echo $_POST["email"];
+                                                                            } else {
+                                                                                echo "";
+                                                                            }
+                                                                            ?>" />
+                        <?php
+                        if (isset($errores["email"])) {
+                            echo "<p class='error'>" . $errores["email"] . "</p>";
+                        }
+                        ?>
 
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <input type="submit" name="enviar" id="evniar" value="Enviar" />
-                </td>
-            </tr>
-        </table>
-    </form>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="submit" name="enviar" id="enviar" value="Enviar" />
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
     <footer>
         <?php
         CreaFooter::creaFooterPagina("", "");

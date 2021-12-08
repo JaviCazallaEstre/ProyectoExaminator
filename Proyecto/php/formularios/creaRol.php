@@ -23,39 +23,42 @@ if (isset($_POST["crear"])) {
     <title>Crear rol</title>
     <script src="../../js/creaRol.js"></script>
     <script src="../../js/libreria/metodos.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../css/creaRol.css" />
 </head>
 
 <body>
-<header>
-    <?php
+    <header>
+        <?php
         CreaCabecera::creaCabeceraProfesor();
-    ?>
-</header>
-    <form id="formu" method="POST" name="formu">
-        <table>
-            <tr>
-                <td>
-                    <label for="nombre">Nombre: *</label>
-                </td>
-                <td id="tdNombre">
-                    <input type="text" id="nombre" name="nombre" />
-                    <?php
-                    if (isset($errores["nombre"])) {
-                        echo "<p class='error'>" . $errores["nombre"] . "</p>";
-                    }
-                    ?>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <input type="submit" id="crear" name="crear" value="Crear" />
-                </td>
-            </tr>
-        </table>
-    </form>
+        ?>
+    </header>
+    <div class="contenido"> 
+        <form id="formu" method="POST" name="formu">
+            <table>
+                <tr>
+                    <td>
+                        <label for="nombre">Nombre: *</label>
+                    </td>
+                    <td id="tdNombre">
+                        <input type="text" id="nombre" name="nombre" />
+                        <?php
+                        if (isset($errores["nombre"])) {
+                            echo "<p class='error'>" . $errores["nombre"] . "</p>";
+                        }
+                        ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="submit" id="crear" name="crear" value="Crear" />
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
     <footer>
         <?php
-        CreaFooter::creaFooterPagina("","");
+        CreaFooter::creaFooterPagina("", "");
         ?>
     </footer>
 </body>

@@ -1,6 +1,6 @@
 <?php
-require_once("../../cargadores/cargarBD.php");
-require_once("../../cargadores/cargarclases.php");
+require_once($_SERVER['DOCUMENT_ROOT'] . "/Proyecto/ProyectoExaminator/Proyecto/php/cargadores/cargarBD.php");
+require_once($_SERVER['DOCUMENT_ROOT'] . "/Proyecto/ProyectoExaminator/Proyecto/php/cargadores/cargarClases.php");
 class BdRol
 {
     public static function sacaRoles()
@@ -21,10 +21,11 @@ class BdRol
     public static function insertaRol(Rol $rol)
     {
         $conexion = Conn::creaConexion();
+        $id = null;
         $descripcion = $rol->descripcion;
         $sentencia = "INSERT INTO rol VALUES(:ID, :DESCRIPCION)";
         $registros = $conexion->prepare($sentencia);
-        $registros->bindParam(':ID', null);
+        $registros->bindParam(':ID', $id);
         $registros->bindParam(':DESCRIPCION', $descripcion);
         $registros->execute();
         $registros->closeCursor();

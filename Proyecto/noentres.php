@@ -2,6 +2,7 @@
 require_once("php/cargadores/cargarBD.php");
 require_once("php/cargadores/cargarclases.php");
 require_once("php/cargadores/cargarGestion.php");
+$errores = array();
 if (isset($_POST["enviar"])) {
     if ($_POST["email"] != "" && $_POST["contrasena"] != "") {
         $usuario = Login::existeUsuario($_POST["email"], $_POST["contrasena"]);
@@ -14,10 +15,10 @@ if (isset($_POST["enviar"])) {
                 setcookie("recuerdame", $_POST["recuerdame"], time() + 3600);
             }
         } else {
-            echo "<p class='error'>Los datos introducidos son incorrectos</p>";
+            $errores["login"] = "Los datos introducidos son incorrectos";
         }
     } else {
-        echo "<p class='error'>Los campos deben de estar rellenos</p>";
+        $errores["login"] = "Los campos deben de estar rellenos";
     }
 }
 ?>
@@ -28,11 +29,17 @@ if (isset($_POST["enviar"])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/login.css" />
     <title>Iniciar sesion</title>
 </head>
+<header>
+    <div class='logo'><img src='Recursos/Autoescuela-A7-00.png' />
+        <h1>Autoescuela Javi</h1>
+    </div>
+</header>
 
 <body>
-    <div>
+    <div class="contenido">
         <form id="formulario" method="POST">
             <table>
                 <tr>
@@ -48,7 +55,7 @@ if (isset($_POST["enviar"])) {
                                                                                     echo $_COOKIE["usuario"];
                                                                                 }
                                                                             }
-                                                                            ?> '/>
+                                                                            ?> ' />
                     </td>
                 </tr>
                 <tr>
@@ -78,6 +85,13 @@ if (isset($_POST["enviar"])) {
                     </td>
                 </tr>
                 <tr>
+                    <td>
+                        <?php
+                        if (isset($errores["login"])) {
+                            echo "<p class='error'>" . $errores["login"] . "</p>";
+                        }
+                        ?>
+                    </td>
                     <td>
                         <input type="submit" id="enviar" name="enviar" value="Iniciar sesión" />
                     </td>

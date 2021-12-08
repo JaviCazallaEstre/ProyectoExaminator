@@ -10,6 +10,7 @@ require_once("../cargadores/cargarGestion.php");
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alta masiva de usuarios</title>
+    <link rel="stylesheet" type="text/css" href="../../css/main.css" />
 </head>
 <body>
     <header>
@@ -17,11 +18,12 @@ require_once("../cargadores/cargarGestion.php");
             CreaCabecera::creaCabeceraProfesor();
         ?>
     </header>
+    <div class="contenido">
     <form id="formu" name="formu" enctype="multipart/form-data" method="POST">
         <table>
             <tr>
                 <td>
-                    <label for="usuarios">Inserte los datos del alumno. Formato(email,fecha)</label>
+                    <label for="usuarios">Inserte el email del alumno:</label>
                 </td>
             </tr>
             <tr>
@@ -41,6 +43,7 @@ require_once("../cargadores/cargarGestion.php");
             </tr>
         </table>
     </form>
+    </div>
     <footer>
         <?php
         CreaFooter::creaFooterPagina("","");

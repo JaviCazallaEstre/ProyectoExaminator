@@ -1,5 +1,5 @@
 <?php
-require_once("../../cargadores/cargarclases.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/Proyecto/ProyectoExaminator/Proyecto/php/cargadores/cargarClases.php");
 class ExamenHecho
 {
     private $id;

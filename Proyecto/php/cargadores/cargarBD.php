@@ -1,9 +1,10 @@
 <?php
 spl_autoload_register(function($clase)
 {
-    $fichero=$_SERVER['DOCUMENT_ROOT'].substr($_SERVER['PHP_SELF'],0,strrpos($_SERVER['PHP_SELF'],'/')).'/BaseDeDatos/'.$clase.'.php';
+    $fichero=$_SERVER['DOCUMENT_ROOT'].'/Proyecto/ProyectoExaminator/Proyecto/php/gestion'.'/BaseDeDatos/'.$clase.'.php';
     if(file_exists($fichero))
     {
+        
         require_once $fichero;
     }
 });

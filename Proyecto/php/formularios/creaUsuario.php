@@ -69,9 +69,9 @@ if (isset($_POST["crear"])) {
     }
     if (count($errores) == 0) {
         if (isset($_FILES["foto"])) {
-            $usuario = new Usuario($_POST["id"], $_POST["email"], $_POST["nombre"], $_POST["apellidos"], $_POST["contrasena"], $_POST["fecha"], $_FILES["foto"]["name"], new Rol(2, "estudiante"));
+            $usuario = new Usuario(null, $_POST["email"], $_POST["nombre"], $_POST["apellidos"], $_POST["contrasena"], $_POST["fecha"], $_FILES["foto"]["name"], new Rol(2, "estudiante"));
         } else {
-            $usuario = new Usuario($_POST["id"], $_POST["email"], $_POST["nombre"], $_POST["apellidos"], $_POST["contrasena"], $_POST["fecha"], null, new Rol(2, "estudiante"));
+            $usuario = new Usuario(null, $_POST["email"], $_POST["nombre"], $_POST["apellidos"], $_POST["contrasena"], $_POST["fecha"], null, new Rol(2, "estudiante"));
         }
         BdUsuario::insertaUsuario($usuario);
     }
@@ -88,158 +88,171 @@ if (isset($_POST["crear"])) {
     <script src="../../js/creaUsuario.js"></script>
     <script src="../../js/libreria/prototiposString.js"></script>
     <script src="../../js/libreria/metodos.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../css/creaUsuario.css" />
 </head>
 
 <body>
-    <h1>Alta de usuario</h1>
-    <form id="formu" name="formu" method="POST" enctype="multipart/form-data">
-        <table>
-            <tr>
-                <td>
-                    <label for="email">Email:</label>
-                </td>
-                <td id="tdEmail">
-                    <input type="text" id="email" name="email" value="<?php
-                                                                        if (isset($errores["email"])) {
-                                                                            echo "";
-                                                                        } else if (isset($_POST["email"])) {
-                                                                            echo $_POST["email"];
-                                                                        } else {
-                                                                            echo "";
-                                                                        }
-                                                                        ?>" />
-                    <?php
-                    if (isset($errores["email"])) {
-                        echo "<p class='error'>" . $errores["email"] . "</p>";
-                    }
-                    ?>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="nombre">Nombre:</label>
-                </td>
-                <td id="tdNombre">
-                    <input type="text" id="nombre" name="nombre" value="<?php
-                                                                        if (isset($errores["nombre"])) {
-                                                                            echo "";
-                                                                        } else if (isset($_POST["nombre"])) {
-                                                                            echo $_POST["nombre"];
-                                                                        } else {
-                                                                            echo "";
-                                                                        }
-                                                                        ?>" />
-                    <?php
-                    if (isset($errores["nombre"])) {
-                        echo "<p class='error'>" . $errores["nombre"] . "</p>";
-                    }
-                    ?>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="apellidos">Apellidos:</label>
-                </td>
-                <td id="tdApellidos">
-                    <input type="text" id="apellidos" name="apellidos" value="<?php
-                                                                                if (isset($errores["apellidos"])) {
-                                                                                    echo "";
-                                                                                } else if (isset($_POST["apellidos"])) {
-                                                                                    echo $_POST["apellidos"];
-                                                                                } else {
-                                                                                    echo "";
-                                                                                }
-                                                                                ?>" />
-                    <?php
-                    if (isset($errores["apellidos"])) {
-                        echo "<p class='error'>" . $errores["apellidos"] . "</p>";
-                    }
-                    ?>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="contrasena">Contrase&ntilde;a:</label>
-                </td>
-                <td id="tdContrasena">
-                    <input type="password" id="contrasena" name="contrasena" value="<?php
-                                                                                    if (isset($errores["contrasena"]) || isset($errores["contrasenaIgual"])) {
+    <header>
+        <div class='logo'><img src='../../Recursos/Autoescuela-A7-00.png' />
+            <h1>Autoescuela Javi</h1>
+        </div>
+    </header>
+    <div class="contenido">
+        <h1>Alta de usuario</h1>
+        <form id="formu" name="formu" method="POST" enctype="multipart/form-data">
+            <table>
+                <tr>
+                    <td>
+                        <label for="email">Email:</label>
+                    </td>
+                    <td id="tdEmail">
+                        <input type="text" id="email" name="email" value="<?php
+                                                                            if (isset($errores["email"])) {
+                                                                                echo "";
+                                                                            } else if (isset($_POST["email"])) {
+                                                                                echo $_POST["email"];
+                                                                            } else {
+                                                                                echo "";
+                                                                            }
+                                                                            ?>" />
+                        <?php
+                        if (isset($errores["email"])) {
+                            echo "<p class='error'>" . $errores["email"] . "</p>";
+                        }
+                        ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="nombre">Nombre:</label>
+                    </td>
+                    <td id="tdNombre">
+                        <input type="text" id="nombre" name="nombre" value="<?php
+                                                                            if (isset($errores["nombre"])) {
+                                                                                echo "";
+                                                                            } else if (isset($_POST["nombre"])) {
+                                                                                echo $_POST["nombre"];
+                                                                            } else {
+                                                                                echo "";
+                                                                            }
+                                                                            ?>" />
+                        <?php
+                        if (isset($errores["nombre"])) {
+                            echo "<p class='error'>" . $errores["nombre"] . "</p>";
+                        }
+                        ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="apellidos">Apellidos:</label>
+                    </td>
+                    <td id="tdApellidos">
+                        <input type="text" id="apellidos" name="apellidos" value="<?php
+                                                                                    if (isset($errores["apellidos"])) {
                                                                                         echo "";
-                                                                                    } else if (isset($_POST["contrasena"])) {
-                                                                                        echo $_POST["contrasena"];
+                                                                                    } else if (isset($_POST["apellidos"])) {
+                                                                                        echo $_POST["apellidos"];
                                                                                     } else {
                                                                                         echo "";
                                                                                     }
                                                                                     ?>" />
-                    <?php
-                    if (isset($errores["contrasena"])) {
-                        echo "<p class='error'>" . $errores["contrasena"] . "</p>";
-                    }
-                    ?>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="contrasenaIgual">Confirmar contrase&ntilde;a:</label>
-                </td>
-                <td id="tdContrasenaIgual">
-                    <input type="password" id="contrasenaIgual" name="contrasenaIgual" value="<?php
-                                                                                                if (isset($errores["contrasena"]) || isset($errores["contrasenaIgual"])) {
-                                                                                                    echo "";
-                                                                                                } else if (isset($_POST["contrasenaIgual"])) {
-                                                                                                    echo $_POST["contrasenaIgual"];
-                                                                                                } else {
-                                                                                                    echo "";
-                                                                                                }
-                                                                                                ?>" />
-                    <?php
-                    if (isset($errores["contrasenaIgual"])) {
-                        echo "<p class='error'>" . $errores["contrasenaIgual"] . "</p>";
-                    }
-                    ?>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="fecha">Fecha de nacimiento:</label>
-                </td>
-                <td id="tdFecha">
-                    <input type="date" id="fecha" name="fecha" placeholder="dd/mm/yyyy"value="<?php
-                                                                        if (isset($errores["fecha"])) {
-                                                                            echo "";
-                                                                        } else if (isset($_POST["fecha"])) {
-                                                                            echo $_POST["fecha"];
-                                                                        } else {
-                                                                            echo "";
-                                                                        }
-                                                                        ?>" />
-                    <?php
-                    if (isset($errores["fecha"])) {
-                        echo "<p class='error'>" . $errores["fecha"] . "</p>";
-                    }
-                    ?>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="foto">Foto de perfil:</label>
-                </td>
-                <td id="tdFoto">
-                    <input type="file" id="foto" name="foto" />
-                    <?php
-                    if (isset($errores["foto"])) {
-                        echo "<p class='error'>" . $errores["foto"] . "</p>";
-                    }
-                    ?>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <input type="submit" id="crear" name="crear" value="Crear" />
-                </td>
-            </tr>
-        </table>
-    </form>
+                        <?php
+                        if (isset($errores["apellidos"])) {
+                            echo "<p class='error'>" . $errores["apellidos"] . "</p>";
+                        }
+                        ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="contrasena">Contrase&ntilde;a:</label>
+                    </td>
+                    <td id="tdContrasena">
+                        <input type="password" id="contrasena" name="contrasena" value="<?php
+                                                                                        if (isset($errores["contrasena"]) || isset($errores["contrasenaIgual"])) {
+                                                                                            echo "";
+                                                                                        } else if (isset($_POST["contrasena"])) {
+                                                                                            echo $_POST["contrasena"];
+                                                                                        } else {
+                                                                                            echo "";
+                                                                                        }
+                                                                                        ?>" />
+                        <?php
+                        if (isset($errores["contrasena"])) {
+                            echo "<p class='error'>" . $errores["contrasena"] . "</p>";
+                        }
+                        ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="contrasenaIgual">Confirmar contrase&ntilde;a:</label>
+                    </td>
+                    <td id="tdContrasenaIgual">
+                        <input type="password" id="contrasenaIgual" name="contrasenaIgual" value="<?php
+                                                                                                    if (isset($errores["contrasena"]) || isset($errores["contrasenaIgual"])) {
+                                                                                                        echo "";
+                                                                                                    } else if (isset($_POST["contrasenaIgual"])) {
+                                                                                                        echo $_POST["contrasenaIgual"];
+                                                                                                    } else {
+                                                                                                        echo "";
+                                                                                                    }
+                                                                                                    ?>" />
+                        <?php
+                        if (isset($errores["contrasenaIgual"])) {
+                            echo "<p class='error'>" . $errores["contrasenaIgual"] . "</p>";
+                        }
+                        ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="fecha">Fecha de nacimiento:</label>
+                    </td>
+                    <td id="tdFecha">
+                        <input type="date" id="fecha" name="fecha" placeholder="dd/mm/yyyy" value="<?php
+                                                                                                    if (isset($errores["fecha"])) {
+                                                                                                        echo "";
+                                                                                                    } else if (isset($_POST["fecha"])) {
+                                                                                                        echo $_POST["fecha"];
+                                                                                                    } else {
+                                                                                                        echo "";
+                                                                                                    }
+                                                                                                    ?>" />
+                        <?php
+                        if (isset($errores["fecha"])) {
+                            echo "<p class='error'>" . $errores["fecha"] . "</p>";
+                        }
+                        ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="foto">Foto de perfil:</label>
+                    </td>
+                    <td id="tdFoto">
+                        <input type="file" id="foto" name="foto" />
+                        <?php
+                        if (isset($errores["foto"])) {
+                            echo "<p class='error'>" . $errores["foto"] . "</p>";
+                        }
+                        ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="submit" id="crear" name="crear" value="Crear" />
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <footer>
+        <?php
+        CreaFooter::creaFooterPagina("","");
+        ?>
+    </footer>
 </body>
 
 </html>
