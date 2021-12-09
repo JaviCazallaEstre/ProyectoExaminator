@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `examinador`.`rol` (
   `descripcion` VARCHAR(45) CHARACTER SET 'utf8' COLLATE 'utf8_spanish_ci' NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 4
+AUTO_INCREMENT = 3
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_spanish_ci;
 
@@ -55,7 +55,7 @@ CREATE TABLE IF NOT EXISTS `examinador`.`usuarios` (
   `apellidos` VARCHAR(45) CHARACTER SET 'latin1' NULL DEFAULT NULL,
   `contrasena` VARCHAR(20) CHARACTER SET 'latin1' NULL DEFAULT NULL,
   `fecha_nac` DATE NULL DEFAULT NULL,
-  `foto` VARCHAR(100) CHARACTER SET 'utf8' COLLATE 'utf8_spanish_ci' NULL DEFAULT NULL,
+  `foto` VARCHAR(300) CHARACTER SET 'utf8' COLLATE 'utf8_spanish_ci' NULL DEFAULT NULL,
   `rol_id` INT(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `email_UNIQUE` (`email` ASC),
@@ -66,7 +66,7 @@ CREATE TABLE IF NOT EXISTS `examinador`.`usuarios` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-AUTO_INCREMENT = 2
+AUTO_INCREMENT = 5
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_spanish_ci;
 
@@ -179,7 +179,7 @@ COLLATE = utf8_spanish_ci;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `examinador`.`registropendiente` (
   `id` INT(11) NOT NULL,
-  `hash` VARCHAR(45) NOT NULL,
+  `hash` VARCHAR(45) CHARACTER SET 'utf8' NOT NULL,
   `fechaExpiracion` DATE NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `hash_UNIQUE` (`hash` ASC),
@@ -189,7 +189,8 @@ CREATE TABLE IF NOT EXISTS `examinador`.`registropendiente` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_spanish_ci;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;

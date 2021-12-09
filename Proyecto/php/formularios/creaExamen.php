@@ -12,6 +12,9 @@ require_once("../cargadores/cargarclases.php");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crea examen</title>
     <link rel="stylesheet" type="text/css" href="../../css/creaExamen.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
     <script src="../../js/creaExamen.js"></script>
 </head>
 <header>

@@ -10,6 +10,7 @@ window.addEventListener("load", function () {
 
   pidePreguntas();
   for (let i = 0; i < divs.length; i++) {
+    debugger;
     divs[i].ondragstart = function (ev) {
       ev.dataTransfer.setData("text", ev.target.id);
     };

@@ -8,6 +8,9 @@ require_once("cargadores/cargarGestion.php");
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../css/principal.css" />
     <script src="../js/parallax.js"></script>
     <title>Autoescuela Javi</title>
@@ -25,10 +28,10 @@ require_once("cargadores/cargarGestion.php");
                     <a href='#'>Usuarios</a>
                     <ul class='submenu'>
                         <li>
-                            <a href='#'>Alta usuario</a>
+                            <a href='formularios/altaUsuario.php'>Alta usuario</a>
                         </li>
                         <li>
-                            <a href='#'>Alta masiva</a>
+                            <a href='formularios/altaMasivaUsuario.php'>Alta masiva</a>
                         </li>
                     </ul>
                 </li>
@@ -36,7 +39,7 @@ require_once("cargadores/cargarGestion.php");
                     <a href='#'>Tem&aacute;tica</a>
                     <ul class='submenu'>
                         <li>
-                            <a href='#'>Alta tem&aacute;tica</a>
+                            <a href='formularios/creaTematica.php'>Alta tem&aacute;tica</a>
                         </li>
                     </ul>
                 </li>
@@ -44,10 +47,7 @@ require_once("cargadores/cargarGestion.php");
                     <a href='#'>Preguntas</a>
                     <ul class='submenu'>
                         <li>
-                            <a href='#'>Alta pregunta</a>
-                        </li>
-                        <li>
-                            <a href='#'>Alta masiva</a>
+                            <a href='formularios/creaPregunta.php'>Alta pregunta</a>
                         </li>
                     </ul>
                 </li>
@@ -55,10 +55,7 @@ require_once("cargadores/cargarGestion.php");
                     <a href='#'>Ex&aacute;menes</a>
                     <ul class='submenu'>
                         <li>
-                            <a href='#'>Alta examen</a>
-                        </li>
-                        <li>
-                            <a href='#'>Historico</a>
+                            <a href='formularios/creaExamen.php'>Alta examen</a>
                         </li>
                     </ul>
                 </li>

@@ -22,6 +22,9 @@ if (isset($_POST["enviar"])) {
     <script src="../../js/altaUsuario.js"></script>
     <script src="../../js/libreria/prototiposString.js"></script>
     <script src="../../js/libreria/metodos.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../../css/altaUsuario.css" />
 </head>
 

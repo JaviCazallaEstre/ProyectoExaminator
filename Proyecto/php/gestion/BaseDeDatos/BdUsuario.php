@@ -25,6 +25,7 @@ class BdUsuario
         $registros->bindParam(':FOTO', $foto);
         $registros->bindParam(':ROL_ID', $rol);
         $registros->execute();
+        print_r($conexion->errorInfo());
         $registros->closeCursor();
         $registros = null;
         $conexion = null;

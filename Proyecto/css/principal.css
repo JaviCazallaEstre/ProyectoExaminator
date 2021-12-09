@@ -10,8 +10,10 @@ body {
   overflow-x: hidden;
 }
 header {
+  position: fixed;
   background-color: #0069b2;
   margin-top: -10px;
+  width: 110%;
   height: 200px;
   margin-left: -10px;
 }
@@ -27,7 +29,7 @@ header {
   float: right;
   margin-top: 90px;
   color: white;
-  font-family: "Open Sans", serif;
+  font-family: 'Jua', sans-serif;
 }
 #menu {
   margin-left: 950px;
@@ -119,10 +121,12 @@ footer ul li a {
     padding: 8px 24px;
     border-radius: 16px;
     color: black;
+    font-family: 'Jua', sans-serif;
 }
 .contenido div:nth-child(1){
     background-image: url("../Recursos/foto-principal-1.jpg");
-    background-size: cover;
+    /*background-size: 100%;*/
+    max-width: 100%;
 }
 .contenido div:nth-child(2){
     background-color: #0069b2;

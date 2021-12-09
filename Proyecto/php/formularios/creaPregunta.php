@@ -53,7 +53,7 @@ function rellenaSelect()
 {
     $tematicas = BdTematica::sacaTematicas();
     for ($i = 0; $i < count($tematicas); $i++) {
-        echo '<option value="' . $tematicas[$i]["id"] . '">' . $tematicas[$i]["descripcion"] . '</option>';
+        echo '<option value="' . $tematicas[$i]->id . '">' . $tematicas[$i]->descripcion . '</option>';
     }
 }
 ?>
@@ -67,8 +67,10 @@ function rellenaSelect()
     <title>Crea pregunta</title>
     <script src="../../js/creaPregunta.js"></script>
     <script src="../../js/libreria/metodos.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../../css/creaPregunta.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -87,7 +89,7 @@ function rellenaSelect()
                     <td id="tdTematica">
                         <select id="tematica" name="tematica">
                             <?php
-                            //rellenaSelect();
+                            rellenaSelect();
                             ?>
                         </select>
                     </td>
@@ -139,7 +141,7 @@ function rellenaSelect()
                         ?>
                     </td>
                     <td>
-                        <input type="radio" id="correcta1" name="correcta" value="correcta1" />
+                        <input type="radio" id="correcta1" name="correcta" value="1" />
                         <label for="radio1">Correcta</label>
                     </td>
                 </tr>
@@ -166,7 +168,7 @@ function rellenaSelect()
                         ?>
                     </td>
                     <td>
-                        <input type="radio" id="correcta2" name="correcta" value="correcta2" />
+                        <input type="radio" id="correcta2" name="correcta" value="2" />
                         <label for="radio2">Correcta</label>
                     </td>
                 </tr>
@@ -193,7 +195,7 @@ function rellenaSelect()
                         ?>
                     </td>
                     <td>
-                        <input type="radio" id="correcta3" name="correcta" value="correcta3" />
+                        <input type="radio" id="correcta3" name="correcta" value="3" />
                         <label for="radio3">Correcta</label>
                     </td>
                 </tr>
@@ -220,7 +222,7 @@ function rellenaSelect()
                         ?>
                     </td>
                     <td id="tdRadio">
-                        <input type="radio" name="correcta" id="correcta4" value="correcta4" />
+                        <input type="radio" name="correcta" id="correcta4" value="4" />
                         <label for="radio4">Correcta</label>
                         <?php
                         if (isset($errores["correcta"])) {

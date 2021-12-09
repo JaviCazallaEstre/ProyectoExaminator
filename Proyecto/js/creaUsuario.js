@@ -31,7 +31,7 @@ window.addEventListener("load", function () {
       formu.append("contrasena", contrasena.value);
       formu.append("contrasenaIgual", contrasenaIgual.value);
       formu.append("fecha", fecha.value);
-      if (foto.hasOwnProperty("files")) {
+      if (foto["files"].length > 0) {
         if (/^image\//.test(foto.files[0].type)) {
           formu.append("foto", foto.files[0]);
         }
@@ -115,7 +115,8 @@ window.addEventListener("load", function () {
     if (calcularEdad(fecha) < 18) {
       errores["fecha"] = "La edad debe de ser mayor de 18 años";
     }
-    if (foto.hasOwnProperty("files")) {
+    debugger;
+    if (foto["files"].length > 0) {
       limiteKB = 200;
       if (!/^image\//.test(foto.files[0].type)) {
         errores["foto"] = "El archivo debe de ser una foto";

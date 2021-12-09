@@ -40,11 +40,13 @@ window.addEventListener("load", function () {
       formu.append("opcion3", opcion3.value);
       formu.append("opcion4", opcion4.value);
       formu.append("correcta", opcionCorrecta);
-      if (
-        /^image\//.test(archivo.files[0].type) ||
-        /^video\//.test(archivo.files[0].type)
-      ) {
-        formu.append("archivo", archivo.files[0]);
+      if (archivo["files"].length > 0) {
+        if (
+          /^image\//.test(archivo.files[0].type) ||
+          /^video\//.test(archivo.files[0].type)
+        ) {
+          formu.append("archivo", archivo.files[0]);
+        }
       }
       const ajax = new XMLHttpRequest();
       ajax.open("POST", "creaPregunta.php");
@@ -122,7 +124,7 @@ window.addEventListener("load", function () {
     if (opcionCorrecta == "") {
       errores["correcta"] = "Debes de elegir una opción como la correcta";
     }
-    if (archivo.files[0] != "") {
+    if (archivo["files"].length > 0) {
       limiteKb = 4096;
       if (
         !/^image\//.test(archivo.files[0].type) &&

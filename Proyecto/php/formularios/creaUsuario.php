@@ -42,7 +42,6 @@ if (isset($_POST["crear"])) {
     if ($_POST["contrasena"] == "") {
         $errores["contrasena"] = "La contrase&ntilde;a debe de estar rellena";
     }
-    var_dump($_POST);
     if ($_POST["contrasenaIgual"] == "") {
         $errores["contrasenaIgual"] = "El confirmar contrase&ntilde;a debe de estar relleno";
     } else if ($_POST["contrasena"] != $_POST["contrasenaIgual"]) {
@@ -59,7 +58,7 @@ if (isset($_POST["crear"])) {
         $permitidos = array("image/png", "image/jpeg", "image/jpg", "image/gif");
         $limiteKb = 200;
         if (in_array($_FILES["foto"]["type"], $permitidos) && $_FILES["foto"]["size"] <= $limiteKb * 1024) {
-            $ruta = "../../Recursos/Usuarios" . $_FILES["foto"]["name"];
+            $ruta = "../../Recursos/Usuarios/" . $_FILES["foto"]["name"];
             move_uploaded_file($_FILES["foto"]["tmp_name"], $ruta);
         } else if (!in_array($_FILES["foto"]["type"], $permitidos)) {
             $errores["foto"] = "La foto introducida no tiene un formato válido";
@@ -88,6 +87,9 @@ if (isset($_POST["crear"])) {
     <script src="../../js/creaUsuario.js"></script>
     <script src="../../js/libreria/prototiposString.js"></script>
     <script src="../../js/libreria/metodos.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../../css/creaUsuario.css" />
 </head>
 

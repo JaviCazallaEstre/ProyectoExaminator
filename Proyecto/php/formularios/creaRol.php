@@ -23,6 +23,9 @@ if (isset($_POST["crear"])) {
     <title>Crear rol</title>
     <script src="../../js/creaRol.js"></script>
     <script src="../../js/libreria/metodos.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../../css/creaRol.css" />
 </head>
 
