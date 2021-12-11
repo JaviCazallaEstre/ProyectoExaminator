@@ -1,19 +1,17 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT']."/Proyecto/ProyectoExaminator/Proyecto/php/cargadores/cargarClases.php");
+require_once($_SERVER['DOCUMENT_ROOT'] . "/Proyecto/ProyectoExaminator/Proyecto/php/cargadores/cargarClases.php");
 class Pregunta
 {
     private $idPregunta;
     private $enunciado;
-    private $respuestas=[];
     private $multimedia;
     private $idTematica;
     private $respuestaCorrecta;
 
-    public function __construct($idPregunta, $enunciado,$respuestas ,$multimedia, $idTematica, Respuesta $respuestaCorrecta=null)
+    public function __construct($idPregunta, $enunciado, $multimedia, $idTematica, Respuesta $respuestaCorrecta = null)
     {
         $this->idPregunta = $idPregunta;
         $this->enunciado = $enunciado;
-        $this->respuestas = $respuestas;
         $this->multimedia = $multimedia;
         $this->idTematica = $idTematica;
         $this->respuestaCorrecta = $respuestaCorrecta;

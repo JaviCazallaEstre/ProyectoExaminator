@@ -2,12 +2,53 @@
 require_once("../cargadores/cargarBD.php");
 require_once("../cargadores/cargarclases.php");
 require_once("../cargadores/cargarGestion.php");
+require_once("../gestion/vendor/autoload.php");
+
+use PHPMailer\PHPMailer\PHPMailer;
+
 if (isset($_POST["enviar"])) {
     $errores = array();
-    if ($_POST["email"] == "") {
-        $errores["email"] = "Debes de introducir un email";
-    } else if (!($_POST["email"] == filter_var($_POST["email"], FILTER_VALIDATE_EMAIL))) {
-        $errores["email"] = "El email introducido no es v&aacute;lido";
+    if ($_POST["correo"] == "") {
+        $errores["correo"] = "Debes de introducir un email";
+    } else if (!($_POST["correo"] == filter_var($_POST["correo"], FILTER_VALIDATE_EMAIL))) {
+        $errores["correo"] = "El email introducido no es v&aacute;lido";
+    } else if (!BdUsuario::existeUsuario($_POST["correo"])) {
+        $valor = rand(0, 500000000000);
+        $fecha = date(DATE_RFC2822);
+        $hash = md5($valor . $fecha);
+        //BdUsuario::insertaAlta(null,$_POST["correo"]);
+        //bdAltaUsuario::insertaAlta(null,$hash,$_POST["correo"]);
+        $alta = BdUsuario::sacaUsuario($_POST["correo"]);
+        $id = $alta->id;
+        $correo = $alta->correo;
+
+        $mail = new PHPMailer();
+        $mail->IsSMTP();
+        // cambiar a 0 para no ver mensajes de error
+        $mail->SMTPDebug  = 2;
+        $mail->SMTPAuth   = true;
+        $mail->SMTPSecure = "tls";
+        $mail->Host = "smtp.gmail.com";
+        $mail->Port = 587;
+        // introducir usuario de google
+        $mail->Username   = "javiCazallaPruebas@gmail.com";
+        // introducir clave
+        $mail->Password   = "@Maceta12";
+        $mail->SetFrom('javiCazallaPruebas@gmail.com', 'Autoescuela Javi');
+        // asunto
+        $mail->Subject = "Completa tu registro";
+        // cuerpo
+        $mail->MsgHTML("<a href='http://proyectos/Proyecto/ProyectoExaminator/Proyecto/php/formularios/creaUsuario.php?modo=inserta&hash=" . $hash . "&id=" . $id . "&correo=" . $correo . "'>Pincha aqui</a>");
+        // destinatario
+        $address = $_POST["correo"];
+        $mail->AddAddress($address, "Completa tu registro");
+        // enviar
+        $resul = $mail->Send();
+        if (!$resul) {
+            echo "Error" . $mail->ErrorInfo;
+        } else {
+            echo "Enviado";
+        }
     }
 }
 ?>

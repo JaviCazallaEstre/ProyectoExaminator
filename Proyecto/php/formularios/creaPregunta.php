@@ -21,7 +21,7 @@ if (isset($_POST["enviar"])) {
         $errores["opcion4"] = "La cuarta opción debe de estar rellena";
     }
     if ($_POST["correcta"] == "") {
-        $errores["correcta"] = "Debes elegir una opcion correcta";
+        $errores["correcta"] = "Debes elegir una opcion correcta fistro!";
     }
     if (isset($_FILES["archivo"])) {
         $permitidos = array("image/png", "image/jpeg", "image/jpg", "image/gif", "video/mp4", "video/mpg", "video/mpeg", "video/avi");
@@ -40,13 +40,12 @@ if (isset($_POST["enviar"])) {
         $opcion2 = new Respuesta(null, $_POST["opcion2"], null);
         $opcion3 = new Respuesta(null, $_POST["opcion3"], null);
         $opcion4 = new Respuesta(null, $_POST["opcion4"], null);
-        $opciones = array();
-        array_push($opciones, $opcion1, $opcion2, $opcion3, $opcion4);
         if (isset($_FILES["archivo"])) {
-            $pregunta = new Pregunta(null, $_POST["enunciado"], $opciones, $_FILES["archivo"]["name"], null, null);
+            $pregunta = new Pregunta(null, $_POST["enunciado"], $_FILES["archivo"]["name"], $_POST["tematica"], null);
         } else {
-            $pregunta = new Pregunta(null, $_POST["enunciado"], $opciones, null, null, null);
+            $pregunta = new Pregunta(null, $_POST["enunciado"], null, $_POST["tematica"], null);
         }
+        BdPregunta::inserta($pregunta, $opcion1, $opcion2, $opcion3, $opcion4, $_POST["correcta"]);
     }
 }
 function rellenaSelect()

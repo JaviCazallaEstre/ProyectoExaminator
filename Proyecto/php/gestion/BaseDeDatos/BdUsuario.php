@@ -1,6 +1,6 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT']."/Proyecto/ProyectoExaminator/Proyecto/php/cargadores/cargarBD.php");
-require_once($_SERVER['DOCUMENT_ROOT']."/Proyecto/ProyectoExaminator/Proyecto/php/cargadores/cargarClases.php");
+require_once($_SERVER['DOCUMENT_ROOT'] . "/Proyecto/ProyectoExaminator/Proyecto/php/cargadores/cargarBD.php");
+require_once($_SERVER['DOCUMENT_ROOT'] . "/Proyecto/ProyectoExaminator/Proyecto/php/cargadores/cargarClases.php");
 class BdUsuario
 {
     public static function insertaUsuario(Usuario $usuario)
@@ -25,7 +25,18 @@ class BdUsuario
         $registros->bindParam(':FOTO', $foto);
         $registros->bindParam(':ROL_ID', $rol);
         $registros->execute();
-        print_r($conexion->errorInfo());
+        $registros->closeCursor();
+        $registros = null;
+        $conexion = null;
+    }
+    public static function insertaAlta($id, $email)
+    {
+        $conexion = Conn::creaConexion();
+        $sentencia = "INSERT INTO usuarios VALUES(:ID, :EMAIL)";
+        $registros = $conexion->prepare($sentencia);
+        $registros->bindParam(':ID', $id);
+        $registros->bindParam(':EMAIL', $email);
+        $registros->execute();
         $registros->closeCursor();
         $registros = null;
         $conexion = null;
@@ -87,10 +98,10 @@ class BdUsuario
         $conexion = null;
         return $usuarios;
     }
-    public static function sacaUsuario($id)
+    public static function sacaUsuario($email)
     {
         $conexion = Conn::creaConexion();
-        $sentencia = "SELECT * FROM usuarios WHERE id='$id'";
+        $sentencia = "SELECT * FROM usuarios WHERE email ='$email'";
         $registros = $conexion->query($sentencia);
         while ($resultado = $registros->fetch(PDO::FETCH_OBJ)) {
             $usuario = $resultado;

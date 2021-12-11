@@ -32,7 +32,7 @@ window.addEventListener("load", function () {
         }
       }
       let formu = new FormData();
-      formu.append("boton", "");
+      formu.append("enviar", "");
       formu.append("tematica", tematica.value);
       formu.append("enunciado", enunciado.value);
       formu.append("opcion1", opcion1.value);

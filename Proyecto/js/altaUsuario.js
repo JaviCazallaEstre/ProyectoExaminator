@@ -2,9 +2,9 @@ window,
   addEventListener("load", function () {
     const formu = document.getElementById("formu");
     const enviar = document.getElementById("enviar");
-    var email = document.getElementById("email");
+    var email = document.getElementById("correo");
 
-    enviar.onclick(function (ev) {
+    enviar.onclick = function (ev) {
       ev.preventDefault();
       errores = validaAlta(email.value);
       if (Object.keys(errores).length > 0) {
@@ -12,12 +12,12 @@ window,
       } else {
         formulario = new FormData();
         formulario.append("enviar", "");
-        formulario.append("email", email.value);
+        formulario.append("correo", email.value);
         const ajax = new XMLHttpRequest();
         ajax.open("POST", "altaUsuario.php");
         ajax.send(formulario);
       }
-    });
+    };
 
     function validaAlta(email) {
       errores = [];

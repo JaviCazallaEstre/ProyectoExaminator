@@ -9,77 +9,49 @@ window.addEventListener("load", function () {
   const divs = seleccionables.getElementsByTagName("div");
 
   pidePreguntas();
-  for (let i = 0; i < divs.length; i++) {
-    debugger;
-    divs[i].ondragstart = function (ev) {
-      ev.dataTransfer.setData("text", ev.target.id);
-    };
-    divs[i].ondragover = function (ev) {
-      ev.preventDefault();
-    };
-    divs[i].ondrop = function (ev) {
-      ev.preventDefault();
-      
-      const id = ev.dataTransfer.getData("text");
-      ev.target.parentNode.appendChild(document.getElementById(id));
-      if ((ev.target.parentNode.id = "seleccionadas")) {
-        const marcados = seleccionadas.getElementsByClassName("marcado");
-        for (let j = 0; i < marcados.length; j++) seleccionables.appendChild(marcados[j]);
-      }
-      ev.stopPropagation();
-    };
-    divs[i].onclick = function () {
-      this.classList.toggle("marcado");
-    };
-  }
-  seleccionadas.ondragover = function (ev) {
-    ev.preventDefault();
-  };
+  seleccionables.addEventListener("dragover", function () {
+    event.preventDefault();
+  });
+  seleccionables.addEventListener("drop", function () {
+    const id = event.dataTransfer.getData("id");
+    seleccionables.appendChild(document.getElementById(id));
+  });
+  seleccionadas.addEventListener("dragover", function () {
+    event.preventDefault();
+  });
+  seleccionadas.addEventListener("drop", function () {
+    const id = event.dataTransfer.getData("id");
+    seleccionadas.appendChild(document.getElementById(id));
+  });
 
-  seleccionables.ondragover = function (ev) {
-    ev.preventDefault();
-  };
-  seleccionadas.ondrop = function (ev) {
-    ev.preventDefault();
-    debugger;
-    const id = ev.dataTransfer.getData("text");
-    ev.target.appendChild(document.getElementById(id));
-    const marcados = seleccionables.getElementsByClassName("marcado");
-    debugger;
-    for (let j = marcados.length - 1; j >= 0; j--) seleccionadas.appendChild(marcados[j]);
-    ev.stopPropagation();
-  };
+  seleccionables.addEventListener("dragstart", function () {
+    event.dataTransfer.setData("id", event.target.id);
+  });
+  seleccionadas.addEventListener("dragstart", function () {
+    event.dataTransfer.setData("id", event.target.id);
+  });
 
-  seleccionables.ondrop = function (ev) {
-    ev.preventDefault();
-    const id = ev.dataTransfer.getData("text");
-    ev.target.appendChild(document.getElementById(id));
-    const marcados = seleccionadas.getElementsByClassName("marcado");
-    for (let j = marcados.length - 1; j >= 0; j--) seleccionables.appendChild(marcados[j]);
-    ev.stopPropagation();
-  };
   function pidePreguntas() {
     const ajax = new XMLHttpRequest();
-  ajax.onreadystatechange = function () {
-    if (ajax.readyState == 4 && ajax.status == 200) {
-      var respuesta = JSON.parse(ajax.responseText);
-      if (respuesta.preguntas.length > 0) {
-        for (let i = 0; i < respuesta.preguntas.length; i++) {
-          var div = crearContenido(respuesta.preguntas[i]);
-          seleccionables.appendChild(div);
+    ajax.onreadystatechange = function () {
+      if (ajax.readyState == 4 && ajax.status == 200) {
+        var respuesta = JSON.parse(ajax.responseText);
+        if (respuesta.preguntas.length > 0) {
+          for (let i = 0; i < respuesta.preguntas.length; i++) {
+            var div = crearContenido(respuesta.preguntas[i], i);
+            seleccionables.appendChild(div);
+          }
         }
       }
-    }
+    };
+    ajax.open("GET", "../../php/entidades/pidePreguntasPrueba.php");
+    ajax.send();
   }
-  ajax.open("GET", "../../php/entidades/pidePreguntasPrueba.php");
-  ajax.send();
-  }
-  
 
-  function crearContenido(pregunta) {
+  function crearContenido(pregunta, i) {
     const div1 = document.createElement("div");
-    div1.setAttribute("id","hola");
-    div1.setAttribute("draggable","true");
+    div1.setAttribute("id", "div-" + (i + 1));
+    div1.setAttribute("draggable", "true");
     div1.className = pregunta.tematica;
     const div2 = document.createElement("div");
     div2.className = pregunta.tematica;
