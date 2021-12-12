@@ -6,8 +6,48 @@ window.addEventListener("load", function () {
   var activo = document.getElementById("activo");
   var seleccionables = document.getElementById("seleccionables");
   var seleccionadas = document.getElementById("seleccionadas");
+  var idSeleccionadas = [];
   const divs = seleccionables.getElementsByTagName("div");
 
+  enviar.onclick = function(ev) {
+    ev.preventDefault();
+    errores=validaExamen(descripcion.value, duracion.value)
+    if(Object.keys(errores).length>0){
+      muestraErrores(errores);
+    }else{
+      let formu = new FormData();
+      formu.append("enviar","");
+      formu.append("descripcion",descripcion.value);
+      formu.append("duracion",duracion.value);
+      if(activo.checked){
+        valorActivo=1
+      }else{
+        valorActivo=0
+      }
+      formu.append("activo",valorActivo);
+      formu.append("preguntas", idSeleccionadas);
+    }
+  };
+  function validaExamen(descripcion, duracion) {
+    errores=[];
+    if(descripcion==""){
+      errores["descripcion"]="Debe de haber una descripción";
+    }
+    if(duracion==""){
+      errores["descripcion"]="Debe de haber una duración";
+    }
+    return errores;
+  }
+  function muestraErrores(errores) {
+    const tdDescripcion=document.getElementById("tdDescripcion");
+    const tdDuracion=document.getElementById("tdDuracion");
+    if (errores.hasOwnProperty("descripcion")) {
+      escribeErrores("descripcion", errores, tdDescripcion);
+    }
+    if (errores.hasOwnProperty("duracion")) {
+      escribeErrores("duracion", errores, tdDuracion);
+    }
+  }
   pidePreguntas();
   seleccionables.addEventListener("dragover", function () {
     event.preventDefault();
@@ -15,6 +55,7 @@ window.addEventListener("load", function () {
   seleccionables.addEventListener("drop", function () {
     const id = event.dataTransfer.getData("id");
     seleccionables.appendChild(document.getElementById(id));
+    idSeleccionadas = idSeleccionadas.filter(idGuardada => idGuardada != id);
   });
   seleccionadas.addEventListener("dragover", function () {
     event.preventDefault();
@@ -22,6 +63,7 @@ window.addEventListener("load", function () {
   seleccionadas.addEventListener("drop", function () {
     const id = event.dataTransfer.getData("id");
     seleccionadas.appendChild(document.getElementById(id));
+    idSeleccionadas.append(id);
   });
 
   seleccionables.addEventListener("dragstart", function () {
@@ -35,30 +77,30 @@ window.addEventListener("load", function () {
     const ajax = new XMLHttpRequest();
     ajax.onreadystatechange = function () {
       if (ajax.readyState == 4 && ajax.status == 200) {
-        var respuesta = JSON.parse(ajax.responseText);
-        if (respuesta.preguntas.length > 0) {
-          for (let i = 0; i < respuesta.preguntas.length; i++) {
-            var div = crearContenido(respuesta.preguntas[i], i);
+        var preguntas = JSON.parse(ajax.responseText);
+        if (preguntas.length > 0) {
+          for (let i = 0; i < preguntas.length; i++) {
+            var div = crearContenido(preguntas[i]);
             seleccionables.appendChild(div);
           }
         }
       }
     };
-    ajax.open("GET", "../../php/entidades/pidePreguntasPrueba.php");
+    ajax.open("GET", "../../php/entidades/pidePreguntas.php");
     ajax.send();
   }
 
-  function crearContenido(pregunta, i) {
+  function crearContenido(pregunta) {
     const div1 = document.createElement("div");
-    div1.setAttribute("id", "div-" + (i + 1));
+    div1.setAttribute("id", pregunta.id);
     div1.setAttribute("draggable", "true");
     div1.className = pregunta.tematica;
     const div2 = document.createElement("div");
     div2.className = pregunta.tematica;
-    div2.innerHTML = pregunta.tematica;
+    div2.innerHTML = "Tematica: "+pregunta.tematica;
     const div3 = document.createElement("div");
     div3.className = "enunciado";
-    div3.innerHTML = pregunta.enunciado;
+    div3.innerHTML = "Enunciado: "+pregunta.enunciado;
     if (pregunta.recurso != null) {
       const div4 = document.createElement("div");
       imagen = new Image();

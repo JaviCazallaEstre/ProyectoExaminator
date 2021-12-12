@@ -32,11 +32,9 @@ class BdUsuario
     public static function insertaAlta($id, $email)
     {
         $conexion = Conn::creaConexion();
-        $sentencia = "INSERT INTO usuarios VALUES(:ID, :EMAIL)";
+        $sentencia = "INSERT INTO usuarios(id, email) VALUES(?, ?)";
         $registros = $conexion->prepare($sentencia);
-        $registros->bindParam(':ID', $id);
-        $registros->bindParam(':EMAIL', $email);
-        $registros->execute();
+        $registros->execute([$id, $email]);
         $registros->closeCursor();
         $registros = null;
         $conexion = null;
@@ -54,29 +52,41 @@ class BdUsuario
         $rol = $usuario->rol->id;
         $sentencia = "UPDATE usuarios SET id = ?, email=?, nombre = ?, apellidos = ?, contrasena = ?, fecha_nac = ?, foto = ?, rol_id = ? WHERE id LIKE '$id'";
         $registros = $conexion->prepare($sentencia);
-        $registros->execute($id, $email, $nombre, $apellidos, $contrasena, $fechaNac, $foto, $rol);
+        $registros->execute([$id, $email, $nombre, $apellidos, $contrasena, $fechaNac, $foto, $rol]);
         $registros->closeCursor();
         $registros = null;
         $conexion = null;
+    }
+    private static function modificaUsuarioConexion($conexion, Usuario $usuario)
+    {
+
+        $id = $usuario->id;
+        $email = $usuario->email;
+        $nombre = $usuario->nombre;
+        $apellidos = $usuario->apellidos;
+        $contrasena = $usuario->contrasena;
+        $fechaNac = $usuario->fecha_nac;
+        $foto = $usuario->foto;
+        $rol = $usuario->rol->id;
+        $sentencia = "UPDATE usuarios SET id = ?, email=?, nombre = ?, apellidos = ?, contrasena = ?, fecha_nac = ?, foto = ?, rol_id = ? WHERE id LIKE '$id'";
+        $registros = $conexion->prepare($sentencia);
+        $registros->execute([$id, $email, $nombre, $apellidos, $contrasena, $fechaNac, $foto, $rol]);
     }
     public static function existeUsuario($email)
     {
         $conexion = Conn::creaConexion();
         $sentencia = "SELECT email FROM usuarios WHERE email LIKE '$email'";
         $registros = $conexion->query($sentencia);
+        $esta = false;
         while ($resultado = $registros->fetch()) {
             if ($resultado['email'] == $email) {
-                $registros->closeCursor();
-                $registros = null;
-                $conexion = null;
-                return true;
-            } else {
-                $registros->closeCursor();
-                $registros = null;
-                $conexion = null;
-                return false;
+                $esta = true;
             }
         }
+        $registros->closeCursor();
+        $registros = null;
+        $conexion = null;
+        return $esta;
     }
     public static function borraUsuario($id)
     {
@@ -110,5 +120,31 @@ class BdUsuario
         $registros = null;
         $conexion = null;
         return $usuario;
+    }
+    public static function sacaUsuarioId($id)
+    {
+        $conexion = Conn::creaConexion();
+        $sentencia = "SELECT * FROM usuarios WHERE id ='$id'";
+        $registros = $conexion->query($sentencia);
+        while ($resultado = $registros->fetch(PDO::FETCH_OBJ)) {
+            $usuario = $resultado;
+        }
+        $registros->closeCursor();
+        $registros = null;
+        $conexion = null;
+        return $usuario;
+    }
+    public static function insertaBD(Usuario $usuario)
+    {
+        $conexion = Conn::creaConexion();
+        try {
+            $conexion->beginTransaction();
+            self::modificaUsuarioConexion($conexion, $usuario);
+            bdAltaUsuario::borraAlta($conexion, $usuario->email);
+            $conexion->commit();
+        } catch (PDOException $ex) {
+            $conexion->rollBack();
+        }
+        $conexion = null;
     }
 }

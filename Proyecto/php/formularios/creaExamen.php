@@ -12,6 +12,7 @@ require_once("../cargadores/cargarclases.php");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crea examen</title>
     <link rel="stylesheet" type="text/css" href="../../css/creaExamen.css" />
+    <script src="../../js/libreria/metodos.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
@@ -31,7 +32,7 @@ require_once("../cargadores/cargarclases.php");
                     <td>
                         <label for="descripcion">Descripcion:</label>
                     </td>
-                    <td>
+                    <td id="tdDescripcion">
                         <input type="text" id="descripcion" name="descripcion" />
                     </td>
                 </tr>
@@ -39,7 +40,7 @@ require_once("../cargadores/cargarclases.php");
                     <td>
                         <label for="duracion">Duracion:</label>
                     </td>
-                    <td>
+                    <td id="tdDuracion">
                         <input type="number" id="duracion" name="duracion" />
                     </td>
                 </tr>

@@ -16,11 +16,11 @@ if (isset($_POST["enviar"])) {
         $valor = rand(0, 500000000000);
         $fecha = date(DATE_RFC2822);
         $hash = md5($valor . $fecha);
-        //BdUsuario::insertaAlta(null,$_POST["correo"]);
-        //bdAltaUsuario::insertaAlta(null,$hash,$_POST["correo"]);
+        BdUsuario::insertaAlta(null,$_POST["correo"]);
         $alta = BdUsuario::sacaUsuario($_POST["correo"]);
         $id = $alta->id;
-        $correo = $alta->correo;
+        $correo = $alta->email;
+        bdAltaUsuario::insertaAlta($id,$hash,$_POST["correo"]);
 
         $mail = new PHPMailer();
         $mail->IsSMTP();

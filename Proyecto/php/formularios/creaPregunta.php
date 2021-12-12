@@ -21,7 +21,7 @@ if (isset($_POST["enviar"])) {
         $errores["opcion4"] = "La cuarta opción debe de estar rellena";
     }
     if ($_POST["correcta"] == "") {
-        $errores["correcta"] = "Debes elegir una opcion correcta fistro!";
+        $errores["correcta"] = "Debes elegir una opcion correcta";
     }
     if (isset($_FILES["archivo"])) {
         $permitidos = array("image/png", "image/jpeg", "image/jpg", "image/gif", "video/mp4", "video/mpg", "video/mpeg", "video/avi");
@@ -108,8 +108,7 @@ function rellenaSelect()
                                                                             } else {
                                                                                 echo "";
                                                                             }
-                                                                            ?>">
-                    </textarea>
+                                                                            ?>"></textarea>
                         <?php
                         if (isset($errores["enunciado"])) {
                             echo "<p class='error'>" . $errores["enunciado"] . "</p>";

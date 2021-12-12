@@ -23,8 +23,12 @@ window.addEventListener("load", function () {
     if (Object.keys(errores).length > 0) {
       muestraErrores(errores);
     } else {
+      debugger;
       formu = new FormData();
       formu.append("crear", "");
+      formu.append("id", parametroGet("id"));
+      formu.append("hash", parametroGet("hash"));
+      formu.append("modo", parametroGet("modo"));
       formu.append("email", email.value);
       formu.append("nombre", nombre.value);
       formu.append("apellidos", apellidos.value);
@@ -41,6 +45,13 @@ window.addEventListener("load", function () {
       ajax.send(formu);
     }
   };
+
+  function parametroGet(nombre) {
+    nombre = nombre.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + nombre + "=([^&#]*)"),
+    results = regex.exec(location.search);
+    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
 
   function muestraErrores(errores) {
     const tdEmail = document.getElementById("tdEmail");
@@ -115,7 +126,6 @@ window.addEventListener("load", function () {
     if (calcularEdad(fecha) < 18) {
       errores["fecha"] = "La edad debe de ser mayor de 18 años";
     }
-    debugger;
     if (foto["files"].length > 0) {
       limiteKB = 200;
       if (!/^image\//.test(foto.files[0].type)) {

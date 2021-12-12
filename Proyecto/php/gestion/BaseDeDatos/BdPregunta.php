@@ -3,44 +3,32 @@ require_once($_SERVER['DOCUMENT_ROOT'] . "/Proyecto/ProyectoExaminator/Proyecto/
 require_once($_SERVER['DOCUMENT_ROOT'] . "/Proyecto/ProyectoExaminator/Proyecto/php/cargadores/cargarClases.php");
 class BdPregunta
 {
-    public static function insertaPregunta(Pregunta $pregunta)
+    public static function insertaPregunta($conexion, Pregunta $pregunta)
     {
         $id = null;
         $enunciado = $pregunta->enunciado;
         $recurso = $pregunta->multimedia;
         $idTematica = $pregunta->idTematica;
-        $idCorrecta = $pregunta->respuestaCorrecta;
-        $conexion = Conn::creaConexion();
-        $sentencia = "INSERT INTO pregunta VALUES(:ID, :ENUNCIADO, :RECURSO, :TEMATICAS_ID, :RESPUESTA_ID)";
+        $sentencia = "INSERT INTO pregunta VALUES(:ID, :ENUNCIADO, :RECURSO, :TEMATICAS_ID)";
         $registros = $conexion->prepare($sentencia);
         $registros->bindParam(":ID", $id);
         $registros->bindParam(":ENUNCIADO", $enunciado);
         $registros->bindParam(":RECURSO", $recurso);
         $registros->bindParam(":TEMATICAS_ID", $idTematica);
-        $registros->bindParam(':RESPUESTA_ID', $idCorrecta);
         $registros->execute();
-        $id=$conexion->lastInsertId();
-        $registros->closeCursor();
-        $registros = null;
-        $conexion = null;
-        return $id;
+        return $conexion->lastInsertId();
     }
-    public static function insertaRespuesta(Respuesta $respuesta, $idPregunta)
+    public static function insertaRespuesta($conexion, Respuesta $respuesta, $idPregunta)
     {
         $id = null;
         $enunciado = $respuesta->enunciado;
-        $conexion = Conn::creaConexion();
         $sentencia = "INSERT INTO respuesta VALUES(:ID, :ENUNCIADO, :PREGUNTA_ID)";
         $registros = $conexion->prepare($sentencia);
         $registros->bindParam(':ID', $id);
         $registros->bindParam(':ENUNCIADO', $enunciado);
         $registros->bindParam(':PREGUNTA_ID', $idPregunta);
         $registros->execute();
-        $id = $conexion->lastInsertId();
-        $registros->closeCursor();
-        $registros = null;
-        $conexion = null;
-        return $id;
+        return $conexion->lastInsertId();
     }
     public static function sacaIdPreguntas()
     {
@@ -70,26 +58,24 @@ class BdPregunta
         $conexion = null;
         return $idRespuestas;
     }
-    public static function updateRespuestaCorrecta($idPregunta, $idRespuesta)
+    public static function insertRespuestaCorrecta($conexion, $idPregunta, $idRespuesta)
     {
-        $conexion = Conn::creaConexion();
-        $sentencia = "UPDATE pregunta SET respuesta_id=? WHERE id LIKE '$idPregunta'";
+        $sentencia = "INSERT INTO pregunta_correcta VALUES(:PREGUNTA_ID, :RESPUESTA_ID)";
         $registros = $conexion->prepare($sentencia);
-        $registros->execute([$idRespuesta]);
-        $registros->closeCursor();
-        $registros = null;
-        $conexion = null;
+        $registros->bindParam(':PREGUNTA_ID', $idPregunta);
+        $registros->bindParam(':RESPUESTA_ID', $idRespuesta);
+        $registros->execute();
     }
     public static function inserta(Pregunta $pregunta, Respuesta $respuesta1, Respuesta $respuesta2, Respuesta $respuesta3, Respuesta $respuesta4, $respuestaCorrecta)
     {
         $conexion = Conn::creaConexion();
         try {
             $conexion->beginTransaction();
-            $id = self::insertaPregunta($pregunta);
-            $idRespuesta1 = self::insertaRespuesta($respuesta1, $id);
-            $idRespuesta2 = self::insertaRespuesta($respuesta2, $id);
-            $idRespuesta3 = self::insertaRespuesta($respuesta3, $id);
-            $idRespuesta4 = self::insertaRespuesta($respuesta4, $id);
+            $idPregunta = self::insertaPregunta($conexion, $pregunta);
+            $idRespuesta1 = self::insertaRespuesta($conexion, $respuesta1, $idPregunta);
+            $idRespuesta2 = self::insertaRespuesta($conexion, $respuesta2, $idPregunta);
+            $idRespuesta3 = self::insertaRespuesta($conexion, $respuesta3, $idPregunta);
+            $idRespuesta4 = self::insertaRespuesta($conexion, $respuesta4, $idPregunta);
             switch ($respuestaCorrecta) {
                 case 1:
                     $idRespuestaCorrecta = $idRespuesta1;
@@ -104,12 +90,26 @@ class BdPregunta
                     $idRespuestaCorrecta = $idRespuesta4;
                     break;
             }
-            self::updateRespuestaCorrecta($id, $idRespuestaCorrecta);
+            self::insertRespuestaCorrecta($conexion, $idPregunta, $idRespuestaCorrecta);
             $conexion->commit();
         } catch (PDOException $ex) {
             echo $ex->getMessage();
             $conexion->rollBack();
             $conexion = null;
         }
+        $conexion = null;
+    }
+    public static function sacaPreguntas()
+    {
+        $conexion = Conn::creaConexion();
+        $sentencia = "SELECT pregunta.id, pregunta.enunciado, pregunta.recurso, (SELECT tematicas.descripcion FROM tematicas WHERE tematicas.id = pregunta.tematicas_id) AS 'tematica' FROM examinador.pregunta";
+        $registros = $conexion->query($sentencia);
+        while ($resultado = $registros->fetch(PDO::FETCH_OBJ)) {
+            $preguntas[] = $resultado;
+        }
+        $registros->closeCursor();
+        $registros = null;
+        $conexion = null;
+        return $preguntas;
     }
 }

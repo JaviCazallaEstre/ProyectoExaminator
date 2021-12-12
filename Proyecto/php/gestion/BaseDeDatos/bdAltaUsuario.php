@@ -5,26 +5,20 @@ class bdAltaUsuario
 {
     public static function insertaAlta($id, $hash, $correo)
     {
-        $fecha_actual = date("d-m-Y");
-        $fecha= date("d-m-Y", strtotime($fecha_actual . "+ 1 days"));
+        $fecha_actual = date("Y-m-d");
+        $fecha = date("Y-m-d", strtotime($fecha_actual . "+ 1 days"));
         $conexion = Conn::creaConexion();
-        $sentencia = "INSERT INTO registropendiente VALUES(:ID, :HASH, :CORREO, :FECHAEXPIRACION)";
+        $sentencia = "INSERT INTO registropendiente (id, hash, correo, fechaexpiracion) VALUES(?, ?, ?, ?)";
         $registros = $conexion->prepare($sentencia);
-        $registros->bindParam(":ID", $id);
-        $registros->bindParam(":HASH", $hash);
-        $registros->bindParam(":CORREO", $correo);
-        $registros->bindParam(":FECHAEXPIRACION",$fecha);
-        $registros->execute();
+        $registros->execute([$id, $hash, $correo, $fecha]);
         $registros->closeCursor();
         $registros = null;
         $conexion = null;
     }
-    public static function borraAlta($correo)
+    public static function borraAlta($conexion,$correo)
     {
-        $conexion = Conn::creaConexion();
         $sentencia = "DELETE FROM registropendiente WHERE CORREO LIKE '$correo'";
         $conexion->query($sentencia);
-        $conexion = null;
     }
     public static function cogeAlta($correo)
     {
@@ -38,5 +32,21 @@ class bdAltaUsuario
         $registros = null;
         $conexion = null;
         return $alta;
+    }
+    public static function comparaHash($id, $hash)
+    {
+        $conexion = Conn::creaConexion();
+        $sentencia = "SELECT hash FROM registropendiente WHERE ID LIKE'$id'";
+        $registros = $conexion->query($sentencia);
+        $esta = false;
+        while ($resultado = $registros->fetch()) {
+            if ($resultado['hash'] == $hash) {
+                $esta = true;
+            }
+        }
+        $registros->closeCursor();
+        $registros = null;
+        $conexion = null;
+        return $esta;
     }
 }
