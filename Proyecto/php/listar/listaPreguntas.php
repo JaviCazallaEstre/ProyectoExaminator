@@ -11,6 +11,10 @@ require_once("../cargadores/cargarclases.php");
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="../../js/listaPreguntas.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../../scss/main.css" />
     <title>Lista preguntas</title>
 </head>
 
@@ -20,7 +24,7 @@ require_once("../cargadores/cargarclases.php");
         CreaCabecera::creaCabeceraProfesor();
         ?>
     </header>
-    <div id="contenido">
+    <div class="contenido">
         <form action="http://proyectos/Proyecto/ProyectoExaminator/Proyecto/php/formularios/creaPregunta.php">
             <input type="submit" value="Crea pregunta" />
         </form>

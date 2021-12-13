@@ -1,14 +1,30 @@
 .contenido{
-    width: 500px;
-    margin-top: 40px;
-    margin-left: 1100px;
-    margin-bottom: 40px;
+    width: 100%;
+    margin-top: 60px;
+    margin-bottom: 100px;
+    height: 300px;
 }
-.error{
-    color:red;
+.contenido table{
+    border: solid;
+   float: left;
+   margin-left: 600px;
+   width: 500px;
+   border-collapse: collapse;
 }
-#crear{
+.contenido form{
     float: right;
-    margin-top: 30px;
-    margin-bottom: 30px;
+    margin-right: 550px;
+}
+.contenido form input{
+    font-size: 1.5em;
+}
+.contenido thead{
+    background-color: #0069B2;
+    border: solid 1px;
+    color: white;
+    font-size: 2em;
+}
+.contenido tbody{
+    text-align: center;
+    font-size: 1.5em;
 }

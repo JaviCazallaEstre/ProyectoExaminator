@@ -32,32 +32,29 @@ class CreaCabecera
         "<div id='menu'>
             <ul>
                 <li>
-                    <a href='#'>Usuarios</a>
+                    <a href='../listar/listaUsuarios.php'>Usuarios</a>
                     <ul class='submenu'>
                         <li>
-                            <a href='#'>Alta usuario</a>
+                            <a href='../formularios/altaUsuario.php'>Alta usuario</a>
                         </li>
                         <li>
-                            <a href='#'>Alta masiva</a>
+                            <a href='../formularios/altaMasivaUsuario.php'>Alta masiva</a>
                         </li>
                     </ul>
                 </li>
                 <li>
-                    <a href='#'>Tem&aacute;tica</a>
+                    <a href='../listar/listaTematicas.php'>Tem&aacute;tica</a>
                     <ul class='submenu'>
                         <li>
-                            <a href='#'>Alta tem&aacute;tica</a>
+                            <a href='../formularios/creaTematica.php'>Alta tem&aacute;tica</a>
                         </li>
                     </ul>
                 </li>
                 <li>
-                    <a href='#'>Preguntas</a>
+                    <a href='../listar/listaPreguntas.php'>Preguntas</a>
                     <ul class='submenu'>
                         <li>
-                            <a href='#'>Alta pregunta</a>
-                        </li>
-                        <li>
-                            <a href='#'>Alta masiva</a>
+                            <a href='../formularios/creaPregunta.php'>Alta pregunta</a>
                         </li>
                     </ul>
                 </li>
@@ -65,10 +62,7 @@ class CreaCabecera
                     <a href='#'>Ex&aacute;menes</a>
                     <ul class='submenu'>
                         <li>
-                            <a href='#'>Alta examen</a>
-                        </li>
-                        <li>
-                            <a href='#'>Historico</a>
+                            <a href='../formularios/creaExamen.php'>Alta examen</a>
                         </li>
                     </ul>
                 </li>

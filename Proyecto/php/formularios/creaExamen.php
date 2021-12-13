@@ -2,6 +2,18 @@
 require_once("../cargadores/cargarGestion.php");
 require_once("../cargadores/cargarBD.php");
 require_once("../cargadores/cargarclases.php");
+if (isset($_POST["crear"])) {
+    $errores = array();
+    if ($_POST["descripcion"] == "") {
+        $errores["descripcion"] = "La descripcion debe de estar rellena";
+    }
+    if ($_POST["duracion"] == "") {
+        $errores["duracion"] = "La duracion debe de estar rellena";
+    }
+    if (count($_POST["seleccionadas"]) == 0) {
+        $errores["seleccionadas"] = "No has seleccionado preguntas";
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -34,6 +46,11 @@ require_once("../cargadores/cargarclases.php");
                     </td>
                     <td id="tdDescripcion">
                         <input type="text" id="descripcion" name="descripcion" />
+                        <?php
+                        if(isset($errores["descripcion"])){
+                            echo "<p class='error'>" . $errores["descripcion"] . "</p>";
+                        }
+                        ?>
                     </td>
                 </tr>
                 <tr>
@@ -42,6 +59,11 @@ require_once("../cargadores/cargarclases.php");
                     </td>
                     <td id="tdDuracion">
                         <input type="number" id="duracion" name="duracion" />
+                        <?php
+                        if(isset($errores["duracion"])){
+                            echo "<p class='error'>" . $errores["duracion"] . "</p>";
+                        }
+                        ?>
                     </td>
                 </tr>
                 <tr>
@@ -64,8 +86,13 @@ require_once("../cargadores/cargarclases.php");
                     <td>
                         <div id="seleccionables" name="seleccionable"></div>
                     </td>
-                    <td>
+                    <td id="tdSeleccionadas"> 
                         <div id="seleccionadas" name="seleccionadas"></div>
+                        <?php
+                        if(isset($errores["seleccionadas"])){
+                            echo "<p class='error'>" . $errores["seleccionadas"] . "</p>";
+                        }
+                        ?>
                     </td>
                 </tr>
                 <tr>

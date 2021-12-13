@@ -1,6 +1,6 @@
 window.addEventListener("load", function () {
   const formulario = document.getElementById("formu");
-  const enviar = document.getElementById("enviar");
+  const crear = document.getElementById("crear");
   var descripcion = document.getElementById("descripcion");
   var duracion = document.getElementById("duracion");
   var activo = document.getElementById("activo");
@@ -9,14 +9,14 @@ window.addEventListener("load", function () {
   var idSeleccionadas = [];
   const divs = seleccionables.getElementsByTagName("div");
 
-  enviar.onclick = function(ev) {
+  crear.onclick=function(ev) {
     ev.preventDefault();
     errores=validaExamen(descripcion.value, duracion.value)
     if(Object.keys(errores).length>0){
       muestraErrores(errores);
     }else{
       let formu = new FormData();
-      formu.append("enviar","");
+      formu.append("crear","");
       formu.append("descripcion",descripcion.value);
       formu.append("duracion",duracion.value);
       if(activo.checked){
@@ -36,16 +36,23 @@ window.addEventListener("load", function () {
     if(duracion==""){
       errores["descripcion"]="Debe de haber una duración";
     }
+    if(idSeleccionadas.length==0){
+      errores["seleccionadas"]="Debes elegir preguntas";
+    }
     return errores;
   }
   function muestraErrores(errores) {
     const tdDescripcion=document.getElementById("tdDescripcion");
     const tdDuracion=document.getElementById("tdDuracion");
+    const tdSeleccionadas=document.getElementById("tdSeleccionadas");
     if (errores.hasOwnProperty("descripcion")) {
       escribeErrores("descripcion", errores, tdDescripcion);
     }
     if (errores.hasOwnProperty("duracion")) {
       escribeErrores("duracion", errores, tdDuracion);
+    }
+    if(errores.hasOwnProperty("seleccionadas")){
+      escribeErrores("seleccionadas", errores, tdSeleccionadas);
     }
   }
   pidePreguntas();
@@ -53,6 +60,7 @@ window.addEventListener("load", function () {
     event.preventDefault();
   });
   seleccionables.addEventListener("drop", function () {
+    debugger;
     const id = event.dataTransfer.getData("id");
     seleccionables.appendChild(document.getElementById(id));
     idSeleccionadas = idSeleccionadas.filter(idGuardada => idGuardada != id);
@@ -61,9 +69,12 @@ window.addEventListener("load", function () {
     event.preventDefault();
   });
   seleccionadas.addEventListener("drop", function () {
+    debugger;
     const id = event.dataTransfer.getData("id");
     seleccionadas.appendChild(document.getElementById(id));
-    idSeleccionadas.append(id);
+    if(idSeleccionadas.indexOf(id)==-1){
+      idSeleccionadas.push(id);
+    }
   });
 
   seleccionables.addEventListener("dragstart", function () {
@@ -92,7 +103,7 @@ window.addEventListener("load", function () {
 
   function crearContenido(pregunta) {
     const div1 = document.createElement("div");
-    div1.setAttribute("id", pregunta.id);
+    div1.setAttribute("id", "pregunta "+pregunta.id);
     div1.setAttribute("draggable", "true");
     div1.className = pregunta.tematica;
     const div2 = document.createElement("div");
