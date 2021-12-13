@@ -2,6 +2,10 @@
 require_once("../cargadores/cargarGestion.php");
 require_once("../cargadores/cargarBD.php");
 require_once("../cargadores/cargarclases.php");
+Session::inicia();
+if(!Session::usuarioLogueado("usuario")){
+    echo "nada";
+}
 if (isset($_POST["crear"])) {
     $errores = array();
     if ($_POST["descripcion"] == "") {
@@ -10,8 +14,14 @@ if (isset($_POST["crear"])) {
     if ($_POST["duracion"] == "") {
         $errores["duracion"] = "La duracion debe de estar rellena";
     }
-    if (count($_POST["seleccionadas"]) == 0) {
-        $errores["seleccionadas"] = "No has seleccionado preguntas";
+    $preguntas=array();
+    $preguntas=json_decode($_POST["preguntas"]);
+    if (count($preguntas) == 0) {
+        $errores["preguntas"] = "No has seleccionado preguntas";
+    }
+    if (count($errores) == 0) {
+        $examen = new Examen(null, $_POST["descripcion"], $_POST["duracion"], $_POST["activo"]);
+        bdExamen::insertaExamenCompleto($examen, $preguntas);
     }
 }
 ?>
@@ -47,7 +57,7 @@ if (isset($_POST["crear"])) {
                     <td id="tdDescripcion">
                         <input type="text" id="descripcion" name="descripcion" />
                         <?php
-                        if(isset($errores["descripcion"])){
+                        if (isset($errores["descripcion"])) {
                             echo "<p class='error'>" . $errores["descripcion"] . "</p>";
                         }
                         ?>
@@ -60,7 +70,7 @@ if (isset($_POST["crear"])) {
                     <td id="tdDuracion">
                         <input type="number" id="duracion" name="duracion" />
                         <?php
-                        if(isset($errores["duracion"])){
+                        if (isset($errores["duracion"])) {
                             echo "<p class='error'>" . $errores["duracion"] . "</p>";
                         }
                         ?>
@@ -86,10 +96,10 @@ if (isset($_POST["crear"])) {
                     <td>
                         <div id="seleccionables" name="seleccionable"></div>
                     </td>
-                    <td id="tdSeleccionadas"> 
+                    <td id="tdSeleccionadas">
                         <div id="seleccionadas" name="seleccionadas"></div>
                         <?php
-                        if(isset($errores["seleccionadas"])){
+                        if (isset($errores["seleccionadas"])) {
                             echo "<p class='error'>" . $errores["seleccionadas"] . "</p>";
                         }
                         ?>

@@ -9,11 +9,9 @@ class Login
         $sentencia = "SELECT * FROM usuarios WHERE email LIKE '$email'";
         $registros = $conexion->query($sentencia);
         while ($resultado = $registros->fetch(PDO::FETCH_OBJ)) {
-            var_dump($resultado);
             if ($resultado->email== $email && $resultado->contrasena == $contrasena) {
-                echo "ole los caracoles";
                 $persona = $resultado;
-                $rol = BdRol::sacaRolId($persona->id);
+                $rol = BdRol::sacaRolId($persona->rol_id);
                 $objetoRol = new Rol($rol->id, $rol->descripcion);
                 $usuario = new Usuario($persona->id, $persona->email, $persona->nombre, $persona->apellidos, $persona->contrasena, $persona->fecha_nac, $persona->foto, $objetoRol);
                 $registros->closeCursor();

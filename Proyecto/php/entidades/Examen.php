@@ -4,15 +4,13 @@ class Examen
     private $id;
     private $descripcion;
     private $duracion;
-    private $numero;
     private $activo;
 
-    public function __construct($id, $descripcion, $duracion, $numero, $activo)
+    public function __construct($id, $descripcion, $duracion, $activo)
     {
         $this->id = $id;
         $this->descripcion = $descripcion;
         $this->duracion = $duracion;
-        $this->numero = $numero;
         $this->activo = $activo;
     }
 

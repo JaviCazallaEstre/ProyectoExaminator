@@ -3,6 +3,10 @@ require_once("../cargadores/cargarBD.php");
 require_once("../cargadores/cargarclases.php");
 require_once("../cargadores/cargarGestion.php");
 require_once("../gestion/vendor/autoload.php");
+Session::inicia();
+if(!Session::usuarioLogueado("usuario")){
+    echo "nada";
+}
 
 use PHPMailer\PHPMailer\PHPMailer;
 
@@ -25,7 +29,7 @@ if (isset($_POST["enviar"])) {
         $mail = new PHPMailer();
         $mail->IsSMTP();
         // cambiar a 0 para no ver mensajes de error
-        $mail->SMTPDebug  = 2;
+        $mail->SMTPDebug  = 0;
         $mail->SMTPAuth   = true;
         $mail->SMTPSecure = "tls";
         $mail->Host = "smtp.gmail.com";

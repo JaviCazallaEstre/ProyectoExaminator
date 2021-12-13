@@ -2,6 +2,10 @@
 require_once("../cargadores/cargarGestion.php");
 require_once("../cargadores/cargarBD.php");
 require_once("../cargadores/cargarclases.php");
+Session::inicia();
+if(!Session::usuarioLogueado("usuario")){
+    echo "nada";
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">

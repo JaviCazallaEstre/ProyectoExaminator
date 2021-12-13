@@ -1,5 +1,9 @@
 <?php
 require_once("cargadores/cargarGestion.php");
+Session::inicia();
+if(!Session::usuarioLogueado("usuario")){
+    echo "nada";
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">

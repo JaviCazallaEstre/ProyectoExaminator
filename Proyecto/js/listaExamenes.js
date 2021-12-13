@@ -14,19 +14,29 @@ window.addEventListener("load", function () {
         }
       }
     };
-    ajax.open("GET", "sacaTematicas.php");
+    ajax.open("GET", "sacaExamenes.php");
     ajax.send();
   }
-  function creaContenido(tematica) {
-    var id = tematica.id;
+  function creaContenido(examen) {
+    var id = examen.id;
     const tr = document.createElement("tr");
     tr.setAttribute("id", id);
     const td = document.createElement("td");
-    td.innerHTML = tematica.id;
+    td.innerHTML = examen.id;
     const td2 = document.createElement("td");
-    td2.innerHTML = tematica.descripcion;
+    td2.innerHTML = examen.descripcion;
+    const td3 = document.createElement("td");
+    td3.innerHTML = examen.duracion;
+    const td4 = document.createElement("td");
+    if (examen.activo == 1) {
+      td4.innerHTML = "Activo";
+    } else {
+      td4.innerHTML = "Inactivo";
+    }
     tr.appendChild(td);
     tr.appendChild(td2);
+    tr.appendChild(td3);
+    tr.appendChild(td4);
     return tr;
   }
 });

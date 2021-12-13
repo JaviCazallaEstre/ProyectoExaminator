@@ -14,12 +14,12 @@ if(!Session::usuarioLogueado("usuario")){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="../../js/listaPreguntas.js"></script>
+    <script src="../../js/listaExamenes.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../../scss/main.css" />
-    <title>Lista preguntas</title>
+    <title>Lista examenes</title>
 </head>
 
 <body>
@@ -29,14 +29,15 @@ if(!Session::usuarioLogueado("usuario")){
         ?>
     </header>
     <div class="contenido">
-        <form action="http://proyectos/Proyecto/ProyectoExaminator/Proyecto/php/formularios/creaPregunta.php">
-            <input type="submit" value="Crea pregunta" />
+        <form action="http://proyectos/Proyecto/ProyectoExaminator/Proyecto/php/formularios/creaExamen.php">
+            <input type="submit" value="Crea examen" />
         </form>
         <table>
             <thead>
                 <th>ID</th>
-                <th>Enunciado</th>
-                <th>Tem&aacute;tica</th>
+                <th>Descripci&oacute;n</th>
+                <th>Duraci&oacute;n</th>
+                <th>Activo</th>
             </thead>
             <tbody id="tbody">
 

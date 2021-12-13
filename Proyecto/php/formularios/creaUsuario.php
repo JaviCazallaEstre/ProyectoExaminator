@@ -2,6 +2,7 @@
 require_once("../cargadores/cargarBD.php");
 require_once("../cargadores/cargarclases.php");
 require_once("../cargadores/cargarGestion.php");
+Session::inicia();
 if ($_GET["modo"] == "modifica") {
     $usuario = BdUsuario::sacaUsuarioId($_GET["id"]);
 }
@@ -78,6 +79,9 @@ if (isset($_POST["crear"])) {
         if($_POST["modo"]=="inserta"){
             if(bdAltaUsuario::comparaHash($_POST["id"],$_POST["hash"])){
                 BdUsuario::insertaBD($usuario);
+                $usuarioCreado = Login::existeUsuario($_POST["email"], $_POST["contrasena"]);
+                Session::escribir("usuario", $usuarioCreado);
+                header("../Principal.php");
             }
         }else if($_POST["modo"]=="modifica"){
             BdUsuario::modificaUsuario($usuario);

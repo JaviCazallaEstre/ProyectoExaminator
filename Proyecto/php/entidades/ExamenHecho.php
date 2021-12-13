@@ -9,7 +9,7 @@ class ExamenHecho
     private $idExamen;
     private $idUsuario;
 
-    public function __construct($id, $fecha, $respuestas, $calificacion, Examen $idExamen, Usuario $idUsuario)
+    public function __construct($id, $fecha, $respuestas, $calificacion, $idExamen, $idUsuario)
     {
         $this->id = $id;
         $this->fecha = $fecha;

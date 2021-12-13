@@ -59,7 +59,7 @@ class CreaCabecera
                     </ul>
                 </li>
                 <li>
-                    <a href='#'>Ex&aacute;menes</a>
+                    <a href='../listar/listaExamenes.php'>Ex&aacute;menes</a>
                     <ul class='submenu'>
                         <li>
                             <a href='../formularios/creaExamen.php'>Alta examen</a>

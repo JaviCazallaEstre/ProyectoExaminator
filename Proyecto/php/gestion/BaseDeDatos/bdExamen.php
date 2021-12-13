@@ -1,27 +1,42 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT']."/Proyecto/ProyectoExaminator/Proyecto/php/cargadores/cargarBD.php");
-require_once($_SERVER['DOCUMENT_ROOT']."/Proyecto/ProyectoExaminator/Proyecto/php/cargadores/cargarClases.php");
+require_once($_SERVER['DOCUMENT_ROOT'] . "/Proyecto/ProyectoExaminator/Proyecto/php/cargadores/cargarBD.php");
+require_once($_SERVER['DOCUMENT_ROOT'] . "/Proyecto/ProyectoExaminator/Proyecto/php/cargadores/cargarClases.php");
 class bdExamen
 {
-    public static function insertaExamen(Examen $examen)
+    private static function insertaExamen($conexion, Examen $examen)
     {
-        $conexion = Conn::creaConexion();
         $id = $examen->id;
         $descripcion = $examen->descripcion;
         $duracion = $examen->duracion;
-        $numero = $examen->numero;
         $activo = $examen->activo;
-        $sentencia = "INSERT INTO examen VALUES (:ID, :DESCRIPCION, :DURACION, :NUMERO, :ACTIVO)";
+        $sentencia = "INSERT INTO examen VALUES (:ID, :DESCRIPCION, :DURACION, :ACTIVO)";
         $registros = $conexion->prepare($sentencia);
         $registros->bindParam(':ID', $id);
         $registros->bindParam(':DESCRIPCION', $descripcion);
         $registros->bindParam(':DURACION', $duracion);
-        $registros->bindParam('NUMERO', $numero);
         $registros->bindParam(':ACTIVO', $activo);
         $registros->execute();
-        $registros->closeCursor();
-        $registros = null;
-        $conexion = null;
+        return $conexion->lastInsertId();
+    }
+    private static function insertaExamenPregunta($conexion, $idExamen, $idPregunta)
+    {
+        $sentencia = "INSERT INTO pregunta_has_examen(pregunta_id, examen_id) VALUES(?,?)";
+        $registros = $conexion->prepare($sentencia);
+        $registros->execute([$idPregunta, $idExamen]);
+    }
+    public static function insertaExamenCompleto(Examen $examen, $preguntas)
+    {
+        $conexion = Conn::creaConexion();
+        try {
+            $conexion->beginTransaction();
+            $idExamen = self::insertaExamen($conexion, $examen);
+            for ($i = 0; $i < count($preguntas); $i++) {
+                self::insertaExamenPregunta($conexion, $idExamen, $preguntas[$i]);
+            }
+            $conexion->commit();
+        } catch (PDOException $ex) {
+            $conexion->rollBack();
+        }
     }
     public static function borraExamen($id)
     {
@@ -66,7 +81,7 @@ class bdExamen
         $conexion = Conn::creaConexion();
         $sentencia = "UPDATE examen SET id=?, descripcion=?, duracion=?, numero=?, activo=?";
         $registros = $conexion->query($sentencia);
-        $registros->execute($id, $descripcion, $duracion, $numero, $activo);
+        $registros->execute([$id, $descripcion, $duracion, $numero, $activo]);
         $registros->closeCursor();
         $registros = null;
         $conexion = null;

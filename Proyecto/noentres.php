@@ -14,6 +14,7 @@ if (isset($_POST["enviar"])) {
                 setcookie("contrasena", $_POST["contrasena"], time() + 3600);
                 setcookie("recuerdame", $_POST["recuerdame"], time() + 3600);
             }
+            header("php/principal.php");
         } else {
             $errores["login"] = "Los datos introducidos son incorrectos";
         }

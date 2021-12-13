@@ -2,6 +2,10 @@
 require_once("../cargadores/cargarBD.php");
 require_once("../cargadores/cargarclases.php");
 require_once("../cargadores/cargarGestion.php");
+Session::inicia();
+if(!Session::usuarioLogueado("usuario")){
+    echo "nada";
+}
 if (isset($_POST["crear"])) {
     $errores = array();
     if ($_POST["nombre"] == "") {
