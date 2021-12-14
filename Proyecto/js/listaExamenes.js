@@ -20,7 +20,7 @@ window.addEventListener("load", function () {
   function creaContenido(examen) {
     var id = examen.id;
     const tr = document.createElement("tr");
-    tr.setAttribute("id", id);
+    tr.setAttribute("id", "examen "+id);
     const td = document.createElement("td");
     td.innerHTML = examen.id;
     const td2 = document.createElement("td");
@@ -33,10 +33,14 @@ window.addEventListener("load", function () {
     } else {
       td4.innerHTML = "Inactivo";
     }
+    const td5 = document.createElement("td");
+    td5.innerHTML =
+      "<a href='../formularios/creaExamenHecho.php?id=" + id + "'>Realizar</a>";
     tr.appendChild(td);
     tr.appendChild(td2);
     tr.appendChild(td3);
     tr.appendChild(td4);
+    tr.appendChild(td5);
     return tr;
   }
 });

@@ -4,7 +4,10 @@ require_once("../cargadores/cargarBD.php");
 require_once("../cargadores/cargarclases.php");
 Session::inicia();
 if(!Session::usuarioLogueado("usuario")){
-    echo "nada";
+    //header("Location: ../../index.php");
+}
+if(Session::leer("rol")==2){
+    //header("Location: ../Principal.php");
 }
 ?>
 <!DOCTYPE html>
@@ -25,7 +28,7 @@ if(!Session::usuarioLogueado("usuario")){
 <body>
     <header>
         <?php
-        CreaCabecera::creaCabeceraProfesor();
+            CreaCabecera::creaCabeceraProfesor();
         ?>
     </header>
     <div class="contenido">

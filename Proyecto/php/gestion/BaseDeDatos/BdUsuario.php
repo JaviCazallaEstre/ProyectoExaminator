@@ -57,6 +57,23 @@ class BdUsuario
         $registros = null;
         $conexion = null;
     }
+    public static function modificaUsuarioSinRol(Usuario $usuario)
+    {
+        $conexion = Conn::creaConexion();
+        $id = $usuario->id;
+        $email = $usuario->email;
+        $nombre = $usuario->nombre;
+        $apellidos = $usuario->apellidos;
+        $contrasena = $usuario->contrasena;
+        $fechaNac = $usuario->fecha_nac;
+        $foto = $usuario->foto;
+        $sentencia = "UPDATE usuarios SET id = ?, email=?, nombre = ?, apellidos = ?, contrasena = ?, fecha_nac = ?, foto = ? WHERE id LIKE '$id'";
+        $registros = $conexion->prepare($sentencia);
+        $registros->execute([$id, $email, $nombre, $apellidos, $contrasena, $fechaNac, $foto]);
+        $registros->closeCursor();
+        $registros = null;
+        $conexion = null;
+    }
     private static function modificaUsuarioConexion($conexion, Usuario $usuario)
     {
 

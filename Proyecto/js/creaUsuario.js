@@ -23,7 +23,6 @@ window.addEventListener("load", function () {
     if (Object.keys(errores).length > 0) {
       muestraErrores(errores);
     } else {
-      debugger;
       formu = new FormData();
       formu.append("crear", "");
       formu.append("id", parametroGet("id"));
@@ -49,9 +48,11 @@ window.addEventListener("load", function () {
   function parametroGet(nombre) {
     nombre = nombre.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
     var regex = new RegExp("[\\?&]" + nombre + "=([^&#]*)"),
-    results = regex.exec(location.search);
-    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-}
+      results = regex.exec(location.search);
+    return results === null
+      ? ""
+      : decodeURIComponent(results[1].replace(/\+/g, " "));
+  }
 
   function muestraErrores(errores) {
     const tdEmail = document.getElementById("tdEmail");

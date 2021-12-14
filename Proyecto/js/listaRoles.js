@@ -20,7 +20,7 @@ window.addEventListener("load", function () {
   function creaContenido(rol) {
     var id = rol.id;
     const tr = document.createElement("tr");
-    tr.setAttribute("id", id);
+    tr.setAttribute("id", "rol " + id);
     const td = document.createElement("td");
     td.innerHTML = rol.id;
     const td2 = document.createElement("td");

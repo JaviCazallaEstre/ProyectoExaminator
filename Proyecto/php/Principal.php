@@ -1,8 +1,8 @@
 <?php
 require_once("cargadores/cargarGestion.php");
 Session::inicia();
-if(!Session::usuarioLogueado("usuario")){
-    header("Location: ../noentres.php");
+if (!Session::usuarioLogueado("usuario")) {
+    //header("Location: ../index.php");
 }
 ?>
 <!DOCTYPE html>
@@ -22,11 +22,13 @@ if(!Session::usuarioLogueado("usuario")){
 
 <body>
     <header>
-        <div class='logo'><img src='../Recursos/Autoescuela-A7-00.png' />
+        <?php
+        if (Session::leer("rol") == 1) {
+            echo "<div class='logo'><img src='../Recursos/Autoescuela-A7-00.png' />
             <h1>Autoescuela Javi</h1>
-        </div>
-        <div class='fotoUsuario'><img src='' /></div>
-        <div id='menu'>
+        </div>";
+            echo "<div class='fotoUsuario'><img src='' /></div>";
+            echo "<div id='menu'>
             <ul>
                 <li>
                     <a href='listar/listaUsuarios.php'>Usuarios</a>
@@ -64,7 +66,22 @@ if(!Session::usuarioLogueado("usuario")){
                     </ul>
                 </li>
             </ul>
-        </div>
+        </div>";
+        } else {
+            echo "<div class='logo'><img src='../Recursos/Autoescuela-A7-00.png'/>
+        <h1>Autoescuela Javi</h1>
+        </div>";
+            echo "<div class='fotoUsuario'><img src=''/></div>";
+            echo
+            "<div id='menu'>
+    <ul>
+        <li>
+            <a href='../listar/listaExamenes.php'>Examen predefinido</a>
+        </li>
+    </ul>
+</div>";
+        }
+        ?>
     </header>
     <div class="contenido">
         <div id="parallax">
@@ -74,7 +91,7 @@ if(!Session::usuarioLogueado("usuario")){
             <p>
                 Este es el sitio web de Autoescuela Javi en esta web podr&aacute;s preparar tu
                 te&oacute;rico mediante nuestros ex&aacute;menes donde pondr&aacute;s a prueba tus
-                concocimientos y te garantizamos el salir preparado al examen de la DGT mediante 
+                concocimientos y te garantizamos el salir preparado al examen de la DGT mediante
                 nuestros propios ex&aacute;menes. Contamos con una tasa del 95% de aprobados al primer
                 intento el porcentaje m&aacute;s alto de Ja&eacute;n.
             </p>

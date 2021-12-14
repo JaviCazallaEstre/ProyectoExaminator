@@ -20,7 +20,7 @@ window.addEventListener("load", function () {
   function creaContenido(tematica) {
     var id = tematica.id;
     const tr = document.createElement("tr");
-    tr.setAttribute("id", id);
+    tr.setAttribute("id", "tematica" + id);
     const td = document.createElement("td");
     td.innerHTML = tematica.id;
     const td2 = document.createElement("td");

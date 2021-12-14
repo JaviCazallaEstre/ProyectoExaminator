@@ -4,7 +4,10 @@ require_once("../cargadores/cargarBD.php");
 require_once("../cargadores/cargarclases.php");
 Session::inicia();
 if(!Session::usuarioLogueado("usuario")){
-    echo "nada";
+    //header("Location: ../../index.php");
+}
+if(Session::leer("rol")==2){
+    //header("Location: ../Principal.php");
 }
 ?>
 <!DOCTYPE html>
@@ -25,7 +28,11 @@ if(!Session::usuarioLogueado("usuario")){
 <body>
     <header>
         <?php
-        CreaCabecera::creaCabeceraProfesor();
+        //if(Session::leer("rol")==1){
+            CreaCabecera::creaCabeceraProfesor();
+        //}else{
+        //    CreaCabecera::creaCabeceraAlumno();
+        //}
         ?>
     </header>
     <div class="contenido">
@@ -38,6 +45,7 @@ if(!Session::usuarioLogueado("usuario")){
                 <th>Descripci&oacute;n</th>
                 <th>Duraci&oacute;n</th>
                 <th>Activo</th>
+                <th>Acci&oacute;n</th>
             </thead>
             <tbody id="tbody">
 

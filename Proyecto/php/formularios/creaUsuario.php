@@ -3,8 +3,10 @@ require_once("../cargadores/cargarBD.php");
 require_once("../cargadores/cargarclases.php");
 require_once("../cargadores/cargarGestion.php");
 Session::inicia();
-if ($_GET["modo"] == "modifica") {
-    $usuario = BdUsuario::sacaUsuarioId($_GET["id"]);
+if (isset($_GET["modo"])) {
+    if ($_GET["modo"] == "modifica") {
+        $usuario = BdUsuario::sacaUsuarioId($_GET["id"]);
+    }
 }
 function validateDateEs($date)
 {
@@ -76,19 +78,18 @@ if (isset($_POST["crear"])) {
         } else {
             $usuario = new Usuario($_POST["id"], $_POST["email"], $_POST["nombre"], $_POST["apellidos"], $_POST["contrasena"], $_POST["fecha"], null, new Rol(2, "estudiante"));
         }
-        if($_POST["modo"]=="inserta"){
-            if(bdAltaUsuario::comparaHash($_POST["id"],$_POST["hash"])){
+        if ($_POST["modo"] == "inserta") {
+            if (bdAltaUsuario::comparaHash($_POST["id"], $_POST["hash"])) {
                 BdUsuario::insertaBD($usuario);
                 $usuarioCreado = Login::existeUsuario($_POST["email"], $_POST["contrasena"]);
                 Session::escribir("usuario", $usuarioCreado);
-                Session::escribir("rol",$usuarioCreado->rol->id);
-                header("Location: ../Principal.php");
+                Session::escribir("rol", $usuarioCreado->rol->id);
+                header("Location: ../principal.php");
             }
-        }else if($_POST["modo"]=="modifica"){
-            
-            BdUsuario::modificaUsuario($usuario);
+        } else if ($_POST["modo"] == "modifica") {
+
+            BdUsuario::modificaUsuarioSinRol($usuario);
         }
-        
     }
 }
 ?>
@@ -125,10 +126,12 @@ if (isset($_POST["crear"])) {
                     </td>
                     <td id="tdEmail">
                         <input type="text" id="email" name="email" readonly value="<?php
-                                                                                    if ($_GET["modo"] == "modifica") {
-                                                                                        echo $usuario->email;
-                                                                                    } else {
-                                                                                        echo $_GET["correo"];
+                                                                                    if (isset($_GET["modo"])) {
+                                                                                        if ($_GET["modo"] == "modifica") {
+                                                                                            echo $usuario->email;
+                                                                                        } else {
+                                                                                            echo $_GET["correo"];
+                                                                                        }
                                                                                     }
                                                                                     ?>" />
                         <?php
@@ -144,8 +147,10 @@ if (isset($_POST["crear"])) {
                     </td>
                     <td id="tdNombre">
                         <input type="text" id="nombre" name="nombre" value="<?php
-                                                                            if ($_GET["modo"] == "modifica") {
-                                                                                echo $usuario->nombre;
+                                                                            if (isset($_GET["modo"])) {
+                                                                                if ($_GET["modo"] == "modifica") {
+                                                                                    echo $usuario->nombre;
+                                                                                }
                                                                             } else if (isset($errores["nombre"])) {
                                                                                 echo "";
                                                                             } else if (isset($_POST["nombre"])) {
@@ -167,8 +172,10 @@ if (isset($_POST["crear"])) {
                     </td>
                     <td id="tdApellidos">
                         <input type="text" id="apellidos" name="apellidos" value="<?php
-                                                                                    if ($_GET["modo"] == "modifica") {
-                                                                                        echo $usuario->apellidos;
+                                                                                    if (isset($_GET["modo"])) {
+                                                                                        if ($_GET["modo"] == "modifica") {
+                                                                                            echo $usuario->apellidos;
+                                                                                        }
                                                                                     } else if (isset($errores["apellidos"])) {
                                                                                         echo "";
                                                                                     } else if (isset($_POST["apellidos"])) {
@@ -190,8 +197,10 @@ if (isset($_POST["crear"])) {
                     </td>
                     <td id="tdContrasena">
                         <input type="password" id="contrasena" name="contrasena" value="<?php
-                                                                                        if ($_GET["modo"] == "modifica") {
-                                                                                            echo $usuario->contrasena;
+                                                                                        if (isset($_GET["modo"])) {
+                                                                                            if ($_GET["modo"] == "modifica") {
+                                                                                                echo $usuario->contrasena;
+                                                                                            }
                                                                                         } else if (isset($errores["contrasena"]) || isset($errores["contrasenaIgual"])) {
                                                                                             echo "";
                                                                                         } else if (isset($_POST["contrasena"])) {
@@ -213,8 +222,10 @@ if (isset($_POST["crear"])) {
                     </td>
                     <td id="tdContrasenaIgual">
                         <input type="password" id="contrasenaIgual" name="contrasenaIgual" value="<?php
-                                                                                                    if ($_GET["modo"] == "modifica") {
-                                                                                                        echo $usuario->contrasena;
+                                                                                                    if (isset($_GET["modo"])) {
+                                                                                                        if ($_GET["modo"] == "modifica") {
+                                                                                                            echo $usuario->contrasena;
+                                                                                                        }
                                                                                                     } else if (isset($errores["contrasena"]) || isset($errores["contrasenaIgual"])) {
                                                                                                         echo "";
                                                                                                     } else if (isset($_POST["contrasenaIgual"])) {
@@ -236,8 +247,10 @@ if (isset($_POST["crear"])) {
                     </td>
                     <td id="tdFecha">
                         <input type="date" id="fecha" name="fecha" placeholder="dd/mm/yyyy" value="<?php
-                                                                                                    if ($_GET["modo"] == "modifica") {
-                                                                                                        echo $usuario->fecha_nac;
+                                                                                                    if (isset($_GET["modo"])) {
+                                                                                                        if ($_GET["modo"] == "modifica") {
+                                                                                                            echo $usuario->fecha_nac;
+                                                                                                        }
                                                                                                     } else if (isset($errores["fecha"])) {
                                                                                                         echo "";
                                                                                                     } else if (isset($_POST["fecha"])) {
@@ -259,8 +272,10 @@ if (isset($_POST["crear"])) {
                     </td>
                     <td id="tdFoto">
                         <input type="file" id="foto" name="foto" value="<?php
-                                                                        if ($_GET["modo"] == "modifica") {
-                                                                            echo $usuario->foto;
+                                                                        if (isset($_GET["modo"])) {
+                                                                            if ($_GET["modo"] == "modifica") {
+                                                                                echo $usuario->foto;
+                                                                            }
                                                                         }
                                                                         ?>" />
                         <?php
@@ -273,9 +288,13 @@ if (isset($_POST["crear"])) {
                 <tr>
                     <td>
                         <input type="submit" id="crear" name="crear" value="<?php
-                                                                            if($_GET["modo"]=="modifica"){
-                                                                                echo "Modificar";
-                                                                            }else{
+                                                                            if (isset($_GET["modo"])) {
+                                                                                if ($_GET["modo"] == "modifica") {
+                                                                                    echo "Modificar";
+                                                                                } else {
+                                                                                    echo "Crear";
+                                                                                }
+                                                                            } else {
                                                                                 echo "Crear";
                                                                             }
                                                                             ?>" />

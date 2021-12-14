@@ -10,14 +10,8 @@ class CreaCabecera
         echo
         "<div id='menu'>
     <ul>
-        <li id=>
-            <a href='#'>Hist&oacute;rico de ex&aacute;menes</a>
-        </li>
         <li>
-            <a href='#'>Examen predefinido</a>
-        </li>
-        <li>
-            <a href='#'>Examen aleatorio</a>
+            <a href='../listar/listaExamenes.php'>Examen predefinido</a>
         </li>
     </ul>
 </div>";

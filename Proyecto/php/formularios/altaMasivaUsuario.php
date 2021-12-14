@@ -4,7 +4,10 @@ require_once("../cargadores/cargarclases.php");
 require_once("../cargadores/cargarGestion.php");
 Session::inicia();
 if(!Session::usuarioLogueado("usuario")){
-    echo "nada";
+    header("Location: ../../index.php");
+}
+if(Session::leer("rol")==2){
+    header("Location: ../Principal.php");
 }
 ?>
 <!DOCTYPE html>
