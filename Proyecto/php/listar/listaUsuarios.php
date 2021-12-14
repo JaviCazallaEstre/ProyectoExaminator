@@ -17,14 +17,19 @@ if(!Session::usuarioLogueado("usuario")){
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../../css/listarUsuarios.css" />
+    <script src="../../js/listaUsuario.js"></script>
     <title>Lista usuarios</title>
 </head>
 
 <body>
     <header>
+        <?php
+        CreaCabecera::creaCabeceraProfesor();
+        ?>
     </header>
-    <div id="contenido">
-        <div id="formularios">
+    <div class="contenido">
+        <div class="formularios">
             <form action="http://proyectos/Proyecto/ProyectoExaminator/Proyecto/php/formularios/altaUsuario.php">
                 <input type="submit" value="Alta usuario" />
             </form>
@@ -35,12 +40,23 @@ if(!Session::usuarioLogueado("usuario")){
         <table>
             <thead>
                 <tr>
-                    
+                    <th>ID</th>
+                    <th>Email</th>
+                    <th>Nombre</th>
+                    <th>Apellidos</th>
+                    <th>Rol</th>
+                    <th>Accion</th>
                 </tr>
+            </thead>
+            <tbody id="tbody">
+
+            </tbody>
         </table>
     </div>
     <footer>
-
+        <?php
+        CreaFooter::creaFooterPagina("","");
+        ?>
     </footer>
 </body>
 

@@ -9,12 +9,13 @@ if (isset($_POST["enviar"])) {
         if ($usuario != false) {
             Session::inicia();
             Session::escribir("usuario", $usuario);
-            if ($_POST["recuerdame"] == 'on') {
+            Session::escribir("rol",$usuario->rol->id);
+            if (isset($_POST["recuerdame"])) {
                 setcookie("usuario", $_POST["email"], time() + 3600);
                 setcookie("contrasena", $_POST["contrasena"], time() + 3600);
                 setcookie("recuerdame", $_POST["recuerdame"], time() + 3600);
             }
-            header("php/principal.php");
+            header("Location: php/principal.php");
         } else {
             $errores["login"] = "Los datos introducidos son incorrectos";
         }

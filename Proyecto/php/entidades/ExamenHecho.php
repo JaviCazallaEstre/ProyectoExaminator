@@ -4,17 +4,15 @@ class ExamenHecho
 {
     private $id;
     private $fecha;
-    private $respuestas = [];
-    private $calificacion;
+    private $respuestas;
     private $idExamen;
     private $idUsuario;
 
-    public function __construct($id, $fecha, $respuestas, $calificacion, $idExamen, $idUsuario)
+    public function __construct($id, $fecha, $respuestas, $idExamen, $idUsuario)
     {
         $this->id = $id;
         $this->fecha = $fecha;
         $this->respuestas = $respuestas;
-        $this->calificacion = $calificacion;
         $this->idExamen = $idExamen;
         $this->idUsuario = $idUsuario;
     }

@@ -1,30 +1,59 @@
-.contenido{
+#contenido{
     width: 100%;
     margin-top: 60px;
     margin-bottom: 100px;
-    height: 300px;
+    height: 90%;
 }
-.contenido table{
-    border: solid;
-   float: left;
-   margin-left: 600px;
-   width: 500px;
-   border-collapse: collapse;
+#pregunta{
+    width: 100%;
 }
-.contenido form{
-    float: right;
-    margin-right: 550px;
+#pregunta h2{
+    margin-left: 50px;
+    font-size:2.5em ;
 }
-.contenido form input{
+#foto{
+    width: 600px;
+    height: 600px;
+    margin-left: 100px;
+    float: left;
+}
+#foto img{
+    width: 600px;
+    height: 600px;
+    float: left;
+}
+#enunciado {
+    width: 600px;
+    float: left;
+    margin-left: 100px;
+}
+#enunciado p{
     font-size: 1.5em;
 }
-.contenido thead{
-    background-color: #0069B2;
-    border: solid 1px;
-    color: white;
-    font-size: 2em;
+#opciones{
+    float: left;
+    width: 300px;
+    margin-left: 190px;
+    display: grid;
+    grid-template-columns:repeat(2, 1fr)
 }
-.contenido tbody{
-    text-align: center;
+#opciones label{
+    margin-bottom: 20px;
     font-size: 1.5em;
+}
+#botones{
+    margin-left: 500px;
+    width: 350px;
+    float: left;
+}
+#botones input{
+    font-size: 1.5em;
+}
+#eligePregunta{
+    display: grid;
+    grid-template-columns: repeat(10 , 1fr);
+    position: absolute;
+    margin-top: 600px;
+    width: 500px;
+    margin-left: 900px;
 }

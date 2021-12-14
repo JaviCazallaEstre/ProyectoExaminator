@@ -2,7 +2,7 @@
 require_once("cargadores/cargarGestion.php");
 Session::inicia();
 if(!Session::usuarioLogueado("usuario")){
-    echo "nada";
+    header("Location: ../noentres.php");
 }
 ?>
 <!DOCTYPE html>
@@ -29,7 +29,7 @@ if(!Session::usuarioLogueado("usuario")){
         <div id='menu'>
             <ul>
                 <li>
-                    <a href='#'>Usuarios</a>
+                    <a href='listar/listaUsuarios.php'>Usuarios</a>
                     <ul class='submenu'>
                         <li>
                             <a href='formularios/altaUsuario.php'>Alta usuario</a>
@@ -40,7 +40,7 @@ if(!Session::usuarioLogueado("usuario")){
                     </ul>
                 </li>
                 <li>
-                    <a href='#'>Tem&aacute;tica</a>
+                    <a href='listar/listaTematicas.php'>Tem&aacute;tica</a>
                     <ul class='submenu'>
                         <li>
                             <a href='formularios/creaTematica.php'>Alta tem&aacute;tica</a>
@@ -48,7 +48,7 @@ if(!Session::usuarioLogueado("usuario")){
                     </ul>
                 </li>
                 <li>
-                    <a href='#'>Preguntas</a>
+                    <a href='listar/listaPreguntas.php'>Preguntas</a>
                     <ul class='submenu'>
                         <li>
                             <a href='formularios/creaPregunta.php'>Alta pregunta</a>
@@ -56,7 +56,7 @@ if(!Session::usuarioLogueado("usuario")){
                     </ul>
                 </li>
                 <li>
-                    <a href='#'>Ex&aacute;menes</a>
+                    <a href='listar/listaExamenes.php'>Ex&aacute;menes</a>
                     <ul class='submenu'>
                         <li>
                             <a href='formularios/creaExamen.php'>Alta examen</a>

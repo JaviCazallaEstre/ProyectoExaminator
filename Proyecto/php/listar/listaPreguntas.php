@@ -18,7 +18,7 @@ if(!Session::usuarioLogueado("usuario")){
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="../../scss/main.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/listar.css" />
     <title>Lista preguntas</title>
 </head>
 

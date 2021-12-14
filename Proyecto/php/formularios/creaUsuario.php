@@ -81,9 +81,11 @@ if (isset($_POST["crear"])) {
                 BdUsuario::insertaBD($usuario);
                 $usuarioCreado = Login::existeUsuario($_POST["email"], $_POST["contrasena"]);
                 Session::escribir("usuario", $usuarioCreado);
-                header("../Principal.php");
+                Session::escribir("rol",$usuarioCreado->rol->id);
+                header("Location: ../Principal.php");
             }
         }else if($_POST["modo"]=="modifica"){
+            
             BdUsuario::modificaUsuario($usuario);
         }
         

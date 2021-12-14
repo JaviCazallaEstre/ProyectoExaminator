@@ -8,9 +8,9 @@ class CreaCabecera
         </div>";
         echo "<div class='fotoUsuario'><img src=''/></div>";
         echo
-        "<div>
+        "<div id='menu'>
     <ul>
-        <li>
+        <li id=>
             <a href='#'>Hist&oacute;rico de ex&aacute;menes</a>
         </li>
         <li>

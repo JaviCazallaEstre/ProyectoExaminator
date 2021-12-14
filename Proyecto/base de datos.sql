@@ -24,7 +24,6 @@ CREATE TABLE IF NOT EXISTS `examinador`.`examen` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `descripcion` VARCHAR(45) CHARACTER SET 'utf8' COLLATE 'utf8_spanish_ci' NOT NULL,
   `duracion` INT(11) NOT NULL,
-  `numero` INT(11) NULL DEFAULT NULL,
   `activo` TINYINT(1) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
@@ -76,19 +75,18 @@ CREATE TABLE IF NOT EXISTS `examinador`.`examenhechos` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `fecha` VARCHAR(45) CHARACTER SET 'utf8' COLLATE 'utf8_spanish_ci' NOT NULL,
   `respuestas` JSON NOT NULL,
-  `calificacion` INT(11) NOT NULL,
   `examen_id` INT(11) NOT NULL,
-  `usuarios_id1` INT(11) NOT NULL,
+  `usuarios_id` INT(11) NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_examenHechos_examen1_idx` (`examen_id` ASC),
-  INDEX `fk_examenhechos_usuarios1_idx` (`usuarios_id1` ASC),
+  INDEX `fk_examenhechos_usuarios1_idx` (`usuarios_id` ASC),
   CONSTRAINT `fk_examenHechos_examen1`
     FOREIGN KEY (`examen_id`)
     REFERENCES `examinador`.`examen` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_examenhechos_usuarios1`
-    FOREIGN KEY (`usuarios_id1`)
+    FOREIGN KEY (`usuarios_id`)
     REFERENCES `examinador`.`usuarios` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -127,6 +125,47 @@ CREATE TABLE IF NOT EXISTS `examinador`.`pregunta` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_spanish_ci;
+
+
+-- -----------------------------------------------------
+-- Table `examinador`.`respuesta`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `examinador`.`respuesta` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `enunciado` VARCHAR(45) CHARACTER SET 'utf8' COLLATE 'utf8_spanish_ci' NOT NULL,
+  `pregunta_id` INT(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_respuesta_pregunta1_idx` (`pregunta_id` ASC),
+  CONSTRAINT `fk_respuesta_pregunta1`
+    FOREIGN KEY (`pregunta_id`)
+    REFERENCES `examinador`.`pregunta` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_spanish_ci;
+
+
+-- -----------------------------------------------------
+-- Table `examinador`.`pregunta_correcta`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `examinador`.`pregunta_correcta` (
+  `pregunta_id` INT(11) NOT NULL,
+  `respuesta_id` INT(11) NOT NULL,
+  PRIMARY KEY (`pregunta_id`),
+  INDEX `fk_Pregunta_respuesta_respuesta1_idx` (`respuesta_id` ASC),
+  CONSTRAINT `fk_Pregunta_respuesta_pregunta1`
+    FOREIGN KEY (`pregunta_id`)
+    REFERENCES `examinador`.`pregunta` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Pregunta_respuesta_respuesta1`
+    FOREIGN KEY (`respuesta_id`)
+    REFERENCES `examinador`.`respuesta` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
@@ -172,46 +211,6 @@ CREATE TABLE IF NOT EXISTS `examinador`.`registropendiente` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_spanish_ci;
-
-
--- -----------------------------------------------------
--- Table `examinador`.`respuesta`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `examinador`.`respuesta` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `enunciado` VARCHAR(45) CHARACTER SET 'utf8' COLLATE 'utf8_spanish_ci' NOT NULL,
-  `pregunta_id` INT(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_respuesta_pregunta1_idx` (`pregunta_id` ASC),
-  CONSTRAINT `fk_respuesta_pregunta1`
-    FOREIGN KEY (`pregunta_id`)
-    REFERENCES `examinador`.`pregunta` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8
-COLLATE = utf8_spanish_ci;
-
-
--- -----------------------------------------------------
--- Table `examinador`.`Pregunta_correcta`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `examinador`.`Pregunta_correcta` (
-  `pregunta_id` INT(11) NOT NULL,
-  `respuesta_id` INT(11) NOT NULL,
-  PRIMARY KEY (`pregunta_id`),
-  INDEX `fk_Pregunta_respuesta_respuesta1_idx` (`respuesta_id` ASC),
-  CONSTRAINT `fk_Pregunta_respuesta_pregunta1`
-    FOREIGN KEY (`pregunta_id`)
-    REFERENCES `examinador`.`pregunta` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Pregunta_respuesta_respuesta1`
-    FOREIGN KEY (`respuesta_id`)
-    REFERENCES `examinador`.`respuesta` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;

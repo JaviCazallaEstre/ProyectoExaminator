@@ -27,7 +27,7 @@ header {
   float: right;
   margin-top: 90px;
   color: white;
-  font-family: 'Jua', sans-serif;
+  font-family: "Jua", sans-serif;
 }
 
 #menu {
@@ -114,19 +114,73 @@ footer ul li a {
   color: black;
 }
 
-.contenido {
+#contenido {
+  width: 100%;
+  margin-top: 60px;
+  margin-bottom: 100px;
+  height: 90%;
+}
+
+#pregunta {
+  width: 100%;
+}
+
+#pregunta h2 {
+  margin-left: 50px;
+  font-size: 2.5em;
+}
+
+#foto {
+  width: 600px;
+  height: 600px;
+  margin-left: 100px;
+  float: left;
+}
+
+#foto img {
+  width: 600px;
+  height: 600px;
+  float: left;
+}
+
+#enunciado {
+  width: 600px;
+  float: left;
+  margin-left: 100px;
+}
+
+#enunciado p {
+  font-size: 1.5em;
+}
+
+#opciones {
+  float: left;
+  width: 300px;
+  margin-left: 190px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+#opciones label {
+  margin-bottom: 20px;
+  font-size: 1.5em;
+}
+
+#botones {
+  margin-left: 500px;
+  width: 350px;
+  float: left;
+}
+
+#botones input {
+  font-size: 1.5em;
+}
+
+#eligePregunta {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  position: absolute;
+  margin-top: 600px;
   width: 500px;
-  margin-top: 40px;
-  margin-left: 1100px;
-  margin-bottom: 40px;
-}
-
-.error {
-  color: red;
-}
-
-#crear {
-  float: right;
-  margin-top: 30px;
-  margin-bottom: 30px;
+  margin-left: 900px;
 }/*# sourceMappingURL=main.css.map */
