@@ -112,4 +112,28 @@ class BdPregunta
         $conexion = null;
         return $preguntas;
     }
+    public static function sacaRespuestasPregunta($idPregunta){
+        $conexion=Conn::creaConexion();
+        $sentencia = "SELECT * FROM respuesta WHERE pregunta_id LIKE '$idPregunta'";
+        $registros = $conexion->query($sentencia);
+        while ($resultado = $registros->fetch(PDO::FETCH_OBJ)) {
+            $respuestas[] = $resultado;
+        }
+        $registros->closeCursor();
+        $registros = null;
+        $conexion = null;
+        return $respuestas;
+    }
+    public static function sacaPregunta($idPregunta){
+        $conexion=Conn::creaConexion();
+        $sentencia = "SELECT * FROM pregunta WHERE id LIKE '$idPregunta'";
+        $registros = $conexion->query($sentencia);
+        while ($resultado = $registros->fetch(PDO::FETCH_OBJ)) {
+            $pregunta = $resultado;
+        }
+        $registros->closeCursor();
+        $registros = null;
+        $conexion = null;
+        return $pregunta;
+    }
 }

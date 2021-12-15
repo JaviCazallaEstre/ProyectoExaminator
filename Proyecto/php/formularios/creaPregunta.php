@@ -4,10 +4,10 @@ require_once("../cargadores/cargarclases.php");
 require_once("../cargadores/cargarGestion.php");
 Session::inicia();
 if(!Session::usuarioLogueado("usuario")){
-    //header("Location: ../../index.php");
+    header("Location: ../../index.php");
 }
 if(Session::leer("rol")==2){
-    //header("Location: ../Principal.php");
+    header("Location: ../Principal.php");
 }
 if (isset($_POST["enviar"])) {
     $errores = array();

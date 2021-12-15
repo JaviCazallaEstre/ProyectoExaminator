@@ -2,7 +2,7 @@
 require_once("cargadores/cargarGestion.php");
 Session::inicia();
 if (!Session::usuarioLogueado("usuario")) {
-    //header("Location: ../index.php");
+    header("Location: ../index.php");
 }
 ?>
 <!DOCTYPE html>
@@ -76,7 +76,7 @@ if (!Session::usuarioLogueado("usuario")) {
             "<div id='menu'>
     <ul>
         <li>
-            <a href='../listar/listaExamenes.php'>Examen predefinido</a>
+            <a href='listar/listaExamenes.php'>Examen predefinido</a>
         </li>
     </ul>
 </div>";

@@ -119,68 +119,32 @@ footer ul li a {
   margin-top: 60px;
   margin-bottom: 100px;
   height: 90%;
+  margin-left: 600px;
+  margin-right: 600px;
 }
 
-#pregunta {
-  width: 100%;
-}
-
-#pregunta h2 {
-  margin-left: 50px;
-  font-size: 2.5em;
-}
-
-#foto {
-  width: 600px;
-  height: 600px;
-  margin-left: 100px;
+.pregunta{
+  margin: 20px;
   float: left;
-}
-
-#foto img {
-  width: 600px;
-  height: 600px;
-  float: left;
-}
-
-#enunciado {
-  width: 600px;
-  float: left;
-  margin-left: 100px;
-}
-
-#enunciado p {
+  width: 50%;
+  background-color: white;
+  font-family: Arial, Helvetica, sans-serif;
   font-size: 1.5em;
+  padding: 20px;
+  border-radius: 10px;
+  font-weight: bold;
 }
-
-#opciones {
-  float: left;
-  width: 300px;
-  margin-left: 190px;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+.pregunta *{
+  display: block;
 }
-
-#opciones label {
-  margin-bottom: 20px;
-  font-size: 1.5em;
+#opciones{
+  width: 60%;
+  text-align: left;
+  margin-left: 40px;
+  font-weight: initial;
+  color:#686868
 }
-
-#botones {
-  margin-left: 500px;
-  width: 350px;
-  float: left;
+#opciones *{
+  display: inline;
 }
-
-#botones input {
-  font-size: 1.5em;
-}
-
-#eligePregunta {
-  display: grid;
-  grid-template-columns: repeat(10, 1fr);
-  position: absolute;
-  margin-top: 600px;
-  width: 500px;
-  margin-left: 900px;
-}/*# sourceMappingURL=main.css.map */
+/*# sourceMappingURL=main.css.map */

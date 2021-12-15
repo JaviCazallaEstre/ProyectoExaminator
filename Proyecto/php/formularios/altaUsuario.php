@@ -5,10 +5,10 @@ require_once("../cargadores/cargarGestion.php");
 require_once("../gestion/vendor/autoload.php");
 Session::inicia();
 if(!Session::usuarioLogueado("usuario")){
-    //header("Location: ../../index.php");
+    header("Location: ../../index.php");
 }
 if(Session::leer("rol")==2){
-    //header("Location: ../Principal.php");
+    header("Location: ../Principal.php");
 }
 
 use PHPMailer\PHPMailer\PHPMailer;

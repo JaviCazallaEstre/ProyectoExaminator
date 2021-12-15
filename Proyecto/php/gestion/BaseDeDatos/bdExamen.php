@@ -86,4 +86,17 @@ class bdExamen
         $registros = null;
         $conexion = null;
     }
+    public static  function sacaPreguntasExamen($id)
+    {
+        $conexion = Conn::creaConexion();
+        $sentencia = "SELECT * FROM pregunta_has_examen WHERE examen_id LIKE '$id'";
+        $registros = $conexion->query($sentencia);
+        while ($resultado = $registros->fetch(PDO::FETCH_OBJ)) {
+            $preguntas[] = $resultado;
+        }
+        $registros->closeCursor();
+        $registros = null;
+        $conexion = null;
+        return $preguntas;
+    }
 }

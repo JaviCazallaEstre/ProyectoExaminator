@@ -4,10 +4,10 @@ require_once("../cargadores/cargarBD.php");
 require_once("../cargadores/cargarclases.php");
 Session::inicia();
 if (!Session::usuarioLogueado("usuario")) {
-    echo "nada";
+    header("Location: ../../index.php");
 }
 if (isset($_POST["finalizar"])) {
-    $examen = new ExamenHecho(null, null, $_POST["respuestas"], $_POST["idExamen"], $_POST["idUsuario"]);
+    $examen = new ExamenHecho(null, null, $_POST["respuestas"], $_POST["idExamen"], Session::leer("idUsuario"));
     BdExamenHecho::insertaExamen($examen);
 }
 ?>
@@ -34,127 +34,8 @@ if (isset($_POST["finalizar"])) {
     </header>
     <form id="formulario" name="formulario" method="POST">
         <div id="contenido">
-            <div id="pregunta">
-                <h2>Pregunta 1</h2>
-            </div>
-            <div id="foto">
-                <img src="../../Recursos/foto-principal-2.jpg" />;
-            </div>
-            <div id="enunciado">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam
-                    velit, vulputate eu pharetra nec, mattis ac neque. Duis vulputate
-                    commodo lectus, ac blandit elit tincidunt id. Sed rhoncus, tortor sed
-                    eleifend tristique, tortor mauris molestie elit, et lacinia ipsum quam
-                    nec dui.
-                </p>
-            </div>
-            <div id="opciones">
-                <label>Opcion1</label>
-                <input type="radio" name="correcta" id="opcion1" />
-                <label>Opcion2</label>
-                <input type="radio" name="correcta" id="opcion2" />
-                <label>Opcion3</label>
-                <input type="radio" name="correcta" id="opcion3" />
-                <label>Opcion4</label>
-                <input type="radio" name="correcta" id="opcion4" />
-            </div>
-            <div id="botones">
-                <input type="button" name="atras" id="atras" value="Atrás" />
-                <input type="button" name="siguiente" id="siguiente" value="Siguiente" />
-                <input type="submit" name="finalizar" id="finalizar" value="Finalizar" />
-            </div id>
-            <div id="eligePregunta">
-                <div>
-                    <p>1</p>
-                </div>
-                <div>
-                    <p>2</p>
-                </div>
-                <div>
-                    <p>3</p>
-                </div>
-                <div>
-                    <p>4</p>
-                </div>
-                <div>
-                    <p>5</p>
-                </div>
-                <div>
-                    <p>6</p>
-                </div>
-                <div>
-                    <p>7</p>
-                </div>
-                <div>
-                    <p>8</p>
-                </div>
-                <div>
-                    <p>9</p>
-                </div>
-                <div>
-                    <p>10</p>
-                </div>
-                <div>
-                    <p>11</p>
-                </div>
-                <div>
-                    <p>12</p>
-                </div>
-                <div>
-                    <p>13</p>
-                </div>
-                <div>
-                    <p>14</p>
-                </div>
-                <div>
-                    <p>15</p>
-                </div>
-                <div>
-                    <p>16</p>
-                </div>
-                <div>
-                    <p>17</p>
-                </div>
-                <div>
-                    <p>18</p>
-                </div>
-                <div>
-                    <p>19</p>
-                </div>
-                <div>
-                    <p>20</p>
-                </div>
-                <div>
-                    <p>21</p>
-                </div>
-                <div>
-                    <p>22</p>
-                </div>
-                <div>
-                    <p>23</p>
-                </div>
-                <div>
-                    <p>24</p>
-                </div>
-                <div>
-                    <p>25</p>
-                </div>
-                <div>
-                    <p>26</p>
-                </div>
-                <div>
-                    <p>27</p>
-                </div>
-                <div>
-                    <p>28</p>
-                </div>
-                <div>
-                    <p>29</p>
-                </div>
-                <div>
-                    <p>30</p>
-                </div>
-            </div>
+
+            <input type="submit" name="finalizar" id="finalizar" value="Finalizar" />
         </div>
     </form>
     <footer>

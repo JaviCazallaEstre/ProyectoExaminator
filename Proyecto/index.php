@@ -9,6 +9,7 @@ if (isset($_POST["enviar"])) {
         if ($usuario != false) {
             Session::inicia();
             Session::escribir("usuario", $usuario);
+            Session::escribir("idUsuario", $usuario->id);
             Session::escribir("rol",$usuario->rol->id);
             if (isset($_POST["recuerdame"])) {
                 setcookie("usuario", $_POST["email"], time() + 3600);

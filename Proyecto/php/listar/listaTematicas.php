@@ -7,7 +7,7 @@ if(!Session::usuarioLogueado("usuario")){
     //header("Location: ../../index.php");
 }
 if(Session::leer("rol")==2){
-    //header("Location: ../Principal.php");
+    header("Location: ../Principal.php");
 }
 ?>
 <!DOCTYPE html>
