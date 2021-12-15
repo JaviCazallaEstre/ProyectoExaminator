@@ -119,16 +119,16 @@ window.addEventListener("load", function () {
     const div3 = document.createElement("div");
     div3.className = "enunciado";
     div3.innerHTML = "Enunciado: " + pregunta.enunciado;
+    div1.appendChild(div2);
+    div1.appendChild(div3);
     if (pregunta.recurso != null) {
       const div4 = document.createElement("div");
       imagen = new Image();
-      imagen.src = "data:image/png;base64," + pregunta.rcurso;
+      imagen.src = "../../Recursos/Preguntas/" + pregunta.recurso;
       div4.className = "foto";
       div4.appendChild(imagen);
       div1.appendChild(div4);
     }
-    div1.appendChild(div2);
-    div1.appendChild(div3);
     return div1;
   }
 });
