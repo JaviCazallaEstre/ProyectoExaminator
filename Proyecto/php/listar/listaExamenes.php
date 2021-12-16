@@ -6,9 +6,6 @@ Session::inicia();
 if(!Session::usuarioLogueado("usuario")){
     header("Location: ../../index.php");
 }
-if(Session::leer("rol")==2){
-    header("Location: ../Principal.php");
-}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -28,16 +25,17 @@ if(Session::leer("rol")==2){
 <body>
     <header>
         <?php
-        //if(Session::leer("rol")==1){
+        if(Session::leer("rol")==1){
             CreaCabecera::creaCabeceraProfesor();
-        //}else{
-        //    CreaCabecera::creaCabeceraAlumno();
-        //}
+        }else{
+           CreaCabecera::creaCabeceraAlumno();
+        }
         ?>
     </header>
     <div class="contenido">
         <form action="http://proyectos/Proyecto/ProyectoExaminator/Proyecto/php/formularios/creaExamen.php">
             <input type="submit" value="Crea examen" />
+            <input type="text" id="Buscador"/>
         </form>
         <table>
             <thead>

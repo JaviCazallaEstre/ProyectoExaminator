@@ -3,10 +3,10 @@ require_once("../cargadores/cargarGestion.php");
 require_once("../cargadores/cargarBD.php");
 require_once("../cargadores/cargarclases.php");
 Session::inicia();
-if(!Session::usuarioLogueado("usuario")){
+if (!Session::usuarioLogueado("usuario")) {
     header("Location: ../../index.php");
 }
-if(Session::leer("rol")==2){
+if (Session::leer("rol") == 2) {
     header("Location: ../Principal.php");
 }
 if (isset($_POST["crear"])) {
@@ -17,8 +17,8 @@ if (isset($_POST["crear"])) {
     if ($_POST["duracion"] == "") {
         $errores["duracion"] = "La duracion debe de estar rellena";
     }
-    $preguntas=array();
-    $preguntas=json_decode($_POST["preguntas"]);
+    $preguntas = array();
+    $preguntas = json_decode($_POST["preguntas"]);
     if (count($preguntas) == 0) {
         $errores["preguntas"] = "No has seleccionado preguntas";
     }
@@ -50,7 +50,7 @@ if (isset($_POST["crear"])) {
 </header>
 
 <body>
-    <div class="contenido">
+    <main class="contenido">
         <form name="formu" id="formu" method="POST">
             <table>
                 <tr>
@@ -115,7 +115,7 @@ if (isset($_POST["crear"])) {
                 </tr>
             </table>
         </form>
-    </div>
+    </main>
     <footer>
         <?php
         CreaFooter::creaFooterPagina("", "");

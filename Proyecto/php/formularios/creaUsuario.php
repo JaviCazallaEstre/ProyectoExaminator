@@ -84,6 +84,7 @@ if (isset($_POST["crear"])) {
                 $usuarioCreado = Login::existeUsuario($_POST["email"], $_POST["contrasena"]);
                 Session::escribir("usuario", $usuarioCreado);
                 Session::escribir("rol", $usuarioCreado->rol->id);
+                Session::escribir("idUsuario", $usuarioCreado->id);
             }
         } else if ($_POST["modo"] == "modifica") {
 

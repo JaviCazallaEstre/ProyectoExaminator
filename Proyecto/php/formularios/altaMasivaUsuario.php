@@ -17,10 +17,13 @@ if(Session::leer("rol")==2){
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alta masiva de usuarios</title>
+    <script src="../../js/altaMasivaUsuario.js"></script>
+    <script src="../../js/libreria/prototiposString.js"></script>
+    <script src="../../js/libreria/metodos.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="../../css/main.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/altaMasivaUsuario.css" />
 </head>
 <body>
     <header>
@@ -37,7 +40,7 @@ if(Session::leer("rol")==2){
                 </td>
             </tr>
             <tr>
-                <td id="tdTextArea">
+                <td id="tdEmail">
                     <textarea id="textarea" name="textarea"></textarea>
                 </td>
             </tr>

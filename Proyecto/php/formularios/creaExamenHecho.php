@@ -31,6 +31,12 @@ if (isset($_POST["finalizar"])) {
         <?php
         CreaCabecera::creaCabeceraAlumno();
         ?>
+        <div class = "Temporizador"> 
+            Tiempo restante:
+            <span id ="minutos"></span>
+               :
+             <span id ="segundos"></span>
+        </div>
     </header>
     <form id="formulario" name="formulario" method="POST">
         <div id="contenido">

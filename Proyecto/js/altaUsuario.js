@@ -20,6 +20,7 @@ window,
     };
 
     function validaAlta(email) {
+      debugger;
       errores = [];
       if (email == "") {
         errores["email"] = "El campo email debe de estar relleno";

@@ -4,31 +4,55 @@ window.addEventListener("load", function () {
   var textArea = document.getElementById("textarea");
   var archivo = document.getElementById("archivo");
 
-  enviar.onclick(function (ev) {
+  enviar.onclick=function (ev) {
     ev.preventDefault();
-    errores = validaAltaMasiva(textArea.value, archivo);
+    errores = validaAltaMasiva(textArea.value);
+    debugger;
     if (Object.keys(errores).length > 0) {
       escribeErrores(errores);
     } else {
       if (textArea.value != "") {
-        altas = textArea.value.split("/n");
+        altas = textArea.value.split("\n");
         for (let i = 0; i < altas.length; i++) {
-          formulario = new FormData();
-          formulario.append("enviar", "");
-          formulario.append("email", altas[i]);
+          debugger;
+          let formu = new FormData();
+          formu.append("enviar", "");
+          formu.append("correo", altas[i]);
           const ajax = new XMLHttpRequest();
           ajax.open("POST", "altaUsuario.php");
-          ajax.send(formulario);
+          ajax.send(formu);
         }
       }
     }
-  });
-  function validaAltaMasiva(textArea, archivo) {
+  };
+  archivo.addEventListener("change", (ev)=>{
+    let file = ev.target.files[0];
+    let reader = new FileReader();
+    reader.onload = function(ev2){
+    
+        try {
+            contenido = leerCSV(ev2.target.result,true);
+            textArea.innerHTML=contenido;
+
+        } catch (e) {
+            console.log(`Error: ${e.message}`)
+        }
+    }
+
+    reader.readAsText(file);
+});
+function leerCSV(texto,omitirEncabezado = false,separador=","){
+    if(typeof texto !== "string"){
+        throw TypeError("El argumento debe ser una cadena.")
+    }
+   return texto.slice(omitirEncabezado ? texto.indexOf('\n') + 1 : 0)
+    .split('\n')
+    .map(linea => linea.split(separador));
+}
+  function validaAltaMasiva(textArea) {
     errores = [];
-    if (textArea != "" && archivo.files[0] != "") {
-      errores["duplicado"] = "Solo se puede rellenar un campo";
-    } else if (textArea != "") {
-      altas = textArea.value.split("/n");
+    if (textArea != "") {
+      altas = textArea.split("\n");
       valido = true;
       for (let i = 0; i < altas.length; i++) {
         if (!altas[i].esEmail()) {
@@ -42,10 +66,10 @@ window.addEventListener("load", function () {
     return errores;
   }
   function escribeErrores(errores) {
-    const tdArchivo = document.getElementById("tdArchivo");
+    const tdEmail = document.getElementById("tdEmail");
     const tdTextArea = document.getElementById("tdTextArea");
     if (errores.hasOwnProperty("duplicado")) {
-      escribeErrores("duplicado", errores, tdArchivo);
+      escribeErrores("duplicado", errores, tdEmail);
     }
     if (errores.hasOwnProperty("textArea")) {
       escribeErrores("textArea", errores, tdTextArea);

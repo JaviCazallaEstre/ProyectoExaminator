@@ -38,6 +38,7 @@ if(Session::leer("rol")==2){
             </form>
             <form action="http://proyectos/Proyecto/ProyectoExaminator/Proyecto/php/formularios/altaMasivaUsuario.php">
                 <input type="submit" value="Alta masiva usuario" />
+                <input type="text" id="Buscador"/>
             </form>
         </div>
         <table>

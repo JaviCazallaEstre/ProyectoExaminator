@@ -34,6 +34,7 @@ if(Session::leer("rol")==2){
     <div id="contenido">
         <form action="http://proyectos/Proyecto/ProyectoExaminator/Proyecto/php/formularios/creaRol.php">
             <input type="submit" value="Crea rol" />
+            <input type="text" id="Buscador"/>
         </form>
         <table>
             <thead>

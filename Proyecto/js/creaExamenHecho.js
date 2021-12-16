@@ -36,6 +36,55 @@ window.addEventListener("load", function () {
     ajax.send(formu);
   };
 
+    minutos = 30;
+    segundos = 0;
+//Temporizador
+    //Segundos
+    function cargaSegundo(){
+        let txtSegundos;
+
+        if (segundos < 0) {
+            segundos = 59;
+        }
+
+        //Mostrar segundos en pantalla
+        if (segundos < 10) {
+            txtSegundos = 0 + segundos;
+        }else{
+            txtSegundos = segundos;
+        }
+        document.getElementById("segundos").innerHTML = txtSegundos;
+        segundos --;
+        cargaMinuto(segundos)
+    }
+    //Minutos
+    function cargaMinuto(){
+        let txtMinutos;
+
+        //Para este temporizador al no usarse las horas, 
+        //no debemos reiniciar los minutos a 59 cuando llega al final
+        if (segundos == -1 ) {
+            setTimeout(() =>{
+                minutos--
+            },500)
+        }
+        //Si se acaba el tiempo, corregimos el examen
+        if(minutos == 0 && segundos == -1){
+            clearInterval(interSegundos);
+            corrigeExamen();
+            minutos = 0 ;
+            segundos =0;
+
+        }
+        if (minutos < 10) {
+            txtMinutos = 0 + minutos;
+        }else{
+            txtMinutos = minutos;
+        }
+        document.getElementById("minutos").innerHTML = txtMinutos;
+        
+    }
+    const interSegundos = setInterval(cargaSegundo, 1000);
   //peticion de datos
   //pedimos los id de las preguntas que pertenece al examen
   function pideExamen($idExamen) {
