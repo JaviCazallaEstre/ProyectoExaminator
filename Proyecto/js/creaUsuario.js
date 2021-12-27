@@ -120,10 +120,6 @@ window.addEventListener("load", function () {
     } else if (contrasena != contrasenaIgual) {
       errores[contrasenaIgual] = "Las contraseñas no coinciden";
     }
-    //if (fecha == "") {
-    //  errores["fecha"] = "El campo fecha debe de estar relleno";
-    //} else if (!fecha.esFecha()) {
-    //  errores["fecha"] = "Debe introducir una fecha valida";
     if (calcularEdad(fecha) < 18) {
       errores["fecha"] = "La edad debe de ser mayor de 18 años";
     }
