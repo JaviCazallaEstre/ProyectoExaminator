@@ -4,10 +4,10 @@ require_once("../cargadores/cargarBD.php");
 require_once("../cargadores/cargarclases.php");
 Session::inicia();
 if (!Session::usuarioLogueado("usuario")) {
-    header("Location: ../../index.php");
+    //header("Location: ../../index.php");
 }
 if (Session::leer("rol") == 2) {
-    header("Location: ../Principal.php");
+    //header("Location: ../Principal.php");
 }
 if (isset($_POST["crear"])) {
     $errores = array();
@@ -36,21 +36,21 @@ if (isset($_POST["crear"])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crea examen</title>
-    <link rel="stylesheet" type="text/css" href="../../css/creaExamen.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/main.css" />
     <script src="../../js/libreria/metodos.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
     <script src="../../js/creaExamen.js"></script>
 </head>
-<header>
-    <?php
-    CreaCabecera::creaCabeceraProfesor();
-    ?>
-</header>
 
 <body>
-    <main class="contenido">
+    <header class="cabecera">
+        <?php
+        CreaCabecera::creaCabeceraProfesor();
+        ?>
+    </header>
+    <main class="contenidoCrear">
         <form name="formu" id="formu" method="POST">
             <table>
                 <tr>

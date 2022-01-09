@@ -2,7 +2,7 @@
 require_once("cargadores/cargarGestion.php");
 Session::inicia();
 if (!Session::usuarioLogueado("usuario")) {
-    header("Location: ../index.php");
+    //header("Location: ../index.php");
 }
 ?>
 <!DOCTYPE html>
@@ -15,13 +15,13 @@ if (!Session::usuarioLogueado("usuario")) {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="../css/principal.css" />
+    <link rel="stylesheet" type="text/css" href="../css/main.css" />
     <script src="../js/parallax.js"></script>
     <title>Autoescuela Javi</title>
 </head>
 
 <body>
-    <header>
+    <header class="cabecera" id="principal">
         <?php
         if (Session::leer("rol") == 1) {
             echo "<div class='logo'><img src='../Recursos/Autoescuela-A7-00.png' />
@@ -83,7 +83,7 @@ if (!Session::usuarioLogueado("usuario")) {
         }
         ?>
     </header>
-    <div class="contenido">
+    <main class="contenidoPrincipal">
         <div id="parallax">
             <h1>Bienvenido a la Autoescuela Javi</h1>
         </div>
@@ -97,7 +97,7 @@ if (!Session::usuarioLogueado("usuario")) {
             </p>
         </div>
         <div></div>
-    </div>
+    </main>
     <footer>
         <?php
         CreaFooter::creaFooterPagina("", "");

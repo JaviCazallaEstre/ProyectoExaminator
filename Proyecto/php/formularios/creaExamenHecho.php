@@ -4,7 +4,7 @@ require_once("../cargadores/cargarBD.php");
 require_once("../cargadores/cargarclases.php");
 Session::inicia();
 if (!Session::usuarioLogueado("usuario")) {
-    header("Location: ../../index.php");
+    //header("Location: ../../index.php");
 }
 if (isset($_POST["finalizar"])) {
     $examen = new ExamenHecho(null, null, $_POST["respuestas"], $_POST["idExamen"], Session::leer("idUsuario"));
@@ -21,28 +21,28 @@ if (isset($_POST["finalizar"])) {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="../../css/creaExamenHecho.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/main.css" />
     <script src="../../js/creaExamenHecho.js"></script>
     <title>Realiza examen</title>
 </head>
 
 <body>
-    <header>
+    <header class="cabecera">
         <?php
         CreaCabecera::creaCabeceraAlumno();
         ?>
-        <div class = "Temporizador"> 
+        <div class="Temporizador">
             Tiempo restante:
-            <span id ="minutos"></span>
-               :
-             <span id ="segundos"></span>
+            <span id="minutos"></span>
+            :
+            <span id="segundos"></span>
         </div>
     </header>
     <form id="formulario" name="formulario" method="POST">
-        <div id="contenido">
+        <main id="contenido">
 
             <input type="submit" name="finalizar" id="finalizar" value="Finalizar" />
-        </div>
+        </main>
     </form>
     <footer>
         <?php

@@ -1,16 +1,52 @@
+//reset css
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+//Estilo para todas las páginas
+* {
+  padding: 0;
+  border: 0;
+  margin: 0;
+}
 body {
-  background-color: #F5F5F7;
-  color: black;
+  background-color:$color-background;
+  color: $color-base;
   font-family: Arial, Helvetica, sans-serif;
   overflow-x: hidden;
 }
 
 header {
-  background-color: #0069B2;
+  background-color: $navbar-background-color;
   margin-top: -10px;
   height: 200px;
   margin-left: -10px;
   margin-right: -10px;
+}
+header#principal{
+  //solo para la pagina principal
+  position: fixed;
+  width: 110%;
 }
 
 .logo img {
@@ -18,7 +54,12 @@ header {
   width: 200px;
 }
 
-.logo {
+.cabeceraLogin .logo{
+  //solo para la pagina de login
+	margin-left: 1000px;
+    float: left;
+}
+.cabecera .logo {
   margin-left: 400px;
   float: left;
 }
@@ -26,11 +67,12 @@ header {
 .logo h1 {
   float: right;
   margin-top: 90px;
-  color: white;
+  font-size: 2em;
+  color: $navbar-color-hover;
   font-family: 'Jua', sans-serif;
 }
 
-#menu {
+.cabecera #menu {
   margin-left: 950px;
   text-align: center;
   font-size: 1.3em;
@@ -38,64 +80,68 @@ header {
   margin-top: 70px;
 }
 
-#menu ul {
+.cabecera #menu ul {
   list-style-type: none;
 }
 
-#menu ul li {
+.cabecera #menu ul li {
   width: 162px;
   float: left;
 }
 
-#menu ul li a {
+.cabecera #menu ul li a {
   display: block;
   text-decoration: none;
-  color: #fff;
-  background-color: #0069B2;
-  border: solid 1px #fff;
+  color: $navbar-color-hover;
+  background-color: $navbar-background-color;
+  border: solid 1px $navbar-color-hover;
   padding: 8px;
   position: relative;
+  transition-property: background-color;
+  @include duration(2s);
 }
 
-#menu ul li ul.submenu {
+.cabecera #menu ul li ul.submenu {
   display: none;
 }
 
-.submenu li {
+.cabecera .submenu li {
   float: left;
   margin-right: 1px;
 }
 
-.submenu li a {
-  color: #000;
+.cabecera .submenu li a {
+  color: $color-base;
+  transition-property: background-color;
+  @include duration(2s);
   display: block;
   position: relative;
 }
 
-#menu ul li:hover {
+.cabecera #menu ul li:hover {
   position: relative;
 }
 
-#menu ul li a:hover {
-  background-color: #fff;
-  color: #000;
+.cabecera #menu ul li a:hover {
+  background-color: $navbar-color-hover;
+  color: $color-base;
   position: relative;
 }
 
-#menu ul li:hover ul.submenu {
+.cabecera #menu ul li:hover ul.submenu {
   display: block;
   position: absolute;
   left: 0px;
 }
 
-#menu ul li ul li a:hover ul.submenu {
+.cabecera #menu ul li ul li a:hover ul.submenu {
   display: block;
   position: absolute;
   left: 161px;
   top: 0px;
 }
 
-#menu ul li ul li a:hover {
-  border-top-color: #000;
+.cabecera #menu ul li ul li a:hover {
+  border-top-color: $color-base;
   position: relative;
 }

@@ -3,11 +3,11 @@ require_once("../cargadores/cargarBD.php");
 require_once("../cargadores/cargarclases.php");
 require_once("../cargadores/cargarGestion.php");
 Session::inicia();
-if(!Session::usuarioLogueado("usuario")){
-    header("Location: ../../index.php");
+if (!Session::usuarioLogueado("usuario")) {
+    //header("Location: ../../index.php");
 }
-if(Session::leer("rol")==2){
-    header("Location: ../Principal.php");
+if (Session::leer("rol") == 2) {
+    //header("Location: ../Principal.php");
 }
 if (isset($_POST["crear"])) {
     $errores = array();
@@ -21,7 +21,7 @@ if (isset($_POST["crear"])) {
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -33,16 +33,16 @@ if (isset($_POST["crear"])) {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="../../css/creaRol.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/main.css" />
 </head>
 
 <body>
-    <header>
+    <header class="cabecera">
         <?php
         CreaCabecera::creaCabeceraProfesor();
         ?>
     </header>
-    <div class="contenido"> 
+    <main class="contenidoCrear">
         <form id="formu" method="POST" name="formu">
             <table>
                 <tr>
@@ -65,7 +65,7 @@ if (isset($_POST["crear"])) {
                 </tr>
             </table>
         </form>
-    </div>
+    </main>
     <footer>
         <?php
         CreaFooter::creaFooterPagina("", "");

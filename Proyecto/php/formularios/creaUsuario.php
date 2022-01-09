@@ -108,16 +108,16 @@ if (isset($_POST["crear"])) {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="../../css/creaUsuario.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/main.css" />
 </head>
 
 <body>
-    <header>
+    <header class="cabeceraLogin">
         <div class='logo'><img src='../../Recursos/Autoescuela-A7-00.png' />
             <h1>Autoescuela Javi</h1>
         </div>
     </header>
-    <div class="contenido">
+    <main class="contenidoCrear">
         <h1>Alta de usuario</h1>
         <form id="formu" name="formu" method="POST" enctype="multipart/form-data">
             <table>
@@ -303,7 +303,7 @@ if (isset($_POST["crear"])) {
                 </tr>
             </table>
         </form>
-    </div>
+    </main>
     <footer>
         <?php
         CreaFooter::creaFooterPagina("", "");

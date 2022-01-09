@@ -3,15 +3,16 @@ require_once("../cargadores/cargarBD.php");
 require_once("../cargadores/cargarclases.php");
 require_once("../cargadores/cargarGestion.php");
 Session::inicia();
-if(!Session::usuarioLogueado("usuario")){
-    header("Location: ../../index.php");
+if (!Session::usuarioLogueado("usuario")) {
+    //header("Location: ../../index.php");
 }
-if(Session::leer("rol")==2){
-    header("Location: ../Principal.php");
+if (Session::leer("rol") == 2) {
+    //header("Location: ../Principal.php");
 }
 ?>
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -23,44 +24,46 @@ if(Session::leer("rol")==2){
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="../../css/altaMasivaUsuario.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/main.css" />
 </head>
+
 <body>
-    <header>
+    <header class="cabecera">
         <?php
-            CreaCabecera::creaCabeceraProfesor();
+        CreaCabecera::creaCabeceraProfesor();
         ?>
     </header>
-    <div class="contenido">
-    <form id="formu" name="formu" enctype="multipart/form-data" method="POST">
-        <table>
-            <tr>
-                <td>
-                    <label for="usuarios">Inserte el email del alumno:</label>
-                </td>
-            </tr>
-            <tr>
-                <td id="tdEmail">
-                    <textarea id="textarea" name="textarea"></textarea>
-                </td>
-            </tr>
-            <tr>
-                <td id="tdArchivo">
-                    <input type="file" name="archivo" id="archivo"/>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <input type="submit" name="enviar" id="enviar" value="Enviar"/>
-                </td>
-            </tr>
-        </table>
-    </form>
-    </div>
+    <main class="contenidoCrear">
+        <form id="formu" name="formu" enctype="multipart/form-data" method="POST">
+            <table>
+                <tr>
+                    <td>
+                        <label for="usuarios">Inserte el email del alumno:</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td id="tdEmail">
+                        <textarea id="textarea" name="textarea"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td id="tdArchivo">
+                        <input type="file" name="archivo" id="archivo" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="submit" name="enviar" id="enviar" value="Enviar" />
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </main>
     <footer>
         <?php
-        CreaFooter::creaFooterPagina("","");
+        CreaFooter::creaFooterPagina("", "");
         ?>
     </footer>
 </body>
+
 </html>

@@ -1,3 +1,4 @@
+//estilo para el footer de las paginas
 footer div{
     width: 10%;
     float: left;
@@ -7,5 +8,5 @@ footer ul{
     list-style: none;
 }
 footer ul li a{
-    color: black;
+    color: $color-base;
 }

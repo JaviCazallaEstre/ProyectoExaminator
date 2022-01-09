@@ -3,8 +3,8 @@ require_once("../cargadores/cargarGestion.php");
 require_once("../cargadores/cargarBD.php");
 require_once("../cargadores/cargarclases.php");
 Session::inicia();
-if(!Session::usuarioLogueado("usuario")){
-    header("Location: ../../index.php");
+if (!Session::usuarioLogueado("usuario")) {
+    //header("Location: ../../index.php");
 }
 ?>
 <!DOCTYPE html>
@@ -18,24 +18,24 @@ if(!Session::usuarioLogueado("usuario")){
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="../../css/listaExamenes.css" />
-    <title>Lista examenes</title>
+    <link rel="stylesheet" type="text/css" href="../../css/main.css" />
+    <title>Lista ex&aacute;menes</title>
 </head>
 
 <body>
-    <header>
+    <header class="cabecera">
         <?php
-        if(Session::leer("rol")==1){
+        if (Session::leer("rol") == 1) {
             CreaCabecera::creaCabeceraProfesor();
-        }else{
-           CreaCabecera::creaCabeceraAlumno();
+        } else {
+            CreaCabecera::creaCabeceraAlumno();
         }
         ?>
     </header>
-    <div class="contenido">
+    <main class="contenidoExamen">
         <form action="http://proyectos/Proyecto/ProyectoExaminator/Proyecto/php/formularios/creaExamen.php">
             <input type="submit" value="Crea examen" />
-            <input type="text" id="Buscador"/>
+            <input type="text" id="Buscador" />
         </form>
         <table>
             <thead>
@@ -49,7 +49,7 @@ if(!Session::usuarioLogueado("usuario")){
 
             </tbody>
         </table>
-    </div>
+    </main>
     <footer>
         <?php
         CreaFooter::creaFooterPagina("", "");

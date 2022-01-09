@@ -4,11 +4,11 @@ require_once("../cargadores/cargarclases.php");
 require_once("../cargadores/cargarGestion.php");
 require_once("../gestion/vendor/autoload.php");
 Session::inicia();
-if(!Session::usuarioLogueado("usuario")){
-    header("Location: ../../index.php");
+if (!Session::usuarioLogueado("usuario")) {
+    //header("Location: ../../index.php");
 }
-if(Session::leer("rol")==2){
-    header("Location: ../Principal.php");
+if (Session::leer("rol") == 2) {
+    //header("Location: ../Principal.php");
 }
 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -23,11 +23,11 @@ if (isset($_POST["enviar"])) {
         $valor = rand(0, 500000000000);
         $fecha = date(DATE_RFC2822);
         $hash = md5($valor . $fecha);
-        BdUsuario::insertaAlta(null,$_POST["correo"]);
+        BdUsuario::insertaAlta(null, $_POST["correo"]);
         $alta = BdUsuario::sacaUsuario($_POST["correo"]);
         $id = $alta->id;
         $correo = $alta->email;
-        bdAltaUsuario::insertaAlta($id,$hash,$_POST["correo"]);
+        bdAltaUsuario::insertaAlta($id, $hash, $_POST["correo"]);
 
         $mail = new PHPMailer();
         $mail->IsSMTP();
@@ -73,16 +73,16 @@ if (isset($_POST["enviar"])) {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="../../css/altaUsuario.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/main.css" />
 </head>
 
 <body>
-    <header>
+    <header class="cabecera">
         <?php
         CreaCabecera::creaCabeceraProfesor();
         ?>
     </header>
-    <div class="contenido">
+    <main class="contenidoCrear">
         <form>
             <table>
                 <tr>
@@ -114,7 +114,7 @@ if (isset($_POST["enviar"])) {
                 </tr>
             </table>
         </form>
-    </div>
+    </main>
     <footer>
         <?php
         CreaFooter::creaFooterPagina("", "");

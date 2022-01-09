@@ -3,11 +3,11 @@ require_once("../cargadores/cargarGestion.php");
 require_once("../cargadores/cargarBD.php");
 require_once("../cargadores/cargarclases.php");
 Session::inicia();
-if(!Session::usuarioLogueado("usuario")){
+if (!Session::usuarioLogueado("usuario")) {
     //header("Location: ../../index.php");
 }
-if(Session::leer("rol")==2){
-    header("Location: ../Principal.php");
+if (Session::leer("rol") == 2) {
+    //header("Location: ../Principal.php");
 }
 ?>
 <!DOCTYPE html>
@@ -21,20 +21,20 @@ if(Session::leer("rol")==2){
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="../../css/listar.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/main.css" />
     <title>Lista Tem&aacute;maticas</title>
 </head>
 
 <body>
-    <header>
+    <header class="cabecera">
         <?php
-            CreaCabecera::creaCabeceraProfesor();
+        CreaCabecera::creaCabeceraProfesor();
         ?>
     </header>
-    <div class="contenido">
+    <main class="contenidoListar">
         <form action="http://proyectos/Proyecto/ProyectoExaminator/Proyecto/php/formularios/creaTematica.php">
             <input type="submit" value="Crea temática" />
-            <input type="text" id="Buscador"/>
+            <input type="text" id="Buscador" />
         </form>
         <table>
             <thead>
@@ -47,10 +47,10 @@ if(Session::leer("rol")==2){
 
             </tbody>
         </table>
-    </div>
+    </main>
     <footer>
         <?php
-        CreaFooter::creaFooterPagina("","");
+        CreaFooter::creaFooterPagina("", "");
         ?>
     </footer>
 </body>

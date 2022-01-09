@@ -7,14 +7,12 @@ window.addEventListener("load", function () {
   enviar.onclick=function (ev) {
     ev.preventDefault();
     errores = validaAltaMasiva(textArea.value);
-    debugger;
     if (Object.keys(errores).length > 0) {
       escribeErrores(errores);
     } else {
       if (textArea.value != "") {
         altas = textArea.value.split("\n");
         for (let i = 0; i < altas.length; i++) {
-          debugger;
           let formu = new FormData();
           formu.append("enviar", "");
           formu.append("correo", altas[i]);
